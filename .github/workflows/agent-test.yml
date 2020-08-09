@@ -1,0 +1,78 @@
+name: Agent test
+
+on:
+  push
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies & build
+        run: |
+          yarn
+          yarn build
+      - name: Sync test in node
+        run: |
+          cd testing/spawn-testing
+          DEBUG=dxos:spawn-testing:* node -r @babel/register src/tests/sync.js
+      - name: Sync test in chrome
+        run: |
+          cd testing/spawn-testing
+          DEBUG=dxos:spawn-testing:* node -r @babel/register src/tests/sync.js --browser
+  throughput-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies & build
+        run: |
+          yarn
+          yarn build
+      - name: Throughput measurement in browser with fs storage
+        run: |
+          cd testing/spawn-testing
+          DEBUG=dxos:spawn-testing:* node -r @babel/register src/tests/max-throughput.js --browser
+  throughput-browser-ram:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies & build
+        run: |
+          yarn
+          yarn build
+      - name: Throughput measurement in browser with RAM storage
+        run: |
+          cd testing/spawn-testing
+          DEBUG=dxos:spawn-testing:* node -r @babel/register src/tests/max-throughput.js --browser --storage ram
+  # throughput-node:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 15
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #         registry-url: https://registry.npmjs.org/
+  #     - name: Install dependencies & build
+  #       run: |
+  #         yarn
+  #         yarn build
+  #     - name: Throughput measurement in node with fs storage
+  #       run: |
+  #         cd testing/spawn-testing
+  #         DEBUG=dxos:spawn-testing:* node -r @babel/register src/tests/max-throughput.js
