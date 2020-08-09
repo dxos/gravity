@@ -1,6 +1,6 @@
 {
   "name": "@dxos/gravity",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "private": true,
   "description": "DXOS Testing monorepo.",
   "homepage": "https://github.com/dxos/gravity#readme",

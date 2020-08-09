@@ -8,6 +8,10 @@ import nanomessagerpc from 'nanomessage-rpc';
 export function createRPC (ipc) {
   const stream = new Duplex({
     write (data, cb) {
+      const kbLength = data.length / 1024;
+      if (kbLength > 8) {
+        console.log('The payload to send through IPC must be <= 8kb', kbLength);
+      }
       ipc.send(data);
       cb(null);
     },

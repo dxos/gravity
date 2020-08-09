@@ -1,6 +1,6 @@
 {
   "name": "@dxos/spawn-testing",
-  "version": "1.0.0-beta.245",
+  "version": "1.0.0-beta.1",
   "license": "AGPLv3",
   "author": "DXOS.org",
   "main": "index.js",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/runtime": "^7.9.6",
     "@dxos/browser-runner": "^v1.0.0-beta.13",
-    "@dxos/client": "^1.0.0-beta.245",
+    "@dxos/client": "^1.0.0-beta.248",
     "@dxos/credentials": "^1.0.1-beta.28",
     "@dxos/crypto": "^1.0.0-beta.1",
     "@dxos/debug": "^1.0.0-beta.73",
