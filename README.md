@@ -1,3 +1,3 @@
 # Gravity
 
-System testing frameworks.
+Unified testing framework for DXNS.
