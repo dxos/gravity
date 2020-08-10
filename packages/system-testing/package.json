@@ -17,7 +17,6 @@
     "@dxos/discovery-swarm-memory": "^1.0.0-beta.105",
     "@dxos/metrics": "^1.0.0-beta.6",
     "@dxos/model-factory": "^1.0.0-beta.27",
-    "@geut/discovery-swarm-webrtc": "^3.0.0-beta.3",
     "assert": "^2.0.0",
     "debug": "^4.1.1"
   },
@@ -40,9 +39,6 @@
     "> 5%"
   ],
   "jest": {
-    "moduleNameMapper": {
-      "@geut/discovery-swarm-webrtc": "@dxos/discovery-swarm-memory"
-    },
     "testEnvironment": "node"
   },
   "semistandard": {

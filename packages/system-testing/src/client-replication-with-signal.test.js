@@ -90,6 +90,7 @@ afterAll(async () => {
   return signalServer.stop();
 });
 
+// TODO(burdon): Failing.
 test.skip('Create 2-Node credential Party with Greeting and Replication (signature invitation)', async () => {
   const clientA = await createTestClient();
   const clientB = await createTestClient();
@@ -128,6 +129,7 @@ test.skip('Create 2-Node credential Party with Greeting and Replication (signatu
   await destroyClients(clients);
 });
 
+// TODO(burdon): Failing.
 test.skip('Create 3-Node credential Party with Greeting and Replication (secret invitation)', async () => {
   const clientA = await createTestClient();
   const clientB = await createTestClient();
