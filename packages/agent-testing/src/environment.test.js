@@ -1,5 +1,13 @@
+//
+// Copyright 2020 DXOS.org
+//
+
+import debug from 'debug';
+
 import { ObjectModel } from '@dxos/echo-db';
 import { EnvironmentFactory, providers, networkTypes } from './index';
+
+const log = debug('dxos:testing');
 
 test('simple', async () => {
   const factory = new EnvironmentFactory();
@@ -21,7 +29,7 @@ test('simple', async () => {
     }
   });
 
-  console.log('> nodes:', env.peers.length, '\n');
+  log('nodes:', env.peers.length);
 
   const models = [];
   env.peers.forEach((peer) => {
@@ -31,10 +39,10 @@ test('simple', async () => {
   const rootModel = models[0];
 
   await Promise.all([...Array(10).keys()].map(() => rootModel.createItem('example.com/Test', { prop1: 'prop1value' })));
-  console.log('> prev state', JSON.stringify(env.state), '\n');
+  log('prev state', JSON.stringify(env.state));
 
   await agent.waitForSync();
-  console.log('> next state', JSON.stringify(env.state), '\n');
+  log('next state', JSON.stringify(env.state));
   await env.destroy();
 
   expect(env.state.processed).toBe(20);
