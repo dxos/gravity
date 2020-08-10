@@ -1,17 +1,13 @@
 {
-  "name": "@dxos/echo-environment-test",
+  "name": "@dxos/agent-testing",
   "version": "1.0.0-beta.1",
-  "description": "Echo environment test.",
+  "description": "Agent testing.",
   "private": true,
-  "homepage": "https://github.com/dxos/echo/tree/master/packages/echo-environment-test#readme",
-  "bugs": {
-    "url": "https://github.com/dxos/echo/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dxos/echo.git"
+    "url": "git+https://github.com/dxos/gravity.git"
   },
-  "license": "GPL-3.0",
+  "license": "AGPLv3",
   "files": [
     "dist",
     "index.js"
@@ -59,7 +55,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.10.3",
     "@dxos/browser-runner": "^1.0.0-beta.9",
-    "@dxos/echo-db": "^1.0.0-beta.27",
+    "@dxos/gravity-db": "^1.0.0-beta.27",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-plugin-add-module-exports": "^1.0.2",
