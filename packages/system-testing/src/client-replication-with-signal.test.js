@@ -5,6 +5,7 @@
 import ram from 'random-access-memory';
 import waitForExpect from 'wait-for-expect';
 
+import { createClient, DefaultModel } from '@dxos/data-client';
 import { Keyring, KeyType } from '@dxos/credentials';
 import {
   createId,
@@ -15,7 +16,6 @@ import {
   verify,
   SIGNATURE_LENGTH
 } from '@dxos/crypto';
-import { createClient, DefaultModel } from '@dxos/data-client';
 
 import { TestSignalServer } from './util/test-signal-server';
 
@@ -28,6 +28,7 @@ export const createTestClient = async () => {
   const keyring = new Keyring();
   await keyring.createKeyRecord({ type: KeyType.IDENTITY });
 
+  // TODO(burdon): Use new Client.
   // Specify the local test signal server
   const client = await createClient(ram, keyring, {
     swarm: {

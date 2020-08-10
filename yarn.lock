@@ -1112,10 +1112,10 @@
     webpack-inject-plugin "^1.5.4"
     yargs "^15.3.1"
 
-"@dxos/client@^1.0.0-beta.107", "@dxos/client@^1.0.0-beta.248":
-  version "1.0.0-beta.248"
-  resolved "https://registry.yarnpkg.com/@dxos/client/-/client-1.0.0-beta.248.tgz#a9848427fb31d02370d8348b5726cddd0161a561"
-  integrity sha512-IlAG6BEVK7XCFBMIHpXJrdIKhcFq+dseN1qaSQtfPrWKZz7UQ1KiJGS6iU/He4P0yXG/2Eo/fExJnQQ+LiYAKA==
+"@dxos/client@^1.0.0-beta.107", "@dxos/client@^1.0.0-beta.248", "@dxos/client@^1.0.0-beta.249":
+  version "1.0.0-beta.249"
+  resolved "https://registry.yarnpkg.com/@dxos/client/-/client-1.0.0-beta.249.tgz#434b83bb3cf3df083d94544fd196fd919a04e824"
+  integrity sha512-B18YKI9SVRRZVa8brnp4Re7l3fMezGXkeng3sgIary0C30JivUrbUQ+lbKj9X8peNk5+Pm2l5ECmm8hZFXG0IQ==
   dependencies:
     "@babel/runtime" "^7.9.6"
     "@dxos/async" "^1.0.0-beta.1"
@@ -1313,6 +1313,14 @@
   dependencies:
     debug "^4.1.1"
 
+"@dxos/discovery-swarm-memory@^1.0.0-beta.105":
+  version "1.0.0-beta.105"
+  resolved "https://registry.yarnpkg.com/@dxos/discovery-swarm-memory/-/discovery-swarm-memory-1.0.0-beta.105.tgz#a79dcec8d10012c84ae1b9e395506124d137312a"
+  integrity sha512-YhMd/X4IXYujjboGHCTcmoXF72W4+bpb4ypVBOdUmO1jUPhD05DvGPNdQh8KL7/jNAybVHHGdvYBSclcAxvg7Q==
+  dependencies:
+    "@wirelineio/hyperswarm-network-memory" "^0.2.17"
+    pump "^3.0.0"
+
 "@dxos/echo-db@^1.0.0-beta.21", "@dxos/echo-db@^1.0.0-beta.27":
   version "1.0.0-beta.27"
   resolved "https://registry.yarnpkg.com/@dxos/echo-db/-/echo-db-1.0.0-beta.27.tgz#9ebfc5308897e41294dc708e6ec531c8a690bbdc"
@@ -1374,9 +1382,9 @@
     through2 "^3.0.1"
 
 "@dxos/feed-store@^1.2.0-beta.1", "@dxos/feed-store@^1.2.0-beta.10", "@dxos/feed-store@^1.2.0-beta.23", "@dxos/feed-store@^1.2.0-beta.25":
-  version "1.2.0-beta.29"
-  resolved "https://registry.yarnpkg.com/@dxos/feed-store/-/feed-store-1.2.0-beta.29.tgz#7f13c77f38be570409338cb58bc9357c67c61371"
-  integrity sha512-2vVNdW7ttAnQ/g+a8eisg/0or+E0mtxMmQi/atqcW31kEENhoM5+q3+zRZ5OjFRP2SWSh5EzyYkDdKUf3/PlKQ==
+  version "1.2.0-beta.30"
+  resolved "https://registry.yarnpkg.com/@dxos/feed-store/-/feed-store-1.2.0-beta.30.tgz#6a6f4d233496679e5e24405a6bfaa0bd6c4363cc"
+  integrity sha512-o7xH0ddhVT0shzpx37V9jGHr68/aD+8AcDmhNLuiGSvlncVnBpv8r2NDKTcOJv1u0eVZBo6A2jemAfe56TCyiQ==
   dependencies:
     buffer-json-encoding "^1.0.2"
     debug "^4.1.1"
@@ -1581,12 +1589,12 @@
     source-map-support "^0.5.16"
 
 "@dxos/react-client@^1.0.0-beta.91":
-  version "1.0.0-beta.248"
-  resolved "https://registry.yarnpkg.com/@dxos/react-client/-/react-client-1.0.0-beta.248.tgz#9e5c901d2d1f07da0610bd28ba1962e4e25a7a1d"
-  integrity sha512-+5WGL5ljxc+PzBi5iPhtK9y2CdUkRkJ0ATRcqvn+0lQHO/9OoKdCbckxtJhfjFDo4vZxYnmYlpFRVoOAspR9Yw==
+  version "1.0.0-beta.249"
+  resolved "https://registry.yarnpkg.com/@dxos/react-client/-/react-client-1.0.0-beta.249.tgz#64a46f7ca17a4f6f4ca05f726208d38946c315c5"
+  integrity sha512-Fm4iANJsnNmR/TmSoNsemfiSG5OUYQ1JUpVAxn+ZO/tHx27tJavyy7MVs4Wu8y7bLGohryiGXMqv6vQURndIFA==
   dependencies:
     "@dxos/async" "^1.0.0-beta.1"
-    "@dxos/client" "^1.0.0-beta.248"
+    "@dxos/client" "^1.0.0-beta.249"
     "@dxos/credentials" "^1.0.1-beta.29"
     "@dxos/crypto" "^1.0.0-beta.0"
     "@dxos/debug" "^1.0.0-beta.73"
@@ -3067,9 +3075,9 @@
     "@types/node" ">= 8"
 
 "@octokit/types@^5.0.0", "@octokit/types@^5.0.1":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-5.3.0.tgz#f0d11e73887fdd06f34587d1fed1c2f597b1f752"
-  integrity sha512-qu6+YHQUl2IJkUBHzal68TNHTjQAgJG2l8C62f1lJ0FLsXhxuT2fe29Bwnl8UXSBof3TqBd92p+YYujzrkvWHQ==
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-5.4.0.tgz#25f2f8e24fec09214553168c41c06383c9d0f529"
+  integrity sha512-D/uotqF69M50OIlwMqgyIg9PuLT2daOiBAYF0P40I2ekFA2ESwwBY5dxZe/UhXdPvIbNKDzuZmQrO7rMpuFbcg==
   dependencies:
     "@types/node" ">= 8"
 
@@ -3884,9 +3892,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "16.9.45"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.45.tgz#b43ccf3d8a3d2020e6a48c8c8492e5a4bc10f097"
-  integrity sha512-vv950slTF5UZ5eDOf13b8qC1SD4rTvkqg3HfaUKzr17U97oeJZAa+dUaIHn0QoOJflNTIt6Pem9MmapULs9dkA==
+  version "16.9.46"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.46.tgz#f0326cd7adceda74148baa9bff6e918632f5069e"
+  integrity sha512-dbHzO3aAq1lB3jRQuNpuZ/mnu+CdD3H0WVaaBQA8LTT3S33xhVBUj232T8M3tAhSWJs/D/UqORYUlJNl/8VQZg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -8201,9 +8209,9 @@ focus-lock@^0.7.0:
   integrity sha512-LI7v2mH02R55SekHYdv9pRHR9RajVNyIJ2N5IEkWbg7FT5ZmJ9Hw4mWxHeEUcd+dJo0QmzztHvDvWcc7prVFsw==
 
 follow-redirects@^1.0.0:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.12.1.tgz#de54a6205311b93d60398ebc01cf7015682312b6"
-  integrity sha512-tmRv0AVuR7ZyouUHLeNSiO6pqulF7dYa3s19c6t+wz9LD69/uSzdMxJ2S91nTI9U3rt/IldxpzMOFejp6f0hjg==
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
+  integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -8482,9 +8490,9 @@ get-stream@^4.0.0, get-stream@^4.1.0:
     pump "^3.0.0"
 
 get-stream@^5.0.0, get-stream@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.1.0.tgz#01203cdc92597f9b909067c3e656cc1f4d3c4dc9"
-  integrity sha512-EXr1FOzrzTfGeL0gQdeFEvOMm2mzMOglyiOXSTpPC+iAjAKftbr3jpCMWynogwYnM+eSj9sHGc6wjIcDvYiygw==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.2.0.tgz#4966a1795ee5ace65e706c4b7beb71257d6e22d3"
+  integrity sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==
   dependencies:
     pump "^3.0.0"
 
@@ -12882,9 +12890,9 @@ onetime@^2.0.0:
     mimic-fn "^1.0.0"
 
 onetime@^5.1.0:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/onetime/-/onetime-5.1.1.tgz#5c8016847b0d67fcedb7eef254751cfcdc7e9418"
-  integrity sha512-ZpZpjcJeugQfWsfyQlshVoowIIQ1qBGSVll4rfDq6JJVO//fesjoX808hXWfBjY+ROZgpKDI5TRSRBSoJiZ8eg==
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/onetime/-/onetime-5.1.2.tgz#d0e96ebb56b07476df1dd9c4806e5237985ca45e"
+  integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
 

@@ -14,6 +14,7 @@
     "@dxos/credentials": "^1.0.1-beta.29",
     "@dxos/crypto": "^1.0.0-beta.1",
     "@dxos/debug": "^1.0.0-beta.73",
+    "@dxos/discovery-swarm-memory": "^1.0.0-beta.105",
     "@dxos/metrics": "^1.0.0-beta.6",
     "@dxos/model-factory": "^1.0.0-beta.27",
     "@geut/discovery-swarm-webrtc": "^3.0.0-beta.3",
@@ -40,7 +41,7 @@
   ],
   "jest": {
     "moduleNameMapper": {
-      "@geut/discovery-swarm-webrtc": "@wirelineio/discovery-swarm-memory"
+      "@geut/discovery-swarm-webrtc": "@dxos/discovery-swarm-memory"
     },
     "testEnvironment": "node"
   },
