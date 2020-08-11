@@ -21,8 +21,8 @@
     "@dxos/data-client": "^1.0.0-beta.91",
     "@dxos/debug": "^1.0.0-beta.73",
     "@dxos/discovery-swarm-memory": "^1.0.0-beta.105",
-    "@dxos/feed-store": "^1.2.0-beta.10",
     "@dxos/feed-replication-network": "^1.0.0-beta.105",
+    "@dxos/feed-store": "^1.2.0-beta.10",
     "@dxos/random-access-multi-storage": "^1.1.0-beta.2",
     "@dxos/react-client": "^1.0.0-beta.91",
     "@dxos/react-json-tree": "^0.11.3",
@@ -70,15 +70,16 @@
     "@storybook/addon-actions": "^5.2.5",
     "@storybook/addon-knobs": "^5.2.5",
     "@storybook/addon-links": "^5.3.19",
-    "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.2.5",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.0",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-inline-import": "^3.0.0",
     "eslint-plugin-import": "^2.18.2",
     "html-webpack-plugin": "^3.2.0",
     "http": "^0.0.0",
-    "typescript": "^3.9.7",
-    "react-force-graph": "^1.36.5"
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-force-graph": "^1.36.5",
+    "typescript": "^3.9.7"
   }
 }
