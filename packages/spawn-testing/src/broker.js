@@ -7,8 +7,9 @@ import execa from 'execa';
 import debug from 'debug';
 import pEvent from 'p-event';
 import { run as runInBrowser } from '@dxos/browser-runner';
+import nanomessagerpc from 'nanomessage-rpc';
 
-import { createRPC } from './create-rpc';
+import { streamFromIpc } from './stream-from-ipc';
 
 const signalLog = debug('dxos:spawn-testing:signal');
 const peerLog = debug('dxos:spawn-testing:peer');
@@ -74,7 +75,9 @@ export class Broker {
       ? await runInBrowser({ src: scriptPath, alias: agent && [`./agents:${agent}`], timeout: 0, log: peerLog, puppeteerOptions, processExit: false })
       : fork(scriptPath, agent && ['--agent', agent]);
 
-    const rpc = createRPC(child);
+    const stream = streamFromIpc(child);
+    const rpc = nanomessagerpc(stream);
+
     await rpc.open();
     await rpc.once('agent-ready');
     const { publicKey } = await rpc.call('init', { storage, agent, browser });

@@ -7,11 +7,17 @@ import prettyHrtime from 'pretty-hrtime';
 import { join } from 'path';
 
 import DefaultAgentClass from './agents';
-import { createRPC } from './create-rpc';
+import { streamFromIpc } from './stream-from-ipc';
+import { Duplex } from 'stream';
+import nanomessagerpc from 'nanomessage-rpc';
 
-(async () => {
+/**
+ * 
+ * @param {Duplex} stream RPC connection to orthestrator
+ */
+async function initPeer(stream) {
   try {
-    const rpc = createRPC(typeof window !== 'undefined' && window.process ? window.process : process);
+    const rpc = nanomessagerpc(stream);
 
     const errors = [];
     process.on('unhandledRejection', (err) => {
@@ -71,4 +77,8 @@ import { createRPC } from './create-rpc';
   } catch (err) {
     console.log(err);
   }
-})();
+}
+
+const ipc = typeof window !== 'undefined' && window.process ? window.process : process
+const stream = streamFromIpc(ipc)
+initPeer(stream)

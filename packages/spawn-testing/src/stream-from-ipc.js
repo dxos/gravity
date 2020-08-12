@@ -3,9 +3,8 @@
 //
 
 import { Duplex } from 'streamx';
-import nanomessagerpc from 'nanomessage-rpc';
 
-export function createRPC (ipc) {
+export function streamFromIpc (ipc) {
   const stream = new Duplex({
     write (data, cb) {
       const kbLength = data.length / 1024;
@@ -44,7 +43,5 @@ export function createRPC (ipc) {
     stream.push(data);
   });
 
-  return nanomessagerpc(stream, {
-    // timeout: Infinity
-  });
+  return stream
 }
