@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.1",
   "description": "Spawning node on different machines and platforms",
   "scripts": {
-    "build": "tsc",
+    "build": "./scripts/build-proto.sh && tsc",
     "lint": "eslint '{src,test}/**/*.ts'",
     "test": "jest --verbose --passWithNoTests"
   },
@@ -20,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "jest": "^26.4.0",
+    "protobufjs": "^6.10.1",
     "semistandard": "^14.2.3",
     "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
