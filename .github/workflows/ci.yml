@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  build-and-test:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
