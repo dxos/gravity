@@ -2,7 +2,7 @@ import { JsonObject } from './common';
 import { Agent } from './agent';
 import assert from 'assert';
 import { Codec } from '@dxos/codec-protobuf';
-import ProtoJSON from './proto/gen/node.json'
+import ProtoJSON from './proto/gen/node.json';
 import { dxos } from './proto/gen/node';
 
 export interface Environment {
@@ -12,7 +12,7 @@ export interface Environment {
 
 const codec = new Codec('dxos.node.NodeCommand')
   .addJson(ProtoJSON)
-  .build()
+  .build();
 
 export class Node {
   private _agent: Agent | undefined;
@@ -27,9 +27,9 @@ export class Node {
     this._reportEvent({
       log: {
         eventName,
-        details: JSON.stringify(details),
+        details: JSON.stringify(details)
       }
-    })
+    });
   }
 
   private _logMessage (...args: any[]) {
@@ -48,17 +48,17 @@ export class Node {
     this._agent = new AgentClass(environment);
   }
 
-  handleCommand(commandBuffer: Buffer) {
+  handleCommand (commandBuffer: Buffer) {
     const command = codec.decodeByType(commandBuffer, 'dxos.node.NodeCommand') as dxos.node.INodeCommand;
-    if(command.event) {
-      assert(command.event!.event)
-      this._sendEvent(JSON.parse(command.event.event))
-    } else if(command.snapshot) {
-      this._snapshot()
+    if (command.event) {
+      assert(command.event!.event);
+      this._sendEvent(JSON.parse(command.event.event));
+    } else if (command.snapshot) {
+      this._snapshot();
     }
   }
 
-  private _reportEvent(event: dxos.node.INodeEvent) {
+  private _reportEvent (event: dxos.node.INodeEvent) {
     const bytes = codec.encodeByType(event, 'dxos.node.NodeEvent');
     this._onEvent(bytes);
   }
@@ -73,9 +73,9 @@ export class Node {
     const snapshot = this._agent.snapshot();
     this._reportEvent({
       snapshot: {
-        data: JSON.stringify(snapshot),
+        data: JSON.stringify(snapshot)
       }
-    })
+    });
   }
 }
 
