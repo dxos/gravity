@@ -1,0 +1,60 @@
+{
+  "name": "@dxos/feed-replication-network",
+  "version": "1.0.0-beta.105",
+  "description": "Bare Feeds Replication Network Simulation",
+  "license": "GPL-3.0",
+  "main": "dist/es/index.js",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel ./src --out-dir ./dist/es --ignore \"**/*.test.js\" --source-maps inline",
+    "build:watch": "npm run build -- --watch",
+    "lint": "semistandard",
+    "prepublishOnly": "npm run build && npm run test",
+    "test": "jest --rootDir ./src --verbose --passWithNoTests"
+  },
+  "browserslist": [
+    "> 5%"
+  ],
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@dxos/protocol": "^1.1.0-beta.1",
+    "@dxos/protocol-network-generator": "^1.1.0-beta.1",
+    "@dxos/protocol-plugin-replicator": "^1.1.0-beta.1",
+    "assert": "^2.0.0",
+    "debug": "^4.1.1",
+    "end-of-stream": "^1.4.4",
+    "pify": "^5.0.0",
+    "random-access-memory": "^3.1.1",
+    "wait-for-expect": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/preset-env": "^7.4.5",
+    "@dxos/feed-store": "1.2.0-beta.21",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-inline-import": "^3.0.0",
+    "jest": "^25.1.0",
+    "semistandard": "^14.2.0"
+  },
+  "semistandard": {
+    "parser": "babel-eslint",
+    "env": [
+      "jest",
+      "node",
+      "browser"
+    ],
+    "ignore": [
+      "dist"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
