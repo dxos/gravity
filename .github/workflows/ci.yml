@@ -1,0 +1,16 @@
+name: Built, Test, Lint
+
+on:
+  push
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - yarn install --frozen-lockfile
+      - yarn build
+      - yarn test 
+      - yarn lint
