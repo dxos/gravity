@@ -8,8 +8,11 @@ export namespace dxos {
         /** Properties of a NodeCommand. */
         interface INodeCommand {
 
-            /** NodeCommand command */
-            command?: (google.protobuf.IAny|null);
+            /** NodeCommand event */
+            event?: (dxos.node.IEventCommand|null);
+
+            /** NodeCommand snapshot */
+            snapshot?: (dxos.node.ISnapshotCommand|null);
         }
 
         /** Represents a NodeCommand. */
@@ -21,8 +24,14 @@ export namespace dxos {
              */
             constructor(properties?: dxos.node.INodeCommand);
 
+            /** NodeCommand event. */
+            public event?: (dxos.node.IEventCommand|null);
+
+            /** NodeCommand snapshot. */
+            public snapshot?: (dxos.node.ISnapshotCommand|null);
+
             /** NodeCommand command. */
-            public command?: (google.protobuf.IAny|null);
+            public command?: ("event"|"snapshot");
 
             /**
              * Creates a new NodeCommand instance using the specified properties.
@@ -275,8 +284,11 @@ export namespace dxos {
             /** NodeEvent timestamp */
             timestamp?: (number|null);
 
-            /** NodeEvent event */
-            event?: (google.protobuf.IAny|null);
+            /** NodeEvent log */
+            log?: (dxos.node.ILogEvent|null);
+
+            /** NodeEvent snapshot */
+            snapshot?: (dxos.node.ISnapshotEvent|null);
         }
 
         /** Represents a NodeEvent. */
@@ -291,8 +303,14 @@ export namespace dxos {
             /** NodeEvent timestamp. */
             public timestamp: number;
 
+            /** NodeEvent log. */
+            public log?: (dxos.node.ILogEvent|null);
+
+            /** NodeEvent snapshot. */
+            public snapshot?: (dxos.node.ISnapshotEvent|null);
+
             /** NodeEvent event. */
-            public event?: (google.protobuf.IAny|null);
+            public event?: ("log"|"snapshot");
 
             /**
              * Creates a new NodeEvent instance using the specified properties.
@@ -368,8 +386,11 @@ export namespace dxos {
         /** Properties of a LogEvent. */
         interface ILogEvent {
 
-            /** LogEvent event */
-            event?: (string|null);
+            /** LogEvent eventName */
+            eventName?: (string|null);
+
+            /** LogEvent details */
+            details?: (string|null);
         }
 
         /** Represents a LogEvent. */
@@ -381,8 +402,11 @@ export namespace dxos {
              */
             constructor(properties?: dxos.node.ILogEvent);
 
-            /** LogEvent event. */
-            public event: string;
+            /** LogEvent eventName. */
+            public eventName: string;
+
+            /** LogEvent details. */
+            public details: string;
 
             /**
              * Creates a new LogEvent instance using the specified properties.

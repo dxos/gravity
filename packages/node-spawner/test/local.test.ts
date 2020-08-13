@@ -8,5 +8,5 @@ test('in-process TestAgent', () => {
 
   node.sendEvent({});
 
-  console.log(node.snapshot());
+  node.snapshot();
 });

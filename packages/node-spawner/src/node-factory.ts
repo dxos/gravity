@@ -1,5 +1,6 @@
 import { Node } from './node';
 import { randomBytes } from '@dxos/crypto';
+import { LocalNodeHandle } from './local-node-handle';
 
 export type PackageSource = {
   kind: 'local',
@@ -20,21 +21,23 @@ export enum Platform {
 export class NodeFactory {
   createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
-    if (platform !== Platform.IN_PROCESS) throw new Error('Only IN_PROCESS platform is supported');
 
-    const nodeId = randomBytes();
-    const node = new Node(
-      nodeId,
-      packageSource.path,
-      (eventName, details) => {
-        if (eventName === 'log') {
-          console.log(`${nodeId.toString('hex').slice(4)}: ${details.message}`);
-        } else {
-          console.log(`${nodeId.toString('hex').slice(4)}: ${eventName} ${JSON.stringify(details)}`);
-        }
-      }
-    );
-    node.start();
-    return node;
+    if(platform === Platform.IN_PROCESS) {
+      const nodeId = randomBytes();
+      let eventHandler: (data: Buffer) => void;
+      const node = new Node(
+        nodeId,
+        packageSource.path,
+        (data) => { eventHandler(data) }
+      );
+      const handle = new LocalNodeHandle(node);
+      eventHandler = handle.handleEvent.bind(handle);
+      node.start();
+      return handle;
+    } else if(platform === Platform.NODE) {
+      throw new Error(`Not implemented`)
+    } else {
+      throw new Error(`Unsupported platform: ${Platform[platform]}`);
+    }
   }
 }

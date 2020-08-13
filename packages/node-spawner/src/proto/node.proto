@@ -5,7 +5,10 @@ package dxos.node;
 import "google/protobuf/any.proto";
 
 message NodeCommand {
-  google.protobuf.Any command = 1;
+  oneof command {
+    EventCommand event = 1;
+    SnapshotCommand snapshot = 2;
+  }
 }
 
 message EventCommand {
@@ -18,11 +21,15 @@ message SnapshotCommand {
 
 message NodeEvent {
   uint32 timestamp = 1;
-  google.protobuf.Any event = 2;
+  oneof event {
+    LogEvent log = 2;
+    SnapshotEvent snapshot = 3;
+  }
 }
 
 message LogEvent {
-  string event = 1;
+  string eventName = 1;
+  string details = 2;
 }
 
 message SnapshotEvent {

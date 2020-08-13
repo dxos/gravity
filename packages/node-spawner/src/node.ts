@@ -1,23 +1,35 @@
 import { JsonObject } from './common';
 import { Agent } from './agent';
 import assert from 'assert';
+import { Codec } from '@dxos/codec-protobuf';
+import ProtoJSON from './proto/gen/node.json'
+import { dxos } from './proto/gen/node';
 
 export interface Environment {
   log: (eventName: string, details: JsonObject) => void;
   logMessage: (...args: any[]) => void;
 }
 
+const codec = new Codec('dxos.node.NodeCommand')
+  .addJson(ProtoJSON)
+  .build()
+
 export class Node {
   private _agent: Agent | undefined;
 
   constructor (
-    private readonly _id: Buffer,
+    public readonly id: Buffer,
     private readonly _agentPath: string,
-    private readonly _onLog: (eventName: string, details: JsonObject) => void
+    private readonly _onEvent: (event: Buffer) => void
   ) {}
 
   private _log (eventName: string, details: JsonObject) {
-    this._onLog(eventName, details);
+    this._reportEvent({
+      log: {
+        eventName,
+        details: JSON.stringify(details),
+      }
+    })
   }
 
   private _logMessage (...args: any[]) {
@@ -36,14 +48,34 @@ export class Node {
     this._agent = new AgentClass(environment);
   }
 
-  sendEvent (event: JsonObject) {
+  handleCommand(commandBuffer: Buffer) {
+    const command = codec.decodeByType(commandBuffer, 'dxos.node.NodeCommand') as dxos.node.INodeCommand;
+    if(command.event) {
+      assert(command.event!.event)
+      this._sendEvent(JSON.parse(command.event.event))
+    } else if(command.snapshot) {
+      this._snapshot()
+    }
+  }
+
+  private _reportEvent(event: dxos.node.INodeEvent) {
+    const bytes = codec.encodeByType(event, 'dxos.node.NodeEvent');
+    this._onEvent(bytes);
+  }
+
+  private _sendEvent (event: JsonObject) {
     assert(this._agent);
     this._agent.onEvent(event);
   }
 
-  snapshot (): JsonObject {
+  private _snapshot () {
     assert(this._agent);
-    return this._agent.snapshot();
+    const snapshot = this._agent.snapshot();
+    this._reportEvent({
+      snapshot: {
+        data: JSON.stringify(snapshot),
+      }
+    })
   }
 }
 

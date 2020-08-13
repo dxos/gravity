@@ -5,10 +5,22 @@
         "node": {
           "nested": {
             "NodeCommand": {
-              "fields": {
+              "oneofs": {
                 "command": {
-                  "type": "google.protobuf.Any",
+                  "oneof": [
+                    "event",
+                    "snapshot"
+                  ]
+                }
+              },
+              "fields": {
+                "event": {
+                  "type": "EventCommand",
                   "id": 1
+                },
+                "snapshot": {
+                  "type": "SnapshotCommand",
+                  "id": 2
                 }
               }
             },
@@ -24,22 +36,38 @@
               "fields": {}
             },
             "NodeEvent": {
+              "oneofs": {
+                "event": {
+                  "oneof": [
+                    "log",
+                    "snapshot"
+                  ]
+                }
+              },
               "fields": {
                 "timestamp": {
                   "type": "uint32",
                   "id": 1
                 },
-                "event": {
-                  "type": "google.protobuf.Any",
+                "log": {
+                  "type": "LogEvent",
                   "id": 2
+                },
+                "snapshot": {
+                  "type": "SnapshotEvent",
+                  "id": 3
                 }
               }
             },
             "LogEvent": {
               "fields": {
-                "event": {
+                "eventName": {
                   "type": "string",
                   "id": 1
+                },
+                "details": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },

@@ -33,7 +33,8 @@ $root.dxos = (function() {
              * Properties of a NodeCommand.
              * @memberof dxos.node
              * @interface INodeCommand
-             * @property {google.protobuf.IAny|null} [command] NodeCommand command
+             * @property {dxos.node.IEventCommand|null} [event] NodeCommand event
+             * @property {dxos.node.ISnapshotCommand|null} [snapshot] NodeCommand snapshot
              */
 
             /**
@@ -52,12 +53,34 @@ $root.dxos = (function() {
             }
 
             /**
-             * NodeCommand command.
-             * @member {google.protobuf.IAny|null|undefined} command
+             * NodeCommand event.
+             * @member {dxos.node.IEventCommand|null|undefined} event
              * @memberof dxos.node.NodeCommand
              * @instance
              */
-            NodeCommand.prototype.command = null;
+            NodeCommand.prototype.event = null;
+
+            /**
+             * NodeCommand snapshot.
+             * @member {dxos.node.ISnapshotCommand|null|undefined} snapshot
+             * @memberof dxos.node.NodeCommand
+             * @instance
+             */
+            NodeCommand.prototype.snapshot = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            /**
+             * NodeCommand command.
+             * @member {"event"|"snapshot"|undefined} command
+             * @memberof dxos.node.NodeCommand
+             * @instance
+             */
+            Object.defineProperty(NodeCommand.prototype, "command", {
+                get: $util.oneOfGetter($oneOfFields = ["event", "snapshot"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
 
             /**
              * Creates a new NodeCommand instance using the specified properties.
@@ -83,8 +106,10 @@ $root.dxos = (function() {
             NodeCommand.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.command != null && Object.hasOwnProperty.call(message, "command"))
-                    $root.google.protobuf.Any.encode(message.command, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                    $root.dxos.node.EventCommand.encode(message.event, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                    $root.dxos.node.SnapshotCommand.encode(message.snapshot, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 return writer;
             };
 
@@ -120,7 +145,10 @@ $root.dxos = (function() {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
-                        message.command = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                        message.event = $root.dxos.node.EventCommand.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        message.snapshot = $root.dxos.node.SnapshotCommand.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -157,10 +185,24 @@ $root.dxos = (function() {
             NodeCommand.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.command != null && message.hasOwnProperty("command")) {
-                    var error = $root.google.protobuf.Any.verify(message.command);
-                    if (error)
-                        return "command." + error;
+                var properties = {};
+                if (message.event != null && message.hasOwnProperty("event")) {
+                    properties.command = 1;
+                    {
+                        var error = $root.dxos.node.EventCommand.verify(message.event);
+                        if (error)
+                            return "event." + error;
+                    }
+                }
+                if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                    if (properties.command === 1)
+                        return "command: multiple values";
+                    properties.command = 1;
+                    {
+                        var error = $root.dxos.node.SnapshotCommand.verify(message.snapshot);
+                        if (error)
+                            return "snapshot." + error;
+                    }
                 }
                 return null;
             };
@@ -177,10 +219,15 @@ $root.dxos = (function() {
                 if (object instanceof $root.dxos.node.NodeCommand)
                     return object;
                 var message = new $root.dxos.node.NodeCommand();
-                if (object.command != null) {
-                    if (typeof object.command !== "object")
-                        throw TypeError(".dxos.node.NodeCommand.command: object expected");
-                    message.command = $root.google.protobuf.Any.fromObject(object.command);
+                if (object.event != null) {
+                    if (typeof object.event !== "object")
+                        throw TypeError(".dxos.node.NodeCommand.event: object expected");
+                    message.event = $root.dxos.node.EventCommand.fromObject(object.event);
+                }
+                if (object.snapshot != null) {
+                    if (typeof object.snapshot !== "object")
+                        throw TypeError(".dxos.node.NodeCommand.snapshot: object expected");
+                    message.snapshot = $root.dxos.node.SnapshotCommand.fromObject(object.snapshot);
                 }
                 return message;
             };
@@ -198,10 +245,16 @@ $root.dxos = (function() {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults)
-                    object.command = null;
-                if (message.command != null && message.hasOwnProperty("command"))
-                    object.command = $root.google.protobuf.Any.toObject(message.command, options);
+                if (message.event != null && message.hasOwnProperty("event")) {
+                    object.event = $root.dxos.node.EventCommand.toObject(message.event, options);
+                    if (options.oneofs)
+                        object.command = "event";
+                }
+                if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                    object.snapshot = $root.dxos.node.SnapshotCommand.toObject(message.snapshot, options);
+                    if (options.oneofs)
+                        object.command = "snapshot";
+                }
                 return object;
             };
 
@@ -573,7 +626,8 @@ $root.dxos = (function() {
              * @memberof dxos.node
              * @interface INodeEvent
              * @property {number|null} [timestamp] NodeEvent timestamp
-             * @property {google.protobuf.IAny|null} [event] NodeEvent event
+             * @property {dxos.node.ILogEvent|null} [log] NodeEvent log
+             * @property {dxos.node.ISnapshotEvent|null} [snapshot] NodeEvent snapshot
              */
 
             /**
@@ -600,12 +654,34 @@ $root.dxos = (function() {
             NodeEvent.prototype.timestamp = 0;
 
             /**
-             * NodeEvent event.
-             * @member {google.protobuf.IAny|null|undefined} event
+             * NodeEvent log.
+             * @member {dxos.node.ILogEvent|null|undefined} log
              * @memberof dxos.node.NodeEvent
              * @instance
              */
-            NodeEvent.prototype.event = null;
+            NodeEvent.prototype.log = null;
+
+            /**
+             * NodeEvent snapshot.
+             * @member {dxos.node.ISnapshotEvent|null|undefined} snapshot
+             * @memberof dxos.node.NodeEvent
+             * @instance
+             */
+            NodeEvent.prototype.snapshot = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            /**
+             * NodeEvent event.
+             * @member {"log"|"snapshot"|undefined} event
+             * @memberof dxos.node.NodeEvent
+             * @instance
+             */
+            Object.defineProperty(NodeEvent.prototype, "event", {
+                get: $util.oneOfGetter($oneOfFields = ["log", "snapshot"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
 
             /**
              * Creates a new NodeEvent instance using the specified properties.
@@ -633,8 +709,10 @@ $root.dxos = (function() {
                     writer = $Writer.create();
                 if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.timestamp);
-                if (message.event != null && Object.hasOwnProperty.call(message, "event"))
-                    $root.google.protobuf.Any.encode(message.event, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.log != null && Object.hasOwnProperty.call(message, "log"))
+                    $root.dxos.node.LogEvent.encode(message.log, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                    $root.dxos.node.SnapshotEvent.encode(message.snapshot, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                 return writer;
             };
 
@@ -673,7 +751,10 @@ $root.dxos = (function() {
                         message.timestamp = reader.uint32();
                         break;
                     case 2:
-                        message.event = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                        message.log = $root.dxos.node.LogEvent.decode(reader, reader.uint32());
+                        break;
+                    case 3:
+                        message.snapshot = $root.dxos.node.SnapshotEvent.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -710,13 +791,27 @@ $root.dxos = (function() {
             NodeEvent.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
+                var properties = {};
                 if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                     if (!$util.isInteger(message.timestamp))
                         return "timestamp: integer expected";
-                if (message.event != null && message.hasOwnProperty("event")) {
-                    var error = $root.google.protobuf.Any.verify(message.event);
-                    if (error)
-                        return "event." + error;
+                if (message.log != null && message.hasOwnProperty("log")) {
+                    properties.event = 1;
+                    {
+                        var error = $root.dxos.node.LogEvent.verify(message.log);
+                        if (error)
+                            return "log." + error;
+                    }
+                }
+                if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                    if (properties.event === 1)
+                        return "event: multiple values";
+                    properties.event = 1;
+                    {
+                        var error = $root.dxos.node.SnapshotEvent.verify(message.snapshot);
+                        if (error)
+                            return "snapshot." + error;
+                    }
                 }
                 return null;
             };
@@ -735,10 +830,15 @@ $root.dxos = (function() {
                 var message = new $root.dxos.node.NodeEvent();
                 if (object.timestamp != null)
                     message.timestamp = object.timestamp >>> 0;
-                if (object.event != null) {
-                    if (typeof object.event !== "object")
-                        throw TypeError(".dxos.node.NodeEvent.event: object expected");
-                    message.event = $root.google.protobuf.Any.fromObject(object.event);
+                if (object.log != null) {
+                    if (typeof object.log !== "object")
+                        throw TypeError(".dxos.node.NodeEvent.log: object expected");
+                    message.log = $root.dxos.node.LogEvent.fromObject(object.log);
+                }
+                if (object.snapshot != null) {
+                    if (typeof object.snapshot !== "object")
+                        throw TypeError(".dxos.node.NodeEvent.snapshot: object expected");
+                    message.snapshot = $root.dxos.node.SnapshotEvent.fromObject(object.snapshot);
                 }
                 return message;
             };
@@ -756,14 +856,20 @@ $root.dxos = (function() {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults) {
+                if (options.defaults)
                     object.timestamp = 0;
-                    object.event = null;
-                }
                 if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                     object.timestamp = message.timestamp;
-                if (message.event != null && message.hasOwnProperty("event"))
-                    object.event = $root.google.protobuf.Any.toObject(message.event, options);
+                if (message.log != null && message.hasOwnProperty("log")) {
+                    object.log = $root.dxos.node.LogEvent.toObject(message.log, options);
+                    if (options.oneofs)
+                        object.event = "log";
+                }
+                if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                    object.snapshot = $root.dxos.node.SnapshotEvent.toObject(message.snapshot, options);
+                    if (options.oneofs)
+                        object.event = "snapshot";
+                }
                 return object;
             };
 
@@ -787,7 +893,8 @@ $root.dxos = (function() {
              * Properties of a LogEvent.
              * @memberof dxos.node
              * @interface ILogEvent
-             * @property {string|null} [event] LogEvent event
+             * @property {string|null} [eventName] LogEvent eventName
+             * @property {string|null} [details] LogEvent details
              */
 
             /**
@@ -806,12 +913,20 @@ $root.dxos = (function() {
             }
 
             /**
-             * LogEvent event.
-             * @member {string} event
+             * LogEvent eventName.
+             * @member {string} eventName
              * @memberof dxos.node.LogEvent
              * @instance
              */
-            LogEvent.prototype.event = "";
+            LogEvent.prototype.eventName = "";
+
+            /**
+             * LogEvent details.
+             * @member {string} details
+             * @memberof dxos.node.LogEvent
+             * @instance
+             */
+            LogEvent.prototype.details = "";
 
             /**
              * Creates a new LogEvent instance using the specified properties.
@@ -837,8 +952,10 @@ $root.dxos = (function() {
             LogEvent.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.event != null && Object.hasOwnProperty.call(message, "event"))
-                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.event);
+                if (message.eventName != null && Object.hasOwnProperty.call(message, "eventName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.eventName);
+                if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.details);
                 return writer;
             };
 
@@ -874,7 +991,10 @@ $root.dxos = (function() {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
-                        message.event = reader.string();
+                        message.eventName = reader.string();
+                        break;
+                    case 2:
+                        message.details = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -911,9 +1031,12 @@ $root.dxos = (function() {
             LogEvent.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.event != null && message.hasOwnProperty("event"))
-                    if (!$util.isString(message.event))
-                        return "event: string expected";
+                if (message.eventName != null && message.hasOwnProperty("eventName"))
+                    if (!$util.isString(message.eventName))
+                        return "eventName: string expected";
+                if (message.details != null && message.hasOwnProperty("details"))
+                    if (!$util.isString(message.details))
+                        return "details: string expected";
                 return null;
             };
 
@@ -929,8 +1052,10 @@ $root.dxos = (function() {
                 if (object instanceof $root.dxos.node.LogEvent)
                     return object;
                 var message = new $root.dxos.node.LogEvent();
-                if (object.event != null)
-                    message.event = String(object.event);
+                if (object.eventName != null)
+                    message.eventName = String(object.eventName);
+                if (object.details != null)
+                    message.details = String(object.details);
                 return message;
             };
 
@@ -947,10 +1072,14 @@ $root.dxos = (function() {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults)
-                    object.event = "";
-                if (message.event != null && message.hasOwnProperty("event"))
-                    object.event = message.event;
+                if (options.defaults) {
+                    object.eventName = "";
+                    object.details = "";
+                }
+                if (message.eventName != null && message.hasOwnProperty("eventName"))
+                    object.eventName = message.eventName;
+                if (message.details != null && message.hasOwnProperty("details"))
+                    object.details = message.details;
                 return object;
             };
 
