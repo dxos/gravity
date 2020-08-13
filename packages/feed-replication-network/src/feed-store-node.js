@@ -52,7 +52,7 @@ export class FeedStoreNode {
       feedStore: this._feedStore,
       onLoad: () => [this._feed],
       onUnsubscribe: () => {
-        this.closed = true;
+        this._closed = true;
       }
     });
     log(`Created feed-store-node ${humanize(this.id)}`);
