@@ -17,14 +17,17 @@ test('in-process TestAgent', async () => {
 test('in-process ClientAgent', async () => {
   const orchestrator = new NodeOrchestrator();
 
-  const node = await orchestrator.createNode(require.resolve('./client-agent'), Platform.IN_PROCESS);
-  node.metrics.update.on(() => console.log(node.metrics.asObject()));
+  const node1 = await orchestrator.createNode(require.resolve('./client-agent'), Platform.IN_PROCESS);
+  const node2 = await orchestrator.createNode(require.resolve('./client-agent'), Platform.IN_PROCESS);
+  node1.metrics.update.on(() => console.log(node1.metrics.asObject()));
+  node2.metrics.update.on(() => console.log(node2.metrics.asObject()));
 
-  node.sendEvent({});
+  node1.sendEvent({});
 
-  await sleep(500); // TODO(marik-d): Wait for sync
+  await orchestrator.waitForSync();
 
-  node.snapshot();
+  node1.snapshot();
+  node2.snapshot();
 
   orchestrator.destroy();
 });

@@ -13,6 +13,24 @@ export class Metrics {
     return this._data.get(key);
   }
 
+  getNumber(key: string) {
+    const val = this._data.get(key);
+    if(val !== undefined && typeof val !== 'number') throw new TypeError()
+    return val
+  }
+  
+  getString(key: string) {
+    const val = this._data.get(key);
+    if(val !== undefined && typeof val !== 'string') throw new TypeError()
+    return val
+  }
+
+  getBoolean(key: string) {
+    const val = this._data.get(key);
+    if(val !== undefined && typeof val !== 'boolean') throw new TypeError()
+    return val
+  }
+
   asObject() {
     const res = {} as Record<string, number | string | boolean>;
     for(const [key, value] of this._data) {
@@ -41,8 +59,7 @@ export class Metrics {
   }
 
   inc(key: string) {
-    const value = this.get(key) ?? 0;
-    if(typeof value !== 'number') throw new TypeError()
+    const value = this.getNumber(key) ?? 0;
     this.set(key, value + 1)
   }
 }

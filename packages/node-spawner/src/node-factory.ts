@@ -22,6 +22,10 @@ export enum Platform {
 export class NodeFactory {
   private _nodes = new Set<NodeHandle>();
 
+  nodes(): Iterable<NodeHandle> {
+    return this._nodes;
+  }
+
   async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
