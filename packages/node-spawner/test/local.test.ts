@@ -19,7 +19,7 @@ test('in-process ClientAgent', async () => {
 
   node.sendEvent({});
 
-  await sleep(500);
+  await sleep(500); // TODO(marik-d): Wait for sync
 
   node.snapshot();
 });

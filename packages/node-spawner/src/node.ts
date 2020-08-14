@@ -1,3 +1,8 @@
+import memdown from 'memdown';
+import { KeyStore } from '@dxos/credentials';
+import { randomBytes } from '@dxos/crypto';
+import { createStorage } from '@dxos/random-access-multi-storage';
+
 import { JsonObject } from './common';
 import { Agent } from './agent';
 import assert from 'assert';
@@ -8,6 +13,8 @@ import { dxos } from './proto/gen/node';
 export interface Environment {
   log: (eventName: string, details: JsonObject) => void;
   logMessage: (...args: any[]) => void;
+  keyStore: any, // TODO(marik-d): Type those better
+  storage: any,
 }
 
 const codec = new Codec('dxos.node.NodeCommand')
@@ -42,7 +49,9 @@ export class Node {
     const AgentClass = requireAgent(this._agentPath);
     const environment: Environment = {
       log: this._log.bind(this),
-      logMessage: this._logMessage.bind(this)
+      logMessage: this._logMessage.bind(this),
+      keyStore: new KeyStore(memdown()),
+      storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`),
     };
 
     this._agent = new AgentClass(environment);

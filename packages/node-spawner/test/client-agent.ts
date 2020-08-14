@@ -1,14 +1,9 @@
-import memdown from 'memdown';
-import { Client } from '@dxos/client';
-import { Keyring, KeyType, KeyStore } from '@dxos/credentials';
-import { InviteDetails, InviteType } from '@dxos/party-manager';
-import { randomBytes } from '@dxos/crypto';
-import { createStorage } from '@dxos/random-access-multi-storage';
 import { DefaultModel } from '@dxos/model-factory';
-
-import { Environment } from '../src/node';
 import { Agent } from '../src/agent';
 import { JsonObject } from '../src/common';
+import { Environment } from '../src/node';
+import { createClientFromEnvironment } from '../src/setup';
+
 
 export default class ClientAgent implements Agent {
   private _count = 0;
@@ -21,13 +16,7 @@ export default class ClientAgent implements Agent {
   }
 
   async init () {
-    const keyStorage = memdown();
-    const keyring = new Keyring(new KeyStore(keyStorage));
-    await keyring.createKeyRecord({ type: KeyType.IDENTITY });
-    const storage = createStorage(`.temp/${randomBytes(32).toString('hex')}`);
-    this._client = new Client({ storage, keyring, swarm: { signal: 'ws://localhost:4000' } });
-    await this._client.initialize();
-    await this._client.partyManager.identityManager.initializeForNewIdentity();
+    this._client = await createClientFromEnvironment(this.environment)
 
     const party = await this._client.partyManager.createParty();
     const topic = party.publicKey.toString('hex');
@@ -50,3 +39,4 @@ export default class ClientAgent implements Agent {
     };
   }
 }
+
