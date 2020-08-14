@@ -10,6 +10,8 @@ test('in-process TestAgent', async () => {
   node.sendEvent({});
 
   node.snapshot();
+
+  orchestrator.destroy();
 });
 
 test('in-process ClientAgent', async () => {
@@ -22,4 +24,6 @@ test('in-process ClientAgent', async () => {
   await sleep(500); // TODO(marik-d): Wait for sync
 
   node.snapshot();
+
+  orchestrator.destroy();
 });

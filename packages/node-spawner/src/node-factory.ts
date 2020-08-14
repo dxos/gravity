@@ -1,6 +1,7 @@
 import { Node } from './node';
 import { randomBytes } from '@dxos/crypto';
 import { LocalNodeHandle } from './local-node-handle';
+import { NodeHandle } from './node-handle';
 
 export type PackageSource = {
   kind: 'local',
@@ -19,6 +20,8 @@ export enum Platform {
 }
 
 export class NodeFactory {
+  private _nodes = new Set<NodeHandle>();
+
   async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
@@ -33,11 +36,18 @@ export class NodeFactory {
       const handle = new LocalNodeHandle(node);
       eventHandler = handle.handleEvent.bind(handle);
       await node.start();
+      this._nodes.add(handle);
       return handle;
     } else if (platform === Platform.NODE) {
       throw new Error('Not implemented');
     } else {
       throw new Error(`Unsupported platform: ${Platform[platform]}`);
+    }
+  }
+  
+  destroy() {
+    for (const node of this._nodes.values()) {
+      node.destroy();
     }
   }
 }

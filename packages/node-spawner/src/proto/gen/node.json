@@ -9,7 +9,8 @@
                 "command": {
                   "oneof": [
                     "event",
-                    "snapshot"
+                    "snapshot",
+                    "destroy"
                   ]
                 }
               },
@@ -21,6 +22,10 @@
                 "snapshot": {
                   "type": "SnapshotCommand",
                   "id": 2
+                },
+                "destroy": {
+                  "type": "DestroyCommand",
+                  "id": 3
                 }
               }
             },
@@ -33,6 +38,9 @@
               }
             },
             "SnapshotCommand": {
+              "fields": {}
+            },
+            "DestroyCommand": {
               "fields": {}
             },
             "NodeEvent": {

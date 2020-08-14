@@ -66,6 +66,8 @@ export class Node {
       this._sendEvent(JSON.parse(command.event.event));
     } else if (command.snapshot) {
       this._snapshot();
+    } else if(command.destroy) {
+      this._destory();
     }
   }
 
@@ -87,6 +89,10 @@ export class Node {
         data: JSON.stringify(snapshot)
       }
     });
+  }
+
+  private _destory() {
+    setTimeout(() => this._agent?.destroy(), 0);
   }
 }
 

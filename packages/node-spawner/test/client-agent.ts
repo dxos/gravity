@@ -38,5 +38,9 @@ export default class ClientAgent implements Agent {
       model: JSON.parse(JSON.stringify(this._model))
     };
   }
+
+  async destroy() {
+    await this._client.destroy();
+  }
 }
 

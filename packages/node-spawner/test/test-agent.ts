@@ -21,4 +21,8 @@ export default class TestAgent implements Agent {
   snapshot (): JsonObject {
     return { count: this._count };
   }
+
+  async destroy() {
+
+  }
 }

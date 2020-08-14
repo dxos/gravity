@@ -26,6 +26,13 @@ export abstract class NodeHandle {
     this.send(codec.encodeByType(command, 'dxos.node.NodeCommand'));
   }
 
+  destroy() {
+    const command: dxos.node.INodeCommand = {
+      destroy: {}
+    };
+    this.send(codec.encodeByType(command, 'dxos.node.NodeCommand'));
+  }
+
   protected abstract send(command: Buffer): void;
 
   handleEvent (data: Buffer) {

@@ -35,6 +35,7 @@ $root.dxos = (function() {
              * @interface INodeCommand
              * @property {dxos.node.IEventCommand|null} [event] NodeCommand event
              * @property {dxos.node.ISnapshotCommand|null} [snapshot] NodeCommand snapshot
+             * @property {dxos.node.IDestroyCommand|null} [destroy] NodeCommand destroy
              */
 
             /**
@@ -68,17 +69,25 @@ $root.dxos = (function() {
              */
             NodeCommand.prototype.snapshot = null;
 
+            /**
+             * NodeCommand destroy.
+             * @member {dxos.node.IDestroyCommand|null|undefined} destroy
+             * @memberof dxos.node.NodeCommand
+             * @instance
+             */
+            NodeCommand.prototype.destroy = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
             /**
              * NodeCommand command.
-             * @member {"event"|"snapshot"|undefined} command
+             * @member {"event"|"snapshot"|"destroy"|undefined} command
              * @memberof dxos.node.NodeCommand
              * @instance
              */
             Object.defineProperty(NodeCommand.prototype, "command", {
-                get: $util.oneOfGetter($oneOfFields = ["event", "snapshot"]),
+                get: $util.oneOfGetter($oneOfFields = ["event", "snapshot", "destroy"]),
                 set: $util.oneOfSetter($oneOfFields)
             });
 
@@ -110,6 +119,8 @@ $root.dxos = (function() {
                     $root.dxos.node.EventCommand.encode(message.event, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                 if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                     $root.dxos.node.SnapshotCommand.encode(message.snapshot, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.destroy != null && Object.hasOwnProperty.call(message, "destroy"))
+                    $root.dxos.node.DestroyCommand.encode(message.destroy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                 return writer;
             };
 
@@ -149,6 +160,9 @@ $root.dxos = (function() {
                         break;
                     case 2:
                         message.snapshot = $root.dxos.node.SnapshotCommand.decode(reader, reader.uint32());
+                        break;
+                    case 3:
+                        message.destroy = $root.dxos.node.DestroyCommand.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -204,6 +218,16 @@ $root.dxos = (function() {
                             return "snapshot." + error;
                     }
                 }
+                if (message.destroy != null && message.hasOwnProperty("destroy")) {
+                    if (properties.command === 1)
+                        return "command: multiple values";
+                    properties.command = 1;
+                    {
+                        var error = $root.dxos.node.DestroyCommand.verify(message.destroy);
+                        if (error)
+                            return "destroy." + error;
+                    }
+                }
                 return null;
             };
 
@@ -228,6 +252,11 @@ $root.dxos = (function() {
                     if (typeof object.snapshot !== "object")
                         throw TypeError(".dxos.node.NodeCommand.snapshot: object expected");
                     message.snapshot = $root.dxos.node.SnapshotCommand.fromObject(object.snapshot);
+                }
+                if (object.destroy != null) {
+                    if (typeof object.destroy !== "object")
+                        throw TypeError(".dxos.node.NodeCommand.destroy: object expected");
+                    message.destroy = $root.dxos.node.DestroyCommand.fromObject(object.destroy);
                 }
                 return message;
             };
@@ -254,6 +283,11 @@ $root.dxos = (function() {
                     object.snapshot = $root.dxos.node.SnapshotCommand.toObject(message.snapshot, options);
                     if (options.oneofs)
                         object.command = "snapshot";
+                }
+                if (message.destroy != null && message.hasOwnProperty("destroy")) {
+                    object.destroy = $root.dxos.node.DestroyCommand.toObject(message.destroy, options);
+                    if (options.oneofs)
+                        object.command = "destroy";
                 }
                 return object;
             };
@@ -617,6 +651,166 @@ $root.dxos = (function() {
             };
 
             return SnapshotCommand;
+        })();
+
+        node.DestroyCommand = (function() {
+
+            /**
+             * Properties of a DestroyCommand.
+             * @memberof dxos.node
+             * @interface IDestroyCommand
+             */
+
+            /**
+             * Constructs a new DestroyCommand.
+             * @memberof dxos.node
+             * @classdesc Represents a DestroyCommand.
+             * @implements IDestroyCommand
+             * @constructor
+             * @param {dxos.node.IDestroyCommand=} [properties] Properties to set
+             */
+            function DestroyCommand(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Creates a new DestroyCommand instance using the specified properties.
+             * @function create
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {dxos.node.IDestroyCommand=} [properties] Properties to set
+             * @returns {dxos.node.DestroyCommand} DestroyCommand instance
+             */
+            DestroyCommand.create = function create(properties) {
+                return new DestroyCommand(properties);
+            };
+
+            /**
+             * Encodes the specified DestroyCommand message. Does not implicitly {@link dxos.node.DestroyCommand.verify|verify} messages.
+             * @function encode
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {dxos.node.IDestroyCommand} message DestroyCommand message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DestroyCommand.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DestroyCommand message, length delimited. Does not implicitly {@link dxos.node.DestroyCommand.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {dxos.node.IDestroyCommand} message DestroyCommand message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DestroyCommand.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a DestroyCommand message from the specified reader or buffer.
+             * @function decode
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {dxos.node.DestroyCommand} DestroyCommand
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DestroyCommand.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dxos.node.DestroyCommand();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a DestroyCommand message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {dxos.node.DestroyCommand} DestroyCommand
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DestroyCommand.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DestroyCommand message.
+             * @function verify
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DestroyCommand.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                return null;
+            };
+
+            /**
+             * Creates a DestroyCommand message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {dxos.node.DestroyCommand} DestroyCommand
+             */
+            DestroyCommand.fromObject = function fromObject(object) {
+                if (object instanceof $root.dxos.node.DestroyCommand)
+                    return object;
+                return new $root.dxos.node.DestroyCommand();
+            };
+
+            /**
+             * Creates a plain object from a DestroyCommand message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof dxos.node.DestroyCommand
+             * @static
+             * @param {dxos.node.DestroyCommand} message DestroyCommand
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DestroyCommand.toObject = function toObject() {
+                return {};
+            };
+
+            /**
+             * Converts this DestroyCommand to JSON.
+             * @function toJSON
+             * @memberof dxos.node.DestroyCommand
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DestroyCommand.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return DestroyCommand;
         })();
 
         node.NodeEvent = (function() {

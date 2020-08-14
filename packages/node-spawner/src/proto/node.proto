@@ -8,6 +8,7 @@ message NodeCommand {
   oneof command {
     EventCommand event = 1;
     SnapshotCommand snapshot = 2;
+    DestroyCommand destroy = 3;
   }
 }
 
@@ -16,6 +17,10 @@ message EventCommand {
 }
 
 message SnapshotCommand {
+
+}
+
+message DestroyCommand {
 
 }
 
