@@ -9,6 +9,10 @@ export default class TestAgent extends Agent {
     super();
   }
 
+  async init () {
+
+  }
+
   onEvent (event: JsonObject) {
     this._count++;
 

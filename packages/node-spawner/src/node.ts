@@ -38,7 +38,7 @@ export class Node {
     });
   }
 
-  start () {
+  async start () {
     const AgentClass = requireAgent(this._agentPath);
     const environment: Environment = {
       log: this._log.bind(this),
@@ -46,6 +46,8 @@ export class Node {
     };
 
     this._agent = new AgentClass(environment);
+
+    await this._agent!.init();
   }
 
   handleCommand (commandBuffer: Buffer) {

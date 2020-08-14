@@ -19,7 +19,7 @@ export enum Platform {
 }
 
 export class NodeFactory {
-  createNode (packageSource: PackageSource, platform: Platform) {
+  async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
     if (platform === Platform.IN_PROCESS) {
@@ -32,7 +32,7 @@ export class NodeFactory {
       );
       const handle = new LocalNodeHandle(node);
       eventHandler = handle.handleEvent.bind(handle);
-      node.start();
+      await node.start();
       return handle;
     } else if (platform === Platform.NODE) {
       throw new Error('Not implemented');
