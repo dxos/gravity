@@ -2,11 +2,10 @@ import { Environment } from '../src/node';
 import { Agent } from '../src/agent';
 import { JsonObject } from '../src/common';
 
-export default class TestAgent extends Agent {
+export default class TestAgent implements Agent {
   private _count = 0;
 
   constructor (private environment: Environment) {
-    super();
   }
 
   async init () {

@@ -10,7 +10,7 @@ import { Environment } from '../src/node';
 import { Agent } from '../src/agent';
 import { JsonObject } from '../src/common';
 
-export default class ClientAgent extends Agent {
+export default class ClientAgent implements Agent {
   private _count = 0;
 
   private _client: any;
@@ -18,7 +18,6 @@ export default class ClientAgent extends Agent {
   private _model: any;
 
   constructor (private environment: Environment) {
-    super();
   }
 
   async init () {
