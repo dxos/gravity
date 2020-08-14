@@ -1,1 +1,1 @@
-declare module "buffer-json-encoding";
+declare module 'buffer-json-encoding';

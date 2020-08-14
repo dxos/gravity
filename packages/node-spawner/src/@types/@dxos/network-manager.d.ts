@@ -1,1 +1,1 @@
-declare module "@dxos/network-manager";
+declare module '@dxos/network-manager';

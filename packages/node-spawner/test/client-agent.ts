@@ -23,11 +23,11 @@ export default class ClientAgent implements Agent {
     this._model = await this._client._modelFactory.createModel(DefaultModel, { topic, type: 'dxos.testing.Message' });
 
     this._model.on('preappend', () => {
-      this.environment.metrics.inc('appended')
-    })
+      this.environment.metrics.inc('appended');
+    });
     this._model.on('update', () => {
-      this.environment.metrics.inc('updated')
-    })
+      this.environment.metrics.inc('updated');
+    });
   }
 
   onEvent (event: JsonObject) {

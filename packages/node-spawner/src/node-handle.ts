@@ -49,7 +49,7 @@ export abstract class NodeHandle {
       }
     } else if (event.snapshot) {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
-    } else if(event.metricsUpdate) {
+    } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
     }
   }

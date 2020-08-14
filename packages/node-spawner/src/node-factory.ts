@@ -22,7 +22,7 @@ export enum Platform {
 export class NodeFactory {
   private _nodes = new Set<NodeHandle>();
 
-  nodes(): Iterable<NodeHandle> {
+  nodes (): Iterable<NodeHandle> {
     return this._nodes;
   }
 

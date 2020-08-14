@@ -59,14 +59,14 @@ export class Node {
       keyStore: new KeyStore(memdown()),
       storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`),
       swarmProvider: new SwarmProvider(),
-      metrics: this._metrics,
+      metrics: this._metrics
     };
 
     this._metrics.update.on(update => {
       this._reportEvent({
-        metricsUpdate: update,
+        metricsUpdate: update
       });
-    })
+    });
 
     this._agent = new AgentClass(environment);
 
