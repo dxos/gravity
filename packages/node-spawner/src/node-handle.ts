@@ -2,12 +2,15 @@ import { JsonObject } from './common';
 import { Codec } from '@dxos/codec-protobuf';
 import ProtoJSON from './proto/gen/node.json';
 import { dxos } from './proto/gen/node';
+import { Metrics } from './metrics';
 
 const codec = new Codec('dxos.node.NodeCommand')
   .addJson(ProtoJSON)
   .build();
 
 export abstract class NodeHandle {
+  readonly metrics = new Metrics();
+
   constructor (private readonly _nodeId: Buffer) {}
 
   sendEvent (event: JsonObject) {
@@ -46,6 +49,8 @@ export abstract class NodeHandle {
       }
     } else if (event.snapshot) {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
+    } else if(event.metricsUpdate) {
+      this.metrics.applyUpdate(event.metricsUpdate);
     }
   }
 }

@@ -2,6 +2,7 @@ import memdown from 'memdown';
 import { KeyStore } from '@dxos/credentials';
 import { randomBytes } from '@dxos/crypto';
 import { createStorage } from '@dxos/random-access-multi-storage';
+import { SwarmProvider } from '@dxos/network-manager';
 
 import { JsonObject } from './common';
 import { Agent } from './agent';
@@ -9,12 +10,15 @@ import assert from 'assert';
 import { Codec } from '@dxos/codec-protobuf';
 import ProtoJSON from './proto/gen/node.json';
 import { dxos } from './proto/gen/node';
+import { Metrics } from './metrics';
 
 export interface Environment {
   log: (eventName: string, details: JsonObject) => void;
   logMessage: (...args: any[]) => void;
   keyStore: any, // TODO(marik-d): Type those better
   storage: any,
+  swarmProvider: any,
+  metrics: Metrics,
 }
 
 const codec = new Codec('dxos.node.NodeCommand')
@@ -23,6 +27,8 @@ const codec = new Codec('dxos.node.NodeCommand')
 
 export class Node {
   private _agent: Agent | undefined;
+
+  private _metrics = new Metrics();
 
   constructor (
     public readonly id: Buffer,
@@ -51,8 +57,16 @@ export class Node {
       log: this._log.bind(this),
       logMessage: this._logMessage.bind(this),
       keyStore: new KeyStore(memdown()),
-      storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`)
+      storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`),
+      swarmProvider: new SwarmProvider(),
+      metrics: this._metrics,
     };
+
+    this._metrics.update.on(update => {
+      this._reportEvent({
+        metricsUpdate: update,
+      });
+    })
 
     this._agent = new AgentClass(environment);
 

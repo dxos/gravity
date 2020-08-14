@@ -29,6 +29,7 @@ message NodeEvent {
   oneof event {
     LogEvent log = 2;
     SnapshotEvent snapshot = 3;
+    MetricsUpdateEvent metricsUpdate = 4;
   }
 }
 
@@ -39,4 +40,17 @@ message LogEvent {
 
 message SnapshotEvent {
   string data = 1;
+}
+
+message MetricsUpdateEvent {
+  message Value {
+    oneof value {
+      int32 int = 2;
+      string string = 3;
+      bool bool = 4;
+    }
+  }
+
+  string key = 1;
+  Value value = 2;
 }

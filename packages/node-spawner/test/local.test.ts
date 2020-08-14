@@ -18,6 +18,7 @@ test('in-process ClientAgent', async () => {
   const orchestrator = new NodeOrchestrator();
 
   const node = await orchestrator.createNode(require.resolve('./client-agent'), Platform.IN_PROCESS);
+  node.metrics.update.on(() => console.log(node.metrics.asObject()));
 
   node.sendEvent({});
 

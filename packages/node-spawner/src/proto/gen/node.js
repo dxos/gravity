@@ -822,6 +822,7 @@ $root.dxos = (function() {
              * @property {number|null} [timestamp] NodeEvent timestamp
              * @property {dxos.node.ILogEvent|null} [log] NodeEvent log
              * @property {dxos.node.ISnapshotEvent|null} [snapshot] NodeEvent snapshot
+             * @property {dxos.node.IMetricsUpdateEvent|null} [metricsUpdate] NodeEvent metricsUpdate
              */
 
             /**
@@ -863,17 +864,25 @@ $root.dxos = (function() {
              */
             NodeEvent.prototype.snapshot = null;
 
+            /**
+             * NodeEvent metricsUpdate.
+             * @member {dxos.node.IMetricsUpdateEvent|null|undefined} metricsUpdate
+             * @memberof dxos.node.NodeEvent
+             * @instance
+             */
+            NodeEvent.prototype.metricsUpdate = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
             /**
              * NodeEvent event.
-             * @member {"log"|"snapshot"|undefined} event
+             * @member {"log"|"snapshot"|"metricsUpdate"|undefined} event
              * @memberof dxos.node.NodeEvent
              * @instance
              */
             Object.defineProperty(NodeEvent.prototype, "event", {
-                get: $util.oneOfGetter($oneOfFields = ["log", "snapshot"]),
+                get: $util.oneOfGetter($oneOfFields = ["log", "snapshot", "metricsUpdate"]),
                 set: $util.oneOfSetter($oneOfFields)
             });
 
@@ -907,6 +916,8 @@ $root.dxos = (function() {
                     $root.dxos.node.LogEvent.encode(message.log, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                     $root.dxos.node.SnapshotEvent.encode(message.snapshot, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                if (message.metricsUpdate != null && Object.hasOwnProperty.call(message, "metricsUpdate"))
+                    $root.dxos.node.MetricsUpdateEvent.encode(message.metricsUpdate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 return writer;
             };
 
@@ -949,6 +960,9 @@ $root.dxos = (function() {
                         break;
                     case 3:
                         message.snapshot = $root.dxos.node.SnapshotEvent.decode(reader, reader.uint32());
+                        break;
+                    case 4:
+                        message.metricsUpdate = $root.dxos.node.MetricsUpdateEvent.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1007,6 +1021,16 @@ $root.dxos = (function() {
                             return "snapshot." + error;
                     }
                 }
+                if (message.metricsUpdate != null && message.hasOwnProperty("metricsUpdate")) {
+                    if (properties.event === 1)
+                        return "event: multiple values";
+                    properties.event = 1;
+                    {
+                        var error = $root.dxos.node.MetricsUpdateEvent.verify(message.metricsUpdate);
+                        if (error)
+                            return "metricsUpdate." + error;
+                    }
+                }
                 return null;
             };
 
@@ -1033,6 +1057,11 @@ $root.dxos = (function() {
                     if (typeof object.snapshot !== "object")
                         throw TypeError(".dxos.node.NodeEvent.snapshot: object expected");
                     message.snapshot = $root.dxos.node.SnapshotEvent.fromObject(object.snapshot);
+                }
+                if (object.metricsUpdate != null) {
+                    if (typeof object.metricsUpdate !== "object")
+                        throw TypeError(".dxos.node.NodeEvent.metricsUpdate: object expected");
+                    message.metricsUpdate = $root.dxos.node.MetricsUpdateEvent.fromObject(object.metricsUpdate);
                 }
                 return message;
             };
@@ -1063,6 +1092,11 @@ $root.dxos = (function() {
                     object.snapshot = $root.dxos.node.SnapshotEvent.toObject(message.snapshot, options);
                     if (options.oneofs)
                         object.event = "snapshot";
+                }
+                if (message.metricsUpdate != null && message.hasOwnProperty("metricsUpdate")) {
+                    object.metricsUpdate = $root.dxos.node.MetricsUpdateEvent.toObject(message.metricsUpdate, options);
+                    if (options.oneofs)
+                        object.event = "metricsUpdate";
                 }
                 return object;
             };
@@ -1476,6 +1510,482 @@ $root.dxos = (function() {
             };
 
             return SnapshotEvent;
+        })();
+
+        node.MetricsUpdateEvent = (function() {
+
+            /**
+             * Properties of a MetricsUpdateEvent.
+             * @memberof dxos.node
+             * @interface IMetricsUpdateEvent
+             * @property {string|null} [key] MetricsUpdateEvent key
+             * @property {dxos.node.MetricsUpdateEvent.IValue|null} [value] MetricsUpdateEvent value
+             */
+
+            /**
+             * Constructs a new MetricsUpdateEvent.
+             * @memberof dxos.node
+             * @classdesc Represents a MetricsUpdateEvent.
+             * @implements IMetricsUpdateEvent
+             * @constructor
+             * @param {dxos.node.IMetricsUpdateEvent=} [properties] Properties to set
+             */
+            function MetricsUpdateEvent(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * MetricsUpdateEvent key.
+             * @member {string} key
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @instance
+             */
+            MetricsUpdateEvent.prototype.key = "";
+
+            /**
+             * MetricsUpdateEvent value.
+             * @member {dxos.node.MetricsUpdateEvent.IValue|null|undefined} value
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @instance
+             */
+            MetricsUpdateEvent.prototype.value = null;
+
+            /**
+             * Creates a new MetricsUpdateEvent instance using the specified properties.
+             * @function create
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {dxos.node.IMetricsUpdateEvent=} [properties] Properties to set
+             * @returns {dxos.node.MetricsUpdateEvent} MetricsUpdateEvent instance
+             */
+            MetricsUpdateEvent.create = function create(properties) {
+                return new MetricsUpdateEvent(properties);
+            };
+
+            /**
+             * Encodes the specified MetricsUpdateEvent message. Does not implicitly {@link dxos.node.MetricsUpdateEvent.verify|verify} messages.
+             * @function encode
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {dxos.node.IMetricsUpdateEvent} message MetricsUpdateEvent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MetricsUpdateEvent.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                    $root.dxos.node.MetricsUpdateEvent.Value.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MetricsUpdateEvent message, length delimited. Does not implicitly {@link dxos.node.MetricsUpdateEvent.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {dxos.node.IMetricsUpdateEvent} message MetricsUpdateEvent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MetricsUpdateEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a MetricsUpdateEvent message from the specified reader or buffer.
+             * @function decode
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {dxos.node.MetricsUpdateEvent} MetricsUpdateEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MetricsUpdateEvent.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dxos.node.MetricsUpdateEvent();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.key = reader.string();
+                        break;
+                    case 2:
+                        message.value = $root.dxos.node.MetricsUpdateEvent.Value.decode(reader, reader.uint32());
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a MetricsUpdateEvent message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {dxos.node.MetricsUpdateEvent} MetricsUpdateEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MetricsUpdateEvent.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MetricsUpdateEvent message.
+             * @function verify
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MetricsUpdateEvent.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.key != null && message.hasOwnProperty("key"))
+                    if (!$util.isString(message.key))
+                        return "key: string expected";
+                if (message.value != null && message.hasOwnProperty("value")) {
+                    var error = $root.dxos.node.MetricsUpdateEvent.Value.verify(message.value);
+                    if (error)
+                        return "value." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a MetricsUpdateEvent message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {dxos.node.MetricsUpdateEvent} MetricsUpdateEvent
+             */
+            MetricsUpdateEvent.fromObject = function fromObject(object) {
+                if (object instanceof $root.dxos.node.MetricsUpdateEvent)
+                    return object;
+                var message = new $root.dxos.node.MetricsUpdateEvent();
+                if (object.key != null)
+                    message.key = String(object.key);
+                if (object.value != null) {
+                    if (typeof object.value !== "object")
+                        throw TypeError(".dxos.node.MetricsUpdateEvent.value: object expected");
+                    message.value = $root.dxos.node.MetricsUpdateEvent.Value.fromObject(object.value);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MetricsUpdateEvent message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @static
+             * @param {dxos.node.MetricsUpdateEvent} message MetricsUpdateEvent
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MetricsUpdateEvent.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.key = "";
+                    object.value = null;
+                }
+                if (message.key != null && message.hasOwnProperty("key"))
+                    object.key = message.key;
+                if (message.value != null && message.hasOwnProperty("value"))
+                    object.value = $root.dxos.node.MetricsUpdateEvent.Value.toObject(message.value, options);
+                return object;
+            };
+
+            /**
+             * Converts this MetricsUpdateEvent to JSON.
+             * @function toJSON
+             * @memberof dxos.node.MetricsUpdateEvent
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MetricsUpdateEvent.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            MetricsUpdateEvent.Value = (function() {
+
+                /**
+                 * Properties of a Value.
+                 * @memberof dxos.node.MetricsUpdateEvent
+                 * @interface IValue
+                 * @property {number|null} [int] Value int
+                 * @property {string|null} [string] Value string
+                 * @property {boolean|null} [bool] Value bool
+                 */
+
+                /**
+                 * Constructs a new Value.
+                 * @memberof dxos.node.MetricsUpdateEvent
+                 * @classdesc Represents a Value.
+                 * @implements IValue
+                 * @constructor
+                 * @param {dxos.node.MetricsUpdateEvent.IValue=} [properties] Properties to set
+                 */
+                function Value(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Value int.
+                 * @member {number} int
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @instance
+                 */
+                Value.prototype.int = 0;
+
+                /**
+                 * Value string.
+                 * @member {string} string
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @instance
+                 */
+                Value.prototype.string = "";
+
+                /**
+                 * Value bool.
+                 * @member {boolean} bool
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @instance
+                 */
+                Value.prototype.bool = false;
+
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+
+                /**
+                 * Value value.
+                 * @member {"int"|"string"|"bool"|undefined} value
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @instance
+                 */
+                Object.defineProperty(Value.prototype, "value", {
+                    get: $util.oneOfGetter($oneOfFields = ["int", "string", "bool"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new Value instance using the specified properties.
+                 * @function create
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {dxos.node.MetricsUpdateEvent.IValue=} [properties] Properties to set
+                 * @returns {dxos.node.MetricsUpdateEvent.Value} Value instance
+                 */
+                Value.create = function create(properties) {
+                    return new Value(properties);
+                };
+
+                /**
+                 * Encodes the specified Value message. Does not implicitly {@link dxos.node.MetricsUpdateEvent.Value.verify|verify} messages.
+                 * @function encode
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {dxos.node.MetricsUpdateEvent.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.int != null && Object.hasOwnProperty.call(message, "int"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.int);
+                    if (message.string != null && Object.hasOwnProperty.call(message, "string"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.string);
+                    if (message.bool != null && Object.hasOwnProperty.call(message, "bool"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.bool);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Value message, length delimited. Does not implicitly {@link dxos.node.MetricsUpdateEvent.Value.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {dxos.node.MetricsUpdateEvent.IValue} message Value message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Value.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Value message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {dxos.node.MetricsUpdateEvent.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dxos.node.MetricsUpdateEvent.Value();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 2:
+                            message.int = reader.int32();
+                            break;
+                        case 3:
+                            message.string = reader.string();
+                            break;
+                        case 4:
+                            message.bool = reader.bool();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Value message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {dxos.node.MetricsUpdateEvent.Value} Value
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Value.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Value message.
+                 * @function verify
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Value.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.int != null && message.hasOwnProperty("int")) {
+                        properties.value = 1;
+                        if (!$util.isInteger(message.int))
+                            return "int: integer expected";
+                    }
+                    if (message.string != null && message.hasOwnProperty("string")) {
+                        if (properties.value === 1)
+                            return "value: multiple values";
+                        properties.value = 1;
+                        if (!$util.isString(message.string))
+                            return "string: string expected";
+                    }
+                    if (message.bool != null && message.hasOwnProperty("bool")) {
+                        if (properties.value === 1)
+                            return "value: multiple values";
+                        properties.value = 1;
+                        if (typeof message.bool !== "boolean")
+                            return "bool: boolean expected";
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a Value message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {dxos.node.MetricsUpdateEvent.Value} Value
+                 */
+                Value.fromObject = function fromObject(object) {
+                    if (object instanceof $root.dxos.node.MetricsUpdateEvent.Value)
+                        return object;
+                    var message = new $root.dxos.node.MetricsUpdateEvent.Value();
+                    if (object.int != null)
+                        message.int = object.int | 0;
+                    if (object.string != null)
+                        message.string = String(object.string);
+                    if (object.bool != null)
+                        message.bool = Boolean(object.bool);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Value message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @static
+                 * @param {dxos.node.MetricsUpdateEvent.Value} message Value
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Value.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.int != null && message.hasOwnProperty("int")) {
+                        object.int = message.int;
+                        if (options.oneofs)
+                            object.value = "int";
+                    }
+                    if (message.string != null && message.hasOwnProperty("string")) {
+                        object.string = message.string;
+                        if (options.oneofs)
+                            object.value = "string";
+                    }
+                    if (message.bool != null && message.hasOwnProperty("bool")) {
+                        object.bool = message.bool;
+                        if (options.oneofs)
+                            object.value = "bool";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this Value to JSON.
+                 * @function toJSON
+                 * @memberof dxos.node.MetricsUpdateEvent.Value
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Value.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return Value;
+            })();
+
+            return MetricsUpdateEvent;
         })();
 
         return node;

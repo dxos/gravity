@@ -48,7 +48,8 @@
                 "event": {
                   "oneof": [
                     "log",
-                    "snapshot"
+                    "snapshot",
+                    "metricsUpdate"
                   ]
                 }
               },
@@ -64,6 +65,10 @@
                 "snapshot": {
                   "type": "SnapshotEvent",
                   "id": 3
+                },
+                "metricsUpdate": {
+                  "type": "MetricsUpdateEvent",
+                  "id": 4
                 }
               }
             },
@@ -84,6 +89,45 @@
                 "data": {
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "MetricsUpdateEvent": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "Value",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Value": {
+                  "oneofs": {
+                    "value": {
+                      "oneof": [
+                        "int",
+                        "string",
+                        "bool"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "int": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "string": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "bool": {
+                      "type": "bool",
+                      "id": 4
+                    }
+                  }
                 }
               }
             }
