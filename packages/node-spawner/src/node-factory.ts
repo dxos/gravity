@@ -44,8 +44,8 @@ export class NodeFactory {
       throw new Error(`Unsupported platform: ${Platform[platform]}`);
     }
   }
-  
-  destroy() {
+
+  destroy () {
     for (const node of this._nodes.values()) {
       node.destroy();
     }

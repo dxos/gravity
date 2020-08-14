@@ -26,7 +26,7 @@ export abstract class NodeHandle {
     this.send(codec.encodeByType(command, 'dxos.node.NodeCommand'));
   }
 
-  destroy() {
+  destroy () {
     const command: dxos.node.INodeCommand = {
       destroy: {}
     };

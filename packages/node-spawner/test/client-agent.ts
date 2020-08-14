@@ -4,7 +4,6 @@ import { JsonObject } from '../src/common';
 import { Environment } from '../src/node';
 import { createClientFromEnvironment } from '../src/setup';
 
-
 export default class ClientAgent implements Agent {
   private _count = 0;
 
@@ -16,7 +15,7 @@ export default class ClientAgent implements Agent {
   }
 
   async init () {
-    this._client = await createClientFromEnvironment(this.environment)
+    this._client = await createClientFromEnvironment(this.environment);
 
     const party = await this._client.partyManager.createParty();
     const topic = party.publicKey.toString('hex');
@@ -39,8 +38,7 @@ export default class ClientAgent implements Agent {
     };
   }
 
-  async destroy() {
+  async destroy () {
     await this._client.destroy();
   }
 }
-

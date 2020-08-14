@@ -22,7 +22,7 @@ export default class TestAgent implements Agent {
     return { count: this._count };
   }
 
-  async destroy() {
+  async destroy () {
 
   }
 }

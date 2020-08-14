@@ -51,7 +51,7 @@ export class Node {
       log: this._log.bind(this),
       logMessage: this._logMessage.bind(this),
       keyStore: new KeyStore(memdown()),
-      storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`),
+      storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`)
     };
 
     this._agent = new AgentClass(environment);
@@ -66,7 +66,7 @@ export class Node {
       this._sendEvent(JSON.parse(command.event.event));
     } else if (command.snapshot) {
       this._snapshot();
-    } else if(command.destroy) {
+    } else if (command.destroy) {
       this._destory();
     }
   }
@@ -91,7 +91,7 @@ export class Node {
     });
   }
 
-  private _destory() {
+  private _destory () {
     setTimeout(() => this._agent?.destroy(), 0);
   }
 }

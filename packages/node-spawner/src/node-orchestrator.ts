@@ -7,7 +7,7 @@ export class NodeOrchestrator {
     return await this._factory.createNode({ kind: 'local', path: agentPath }, platform);
   }
 
-  destroy() {
+  destroy () {
     this._factory.destroy();
   }
 }
