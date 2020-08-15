@@ -36,6 +36,21 @@ export class FeedNode {
   }
 
   /**
+   * @return {FeedTestAgent}
+   */
+  getAgent () {
+    return this._agent;
+  }
+
+  /**
+   * Set this node's associated agent.
+   * @param agent {FeedTestAgent}
+   */
+  setAgent (agent) {
+    this._agent = agent;
+  }
+
+  /**
    *
    * @param topic {Key}
    * @param peerId {Key}
