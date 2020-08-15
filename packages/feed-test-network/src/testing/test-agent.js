@@ -17,6 +17,16 @@ export class TestAgent {
   /** @type {Feed} */
   _feed;
 
+  /**
+   * Method required to be an agent in the test network
+   * @returns {{feed: Feed, feedStore: FeedStore}}
+   */
+  getNetworkInterface () {
+    return { feedStore: this._feedStore, feed: this._feed };
+  }
+
+  // Agent's own interface (unrelated to test network participation):
+
   async initialize (topic) {
     // TODO(dboreham): Allow specification of storage type and encoding.
     this._feedStore = await FeedStore.create(ram, { feedOptions: { valueEncoding: 'json' } });

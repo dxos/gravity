@@ -27,10 +27,11 @@ export class FeedNode {
   /** @type {Boolean} */
   closed;
 
-  constructor (feedstore, feed) {
-    assert(feedstore);
+  constructor (agentNetworkInterface) {
+    const { feedStore, feed } = agentNetworkInterface;
+    assert(feedStore);
     assert(feed);
-    this.feedStore = feedstore;
+    this.feedStore = feedStore;
     this.feed = feed;
   }
 
