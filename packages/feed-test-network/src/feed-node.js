@@ -12,17 +12,18 @@ import { DefaultReplicator } from '@dxos/protocol-plugin-replicator';
 const log = debug('dxos:feed-store-node');
 
 export class FeedNode {
+  // Note this is required by the network-generator
   /** @type {Key} */
   id;
 
   /** @type {FeedStore} */
-  feedStore;
+  _feedStore;
 
   /** @type {Feed} */
-  feed;
+  _feed;
 
   /** @type {ProtocolExtension} */
-  replicator;
+  _replicator;
 
   /** @type {Boolean} */
   closed;
@@ -31,12 +32,12 @@ export class FeedNode {
     const { feedStore, feed } = agentNetworkInterface;
     assert(feedStore);
     assert(feed);
-    this.feedStore = feedStore;
-    this.feed = feed;
+    this._feedStore = feedStore;
+    this._feed = feed;
   }
 
   /**
-   * @return {FeedTestAgent}
+   * @return {FeedAgent}
    */
   getAgent () {
     return this._agent;
@@ -44,7 +45,7 @@ export class FeedNode {
 
   /**
    * Set this node's associated agent.
-   * @param agent {FeedTestAgent}
+   * @param agent {FeedAgent}
    */
   setAgent (agent) {
     this._agent = agent;
@@ -61,9 +62,9 @@ export class FeedNode {
     this.topic = topic;
     this.closed = false;
 
-    this.replicator = new DefaultReplicator({
-      feedStore: this.feedStore,
-      onLoad: () => [this.feed],
+    this._replicator = new DefaultReplicator({
+      feedStore: this._feedStore,
+      onLoad: () => [this._feed],
       onUnsubscribe: () => {
         this.closed = true;
       }
@@ -71,11 +72,12 @@ export class FeedNode {
     log(`Created peer ${humanize(peerId)}`);
   }
 
+  // Note this is required by the network-generator
   createStream () {
     // TODO(dboreham): We believe that topic is required in init(discoveryKey(this.topic) below.
     // However it appears that even if this.topic is undefined, our tests pass.
     assert(this.topic);
-    assert(this.feedStore);
+    assert(this._feedStore);
     return new Protocol({
       streamOptions: {
         live: true
@@ -83,7 +85,7 @@ export class FeedNode {
     })
       .setSession({ id: 'session1' })
       .setContext({ name: 'foo' })
-      .setExtensions([this.replicator.createExtension()])
+      .setExtensions([this._replicator.createExtension()])
       .init(discoveryKey(this.topic))
       .stream;
   }

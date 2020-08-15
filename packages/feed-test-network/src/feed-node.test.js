@@ -5,7 +5,7 @@
 import debug from 'debug';
 import waitForExpect from 'wait-for-expect';
 
-import { humanize, createId } from '@dxos/crypto';
+import { humanize, createId, keyToBuffer } from '@dxos/crypto';
 
 import { FeedNode } from './feed-node';
 import { feedNodeOrchestrator } from './feed-node-orchestrator';
@@ -115,23 +115,37 @@ test('feed-node-network-generated', async () => {
   });
 });
 
-test('feed-node-network-explicit', async () => {
+test.skip('feed-node-network-explicit', async () => {
   // with nodes that have one write feed each and
   // expect to replicate all feeds
   // expose a method to post a message on a node's feed
   // expose a method to check if a specific message has been received by any feed read by a node
   // allow other introspection such as check if two nodes are synced with each other
 
-  const orchestrator = await feedNodeOrchestrator({ initializeConnected: false, peerCount: 2 }, TestAgentFactory);
+  const topic = keyToBuffer(createId());
 
-  // const agent1 = ;
-  // const agent2 = ;
+  const orchestrator = await feedNodeOrchestrator({ initializeConnected: false, peerCount: 0, topic }, TestAgentFactory);
+
+  const createAgentAndNode = async () => {
+    const agent = new TestAgent();
+    await agent.initialize(topic);
+    const node = new FeedNode(agent.getNetworkInterface());
+    const peerId = keyToBuffer(createId());
+    await node.initialize(topic, peerId);
+    node.setAgent(agent);
+    return { agent, node };
+  };
+
+  const { agent: agent1, node: node1 } = await createAgentAndNode();
+  const { agent: agent2, node: node2 } = await createAgentAndNode();
+
+  await orchestrator.insertPeer(node1);
+  await orchestrator.insertPeer(node2);
+
   const peers = orchestrator.peers;
   expect(peers.length).toEqual(2);
 
   const [peer1, peer2] = peers;
-  const agent1 = peer1.getAgent();
-  const agent2 = peer2.getAgent();
 
   log(`Peer1: ${humanize(peer1.id)}`);
   log(`Peer2: ${humanize(peer2.id)}`);
