@@ -22,7 +22,7 @@ const randomMessage = () => {
 const TestAgentFactory = async (topic, peerId) => {
   const agent = new TestAgent();
   await agent.initialize(topic);
-  const node = new FeedNode(agent.feedStore, agent.feed);
+  const node = new FeedNode(agent._feedStore, agent._feed);
   await node.initialize(topic, peerId);
   node.agent = agent;
   return node;
