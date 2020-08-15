@@ -12,57 +12,54 @@ import { DefaultReplicator } from '@dxos/protocol-plugin-replicator';
 const log = debug('dxos:feed-store-node');
 
 export class FeedStoreNode {
-  // TODO(dboreham): Do we need getters/private member pattern here?
   /** @type {Key} */
   id;
 
-  /** @type {Key} */
-  _topic;
-
   /** @type {FeedStore} */
-  _feedStore;
+  feedStore;
 
   /** @type {Feed} */
-  _feed;
+  feed;
 
   /** @type {ProtocolExtension} */
-  _replicator;
+  replicator;
 
   /** @type {Boolean} */
-  _closed;
+  closed;
+
+  constructor (feedstore, feed) {
+    assert(feedstore);
+    assert(feed);
+    this.feedStore = feedstore;
+    this.feed = feed;
+  }
 
   /**
    *
    * @param topic {Key}
    * @param peerId {Key}
-   * @param feedStore {FeedStore}
-   * @param feed {Feed}
    * @returns {Promise<FeedReplicationPeer>}
    */
-  constructor (topic, peerId, feedStore, feed) {
+  async initialize (topic, peerId) {
     this.id = peerId;
-    this._topic = topic;
-    this._feedStore = feedStore;
-    this._feed = feed;
-    this._closed = false;
-  }
+    this.topic = topic;
+    this.closed = false;
 
-  async initialize () {
-    this._replicator = new DefaultReplicator({
-      feedStore: this._feedStore,
-      onLoad: () => [this._feed],
+    this.replicator = new DefaultReplicator({
+      feedStore: this.feedStore,
+      onLoad: () => [this.feed],
       onUnsubscribe: () => {
-        this._closed = true;
+        this.closed = true;
       }
     });
-    log(`Created feed-store-node ${humanize(this.id)}`);
+    log(`Created peer ${humanize(peerId)}`);
   }
 
   createStream () {
     // TODO(dboreham): We believe that topic is required in init(discoveryKey(this.topic) below.
     // However it appears that even if this.topic is undefined, our tests pass.
-    assert(this._topic);
-    assert(this._feedStore);
+    assert(this.topic);
+    assert(this.feedStore);
     return new Protocol({
       streamOptions: {
         live: true
@@ -70,12 +67,12 @@ export class FeedStoreNode {
     })
       .setSession({ id: 'session1' })
       .setContext({ name: 'foo' })
-      .setExtensions([this._replicator.createExtension()])
-      .init(discoveryKey(this._topic))
+      .setExtensions([this.replicator.createExtension()])
+      .init(discoveryKey(this.topic))
       .stream;
   }
 
   isClosed () {
-    return this._closed;
+    return this.closed;
   }
 }
