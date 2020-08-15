@@ -11,7 +11,7 @@ import { DefaultReplicator } from '@dxos/protocol-plugin-replicator';
 
 const log = debug('dxos:feed-store-node');
 
-export class FeedStoreNode {
+export class FeedNode {
   /** @type {Key} */
   id;
 

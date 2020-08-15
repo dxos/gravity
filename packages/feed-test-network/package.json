@@ -1,6 +1,6 @@
 {
-  "name": "@dxos/feed-replication-network",
-  "version": "1.0.0-beta.105",
+  "name": "@dxos/feed-node-orchestrator",
+  "version": "1.0.0-beta.1",
   "description": "Bare Feeds Replication Network Simulation",
   "license": "GPL-3.0",
   "main": "dist/es/index.js",

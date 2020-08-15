@@ -7,11 +7,11 @@ import waitForExpect from 'wait-for-expect';
 
 import { humanize, createId } from '@dxos/crypto';
 
-import { FeedStoreNode } from './feed-store-node';
-import { createReplicationNetwork } from './feed-replication-network';
+import { FeedNode } from './feed-node';
+import { feedNodeOrchestrator } from './feed-node-orchestrator';
 import { TestAgent } from './testing/test-agent';
 
-const log = debug('dxos:feed-replication-network:test');
+const log = debug('dxos:feed-replication-orchestrator:test');
 
 const randomMessage = () => {
   return {
@@ -19,10 +19,10 @@ const randomMessage = () => {
   };
 };
 
-const DebugAgentFactory = async (topic, peerId) => {
+const TestAgentFactory = async (topic, peerId) => {
   const agent = new TestAgent();
   await agent.initialize(topic);
-  const node = new FeedStoreNode(agent.feedStore, agent.feed);
+  const node = new FeedNode(agent.feedStore, agent.feed);
   await node.initialize(topic, peerId);
   node.agent = agent;
   return node;
@@ -35,9 +35,9 @@ test('DirectedReplicationNetwork', async () => {
   // expose a method to check if a specific message has been received by any feed read by a node
   // allow other introspection such as check if two nodes are synced with each other
 
-  const network = await createReplicationNetwork({ initializeConnected: false, peerCount: 2 }, DebugAgentFactory);
+  const orchestrator = await feedNodeOrchestrator({ initializeConnected: false, peerCount: 2 }, TestAgentFactory);
 
-  const peers = network.peers;
+  const peers = orchestrator.peers;
   expect(peers.length).toEqual(2);
 
   const [peer1, peer2] = peers;
@@ -54,7 +54,7 @@ test('DirectedReplicationNetwork', async () => {
 
   // Check replication isn't occurring.
 
-  expect(network.connections.length).toBe(0);
+  expect(orchestrator.connections.length).toBe(0);
 
   await agent1.append(message1);
   await agent2.append(message2);
@@ -76,8 +76,8 @@ test('DirectedReplicationNetwork', async () => {
 
   // Check replication occurs when the peers are connected.
 
-  await network.addConnection(peer1.id, peer2.id);
-  expect(network.connections.length).toBe(1);
+  await orchestrator.addConnection(peer1.id, peer2.id);
+  expect(orchestrator.connections.length).toBe(1);
 
   await waitForExpect(async () => {
     const peer1Messages = await agent1.getMessages();
@@ -88,8 +88,8 @@ test('DirectedReplicationNetwork', async () => {
 
   // Check replication stops again if we remove the connection.
 
-  await network.deleteConnection(peer1.id, peer2.id);
-  expect(network.connections.length).toBe(0);
+  await orchestrator.deleteConnection(peer1.id, peer2.id);
+  expect(orchestrator.connections.length).toBe(0);
 
   await agent1.append(message3);
   await agent2.append(message4);
@@ -103,8 +103,8 @@ test('DirectedReplicationNetwork', async () => {
 
   // Check replication occurs again if we add the connection again.
 
-  await network.addConnection(peer1.id, peer2.id);
-  expect(network.connections.length).toBe(1);
+  await orchestrator.addConnection(peer1.id, peer2.id);
+  expect(orchestrator.connections.length).toBe(1);
 
   await waitForExpect(async () => {
     log('Getting messages2');
