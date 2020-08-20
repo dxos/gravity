@@ -26,14 +26,15 @@ const useSimulation = () => {
   return simulation;
 };
 
-const Graph = ({ simulation, onNodeClick }) => {
+const Graph = (parameters: any) => {
+  const { simulation, onNodeClick } = parameters as {simulation: Simulation, onNodeClick: any};
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
-  const graphRef = useRef();
+  const graphRef = useRef() as any;
 
   useEffect(() => {
     const init = async () => {
       await simulation.initialize();
-      simulation.eventEmitter.on('update', () => { setGraphData(simulation.toForceGraph()); });
+      simulation.onUpdate( () => { setGraphData(simulation.toForceGraph() as any); });
     };
     init();
   }, []);
@@ -73,6 +74,6 @@ export const Network1 = () => {
       <div><Switch checked={continuousMutations} onChange={handleContinuousToggled}></Switch></div>
       <div><Button onClick={() => simulation.singleMutation()}>One Mutation</Button></div>
     </Toolbar>
-    <Graph simulation={simulation} onNodeClick={node => simulation.disconnectNode(node.id)}></Graph>
+    <Graph simulation={simulation} onNodeClick={(node: any) => simulation.disconnectNode(node.id)}></Graph>
   </div>;
 };

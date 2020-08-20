@@ -4,7 +4,7 @@
 
 import Chance from 'chance';
 import debug from 'debug';
-import { _eventEmitter } from 'events';
+import { EventEmitter } from 'events';
 
 import { createId, keyToBuffer, keyToString } from '@dxos/crypto';
 import { createReplicationNetwork } from '@dxos/feed-replication-network';
@@ -16,6 +16,10 @@ debug.enable('dxos:echo:stories');
 
 const chance = new Chance();
 
+// Convenience types for network
+type Peer = any;
+type Connection = any;
+
 export enum Connectivity {
   DISCONNECTED,
   CONNECTED,
@@ -25,12 +29,12 @@ export enum Connectivity {
 
 export class Simulation {
   initialized = false;
-  network;
+  network: any;
 
-  private _itemId;
+  private _itemId: string = '';
   private _type = 'graph._type';
-  private _eventEmitter = new _eventEmitter();
-  private _nodesCache;
+  private _eventEmitter = new EventEmitter();
+  private _nodesCache: Peer[] | undefined;
   private _continuousMutations = false;
 
   async initialize () {
@@ -39,7 +43,7 @@ export class Simulation {
     const firstModel = this.network.peers[0].model;
     this._itemId = await firstModel.createItem(this._type, { color: 'black' });
     this.initialized = true;
-    this.network.peers.forEach(p => p.model.on('update', () => this.signalUpdate()));
+    this.network.peers.forEach((p: Peer) => p.model.on('update', () => this.signalUpdate()));
   }
 
   startMutating () {
@@ -68,9 +72,9 @@ export class Simulation {
   }
 
   async changeConnectivity (connectivity: Connectivity) {
-    const promises = [];
-    const currentPeers = this.network.peers;
-    const currentConnections = this.network.connections;
+    const promises: Promise<any>[] = [];
+    const currentPeers: Peer[] = this.network.peers;
+    const currentConnections: Connection[] = this.network.connections;
 
     const connectedNetwork = () => {
       currentPeers.forEach(
@@ -121,10 +125,10 @@ export class Simulation {
     this.signalUpdate();
   }
 
-  async disconnectNode (nodeId) {
+  async disconnectNode (nodeId: string) {
     log(`Disconnected: ${nodeId}`);
-    const promises = [];
-    const currentConnections = this.network.connections;
+    const promises: Promise<void>[] = [];
+    const currentConnections: Connection[] = this.network.connections;
     currentConnections.forEach((c) => {
       if (keyToString(c.fromPeer.id) === nodeId || keyToString(c.toPeer.id) === nodeId) {
         promises.push(this.network.deleteConnection(c.fromPeer.id, c.toPeer.id));
@@ -136,8 +140,8 @@ export class Simulation {
 
   async addPeer () {
     // For now we always fully connect new peers.
-    const promises = [];
-    const currentPeers = this.network.peers;
+    const promises: Promise<void>[] = [];
+    const currentPeers: Peer[] = this.network.peers;
     const newPeer = await this.network.addPeer(keyToBuffer(createId()));
     log(`Added peer: ${keyToString(newPeer.id)}`);
     currentPeers.forEach(fromPeer => promises.push(this.network.addConnection(fromPeer.id, newPeer.id)));
@@ -145,10 +149,14 @@ export class Simulation {
     this.signalUpdate();
   }
 
+  onUpdate (listener: () => void): void {
+    this._eventEmitter.on('update', listener);
+  }
+
   toForceGraph () {
     // TODO(dboreham): Needs to retain previous object since grapher adorns the nodes (only) with its magic.
     // When we generate a new graph to re-render, without that magic it begins the force simulation anew.
-    const colorFromPeer = (peer) => {
+    const colorFromPeer = (peer: Peer) => {
       const payloadObject = peer.model.getItem(this._itemId);
       return payloadObject ? payloadObject.properties.color : 'black';
     };
@@ -159,9 +167,9 @@ export class Simulation {
         this._nodesCache[i].color = colorFromPeer(peers[i]);
       }
     } else {
-      this._nodesCache = this.network.peers.map(p => ({ id: keyToString(p.id), color: colorFromPeer(p) }));
+      this._nodesCache = this.network.peers.map((p: Peer) => ({ id: keyToString(p.id), color: colorFromPeer(p) }));
     }
-    const links = this.network.connections.map(c => ({ source: keyToString(c.fromPeer.id), target: keyToString(c.toPeer.id) }));
+    const links = this.network.connections.map((c: Connection) => ({ source: keyToString(c.fromPeer.id), target: keyToString(c.toPeer.id) }));
     return { nodes: this._nodesCache, links };
   }
 
