@@ -27,7 +27,7 @@ export class ModelPeer extends FeedReplicationPeer {
     const stream = this.feedStore.createReadStream({ live: true });
     stream.on('data', (message: any) => {
       log(`Received message: ${JSON.stringify(message)}`);
-      this.model.processMessages([message.data]);
+      this.model.processMessages([message]);
     });
   }
 }
