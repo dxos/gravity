@@ -115,12 +115,8 @@ test('feed-node-network-generated', async () => {
   });
 });
 
-test.skip('feed-node-network-explicit', async () => {
-  // with nodes that have one write feed each and
-  // expect to replicate all feeds
-  // expose a method to post a message on a node's feed
-  // expose a method to check if a specific message has been received by any feed read by a node
-  // allow other introspection such as check if two nodes are synced with each other
+test('feed-node-network-explicit', async () => {
+  // Same test as above, but create node objects outside of the orchestrator network then insert into network.
 
   const topic = keyToBuffer(createId());
 
