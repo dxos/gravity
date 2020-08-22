@@ -35,7 +35,8 @@ export class NodeFactory {
     switch (platform) {
       case Platform.IN_PROCESS: {
         const nodeId = randomBytes();
-        const eventHandler: (data: Buffer) => void;
+        // eslint-disable-next-line prefer-const
+        let eventHandler: (data: Buffer) => void;
         const node = new Node(
           nodeId,
           packageSource.path,
