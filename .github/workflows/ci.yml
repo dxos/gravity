@@ -16,7 +16,7 @@ jobs:
           yarn build
       - name: Test
         run: |
-          yarn test
+          yarn test --stream --concurrency 1
       - name: Lint
         run: | 
           yarn lint
