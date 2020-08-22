@@ -22,8 +22,7 @@
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint -- --fix",
-    "test": "lerna run test",
-    "posttest": "npm run lint"
+    "test": "lerna run test"
   },
   "husky": {
     "hooks": {
