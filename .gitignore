@@ -108,4 +108,4 @@ dist
 **/.temp
 
 # Protocol buffers generated source files
-src/proto/gen/
+**/proto/gen/
