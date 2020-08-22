@@ -32,9 +32,10 @@ export class NodeFactory {
   async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
-    switch(platform) {
+    switch (platform) {
       case Platform.IN_PROCESS: {
         const nodeId = randomBytes();
+        // eslint-disable-next-line prefer-const
         let eventHandler: (data: Buffer) => void;
         const node = new Node(
           nodeId,
