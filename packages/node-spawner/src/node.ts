@@ -110,7 +110,7 @@ export class Node {
           }
         });
       },
-      console.error, // TODO(marik-d): Better error reporting
+      console.error // TODO(marik-d): Better error reporting
     );
   }
 

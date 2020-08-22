@@ -10,17 +10,17 @@ export class NodeOrchestrator {
 
   /**
    * Create a node with the specified agents.
-   * 
+   *
    * Agents are assumed to be in a file that default-exports the class that implements the `Agent` interface.
    * Agents take an `Environment` object as the constructor parameter.
-   * 
+   *
    * Look at "test/client-agent.ts" for examples.
-   * 
+   *
    * @param agentPath Path to the agent module
-   * @param platform 
+   * @param platform
    */
   async createNode (agentPath: string, platform: Platform) {
-    return await this._factory.createNode({ kind: 'local', path: agentPath }, platform);
+    return this._factory.createNode({ kind: 'local', path: agentPath }, platform);
   }
 
   async waitForSync () {
@@ -28,7 +28,7 @@ export class NodeOrchestrator {
 
     return combine(nodes.map(node => node.metrics.update)).waitFor(() => {
       const totalAppended = sum(nodes.map(node => node.metrics.getNumber('appended') ?? 0));
-      return nodes.every(node => node.metrics.getNumber('updated') == totalAppended);
+      return nodes.every(node => node.metrics.getNumber('updated') === totalAppended);
     });
   }
 
