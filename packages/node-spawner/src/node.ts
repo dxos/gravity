@@ -97,12 +97,16 @@ export class Node {
 
   private _snapshot () {
     assert(this._agent);
-    const snapshot = this._agent.snapshot();
-    this._reportEvent({
-      snapshot: {
-        data: JSON.stringify(snapshot)
-      }
-    });
+    this._agent.snapshot().then(
+      snapshot => {
+        this._reportEvent({
+          snapshot: {
+            data: JSON.stringify(snapshot)
+          }
+        });
+      },
+      console.error, // TODO(marik-d): Better error reporting
+    );
   }
 
   private _destory () {

@@ -5,7 +5,7 @@ export interface Agent {
 
   onEvent(event: JsonObject): void;
 
-  snapshot(): JsonObject;
+  snapshot(): Promise<JsonObject>;
 
   destroy(): Promise<void>;
 }

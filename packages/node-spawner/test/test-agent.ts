@@ -18,7 +18,7 @@ export default class TestAgent implements Agent {
     this.environment.logMessage('Count is now', this._count);
   }
 
-  snapshot (): JsonObject {
+  async snapshot () {
     return { count: this._count };
   }
 

@@ -38,7 +38,7 @@ export default class ClientAgent implements Agent {
     this.environment.logMessage('Count is now', this._count);
   }
 
-  snapshot (): JsonObject {
+  async snapshot () {
     return {
       count: this._count,
       model: JSON.parse(JSON.stringify(this._model))
