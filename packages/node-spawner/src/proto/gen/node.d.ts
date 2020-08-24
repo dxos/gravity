@@ -1,4 +1,4 @@
-import * as $protobuf from 'protobufjs';
+import * as $protobuf from "protobufjs";
 /** Namespace dxos. */
 export namespace dxos {
 
@@ -20,11 +20,12 @@ export namespace dxos {
 
         /** Represents a NodeCommand. */
         class NodeCommand implements INodeCommand {
-          /**
+
+            /**
              * Constructs a new NodeCommand.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.INodeCommand);
+            constructor(properties?: dxos.node.INodeCommand);
 
             /** NodeCommand event. */
             public event?: (dxos.node.IEventCommand|null);
@@ -36,7 +37,7 @@ export namespace dxos {
             public destroy?: (dxos.node.IDestroyCommand|null);
 
             /** NodeCommand command. */
-            public command?: ('event'|'snapshot'|'destroy');
+            public command?: ("event"|"snapshot"|"destroy");
 
             /**
              * Creates a new NodeCommand instance using the specified properties.
@@ -118,11 +119,12 @@ export namespace dxos {
 
         /** Represents an EventCommand. */
         class EventCommand implements IEventCommand {
-          /**
+
+            /**
              * Constructs a new EventCommand.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.IEventCommand);
+            constructor(properties?: dxos.node.IEventCommand);
 
             /** EventCommand event. */
             public event: string;
@@ -204,36 +206,37 @@ export namespace dxos {
 
         /** Represents a SnapshotCommand. */
         class SnapshotCommand implements ISnapshotCommand {
-          /**
+
+            /**
              * Constructs a new SnapshotCommand.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.ISnapshotCommand);
+            constructor(properties?: dxos.node.ISnapshotCommand);
 
-          /**
+            /**
              * Creates a new SnapshotCommand instance using the specified properties.
              * @param [properties] Properties to set
              * @returns SnapshotCommand instance
              */
-          public static create(properties?: dxos.node.ISnapshotCommand): dxos.node.SnapshotCommand;
+            public static create(properties?: dxos.node.ISnapshotCommand): dxos.node.SnapshotCommand;
 
-          /**
+            /**
              * Encodes the specified SnapshotCommand message. Does not implicitly {@link dxos.node.SnapshotCommand.verify|verify} messages.
              * @param message SnapshotCommand message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-          public static encode(message: dxos.node.ISnapshotCommand, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: dxos.node.ISnapshotCommand, writer?: $protobuf.Writer): $protobuf.Writer;
 
-          /**
+            /**
              * Encodes the specified SnapshotCommand message, length delimited. Does not implicitly {@link dxos.node.SnapshotCommand.verify|verify} messages.
              * @param message SnapshotCommand message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-          public static encodeDelimited(message: dxos.node.ISnapshotCommand, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: dxos.node.ISnapshotCommand, writer?: $protobuf.Writer): $protobuf.Writer;
 
-          /**
+            /**
              * Decodes a SnapshotCommand message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -241,44 +244,44 @@ export namespace dxos {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-          public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dxos.node.SnapshotCommand;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dxos.node.SnapshotCommand;
 
-          /**
+            /**
              * Decodes a SnapshotCommand message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
              * @returns SnapshotCommand
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-          public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dxos.node.SnapshotCommand;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dxos.node.SnapshotCommand;
 
-          /**
+            /**
              * Verifies a SnapshotCommand message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-          public static verify(message: { [k: string]: any }): (string|null);
+            public static verify(message: { [k: string]: any }): (string|null);
 
-          /**
+            /**
              * Creates a SnapshotCommand message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
              * @returns SnapshotCommand
              */
-          public static fromObject(object: { [k: string]: any }): dxos.node.SnapshotCommand;
+            public static fromObject(object: { [k: string]: any }): dxos.node.SnapshotCommand;
 
-          /**
+            /**
              * Creates a plain object from a SnapshotCommand message. Also converts values to other types if specified.
              * @param message SnapshotCommand
              * @param [options] Conversion options
              * @returns Plain object
              */
-          public static toObject(message: dxos.node.SnapshotCommand, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: dxos.node.SnapshotCommand, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
-          /**
+            /**
              * Converts this SnapshotCommand to JSON.
              * @returns JSON object
              */
-          public toJSON(): { [k: string]: any };
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a DestroyCommand. */
@@ -287,36 +290,37 @@ export namespace dxos {
 
         /** Represents a DestroyCommand. */
         class DestroyCommand implements IDestroyCommand {
-          /**
+
+            /**
              * Constructs a new DestroyCommand.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.IDestroyCommand);
+            constructor(properties?: dxos.node.IDestroyCommand);
 
-          /**
+            /**
              * Creates a new DestroyCommand instance using the specified properties.
              * @param [properties] Properties to set
              * @returns DestroyCommand instance
              */
-          public static create(properties?: dxos.node.IDestroyCommand): dxos.node.DestroyCommand;
+            public static create(properties?: dxos.node.IDestroyCommand): dxos.node.DestroyCommand;
 
-          /**
+            /**
              * Encodes the specified DestroyCommand message. Does not implicitly {@link dxos.node.DestroyCommand.verify|verify} messages.
              * @param message DestroyCommand message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-          public static encode(message: dxos.node.IDestroyCommand, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: dxos.node.IDestroyCommand, writer?: $protobuf.Writer): $protobuf.Writer;
 
-          /**
+            /**
              * Encodes the specified DestroyCommand message, length delimited. Does not implicitly {@link dxos.node.DestroyCommand.verify|verify} messages.
              * @param message DestroyCommand message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-          public static encodeDelimited(message: dxos.node.IDestroyCommand, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: dxos.node.IDestroyCommand, writer?: $protobuf.Writer): $protobuf.Writer;
 
-          /**
+            /**
              * Decodes a DestroyCommand message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
@@ -324,44 +328,44 @@ export namespace dxos {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-          public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dxos.node.DestroyCommand;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dxos.node.DestroyCommand;
 
-          /**
+            /**
              * Decodes a DestroyCommand message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
              * @returns DestroyCommand
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-          public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dxos.node.DestroyCommand;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dxos.node.DestroyCommand;
 
-          /**
+            /**
              * Verifies a DestroyCommand message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
-          public static verify(message: { [k: string]: any }): (string|null);
+            public static verify(message: { [k: string]: any }): (string|null);
 
-          /**
+            /**
              * Creates a DestroyCommand message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
              * @returns DestroyCommand
              */
-          public static fromObject(object: { [k: string]: any }): dxos.node.DestroyCommand;
+            public static fromObject(object: { [k: string]: any }): dxos.node.DestroyCommand;
 
-          /**
+            /**
              * Creates a plain object from a DestroyCommand message. Also converts values to other types if specified.
              * @param message DestroyCommand
              * @param [options] Conversion options
              * @returns Plain object
              */
-          public static toObject(message: dxos.node.DestroyCommand, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: dxos.node.DestroyCommand, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
-          /**
+            /**
              * Converts this DestroyCommand to JSON.
              * @returns JSON object
              */
-          public toJSON(): { [k: string]: any };
+            public toJSON(): { [k: string]: any };
         }
 
         /** Properties of a NodeEvent. */
@@ -382,11 +386,12 @@ export namespace dxos {
 
         /** Represents a NodeEvent. */
         class NodeEvent implements INodeEvent {
-          /**
+
+            /**
              * Constructs a new NodeEvent.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.INodeEvent);
+            constructor(properties?: dxos.node.INodeEvent);
 
             /** NodeEvent timestamp. */
             public timestamp: number;
@@ -401,7 +406,7 @@ export namespace dxos {
             public metricsUpdate?: (dxos.node.IMetricsUpdateEvent|null);
 
             /** NodeEvent event. */
-            public event?: ('log'|'snapshot'|'metricsUpdate');
+            public event?: ("log"|"snapshot"|"metricsUpdate");
 
             /**
              * Creates a new NodeEvent instance using the specified properties.
@@ -486,11 +491,12 @@ export namespace dxos {
 
         /** Represents a LogEvent. */
         class LogEvent implements ILogEvent {
-          /**
+
+            /**
              * Constructs a new LogEvent.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.ILogEvent);
+            constructor(properties?: dxos.node.ILogEvent);
 
             /** LogEvent eventName. */
             public eventName: string;
@@ -578,11 +584,12 @@ export namespace dxos {
 
         /** Represents a SnapshotEvent. */
         class SnapshotEvent implements ISnapshotEvent {
-          /**
+
+            /**
              * Constructs a new SnapshotEvent.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.ISnapshotEvent);
+            constructor(properties?: dxos.node.ISnapshotEvent);
 
             /** SnapshotEvent data. */
             public data: string;
@@ -670,11 +677,12 @@ export namespace dxos {
 
         /** Represents a MetricsUpdateEvent. */
         class MetricsUpdateEvent implements IMetricsUpdateEvent {
-          /**
+
+            /**
              * Constructs a new MetricsUpdateEvent.
              * @param [properties] Properties to set
              */
-          constructor(properties?: dxos.node.IMetricsUpdateEvent);
+            constructor(properties?: dxos.node.IMetricsUpdateEvent);
 
             /** MetricsUpdateEvent key. */
             public key: string;
@@ -770,11 +778,12 @@ export namespace dxos {
 
             /** Represents a Value. */
             class Value implements IValue {
-              /**
+
+                /**
                  * Constructs a new Value.
                  * @param [properties] Properties to set
                  */
-              constructor(properties?: dxos.node.MetricsUpdateEvent.IValue);
+                constructor(properties?: dxos.node.MetricsUpdateEvent.IValue);
 
                 /** Value int. */
                 public int: number;
@@ -786,7 +795,7 @@ export namespace dxos {
                 public bool: boolean;
 
                 /** Value value. */
-                public value?: ('int'|'string'|'bool');
+                public value?: ("int"|"string"|"bool");
 
                 /**
                  * Creates a new Value instance using the specified properties.
@@ -880,11 +889,12 @@ export namespace google {
 
         /** Represents an Any. */
         class Any implements IAny {
-          /**
+
+            /**
              * Constructs a new Any.
              * @param [properties] Properties to set
              */
-          constructor(properties?: google.protobuf.IAny);
+            constructor(properties?: google.protobuf.IAny);
 
             /** Any type_url. */
             public type_url: string;

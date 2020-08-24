@@ -2,6 +2,8 @@
   "name": "@dxos/node-spawner",
   "version": "1.0.0-beta.1",
   "description": "Spawning node on different machines and platforms",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "./scripts/build-proto.sh && tsc",
     "lint": "eslint '{src,test}/**/*.ts'",
