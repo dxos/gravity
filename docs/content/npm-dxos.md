@@ -16,6 +16,8 @@ export NPM_CONFIG_REGISTRY=http://npm.dev.dxos.network:5736/
 
 Note that many packages as part of their build process run `npm` so even if you think you're using just `yarn`, you're not and so both environment variables should be set.
 
+Also note that a registry host name is "baked" into the file `yarn.lock` and therefore in order to fetch packages from the development registry it will be necessary to either delete `yarn.lock` prior to running `yarn`, or to ensure that `yarn.lock` already references the intended registry host name.
+
 ## Publishing a package to the Development NPM Registry 
 
 BEWARE: It is relatively easy to create a scenario where publication will occur to the public npm registry, for example by having a valid `npm login` token for npmjs.org, and forgetting to set `NPM_CONFIG_REGISTRY` or by using `lerna` which does not honor the environment variable, and forgetting to pass `--registry`.
