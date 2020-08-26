@@ -19,7 +19,7 @@ export class TestFeedPeer extends FeedReplicationPeer {
     const stream = this.feedStore.createReadStream();
     stream.on('data', (data) => {
       log(`Subscription message: ${JSON.stringify(data)}`);
-      messages.push(data.data);
+      messages.push(data);
     });
     return new Promise((resolve, reject) => {
       eos(stream, (err) => {
