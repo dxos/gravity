@@ -3,13 +3,21 @@ import { Codec } from '@dxos/codec-protobuf';
 import ProtoJSON from './proto/gen/node.json';
 import { dxos } from './proto/gen/node';
 import { Metrics } from './metrics';
+import { Event } from '@dxos/async';
 
 const codec = new Codec('dxos.node.NodeCommand')
   .addJson(ProtoJSON)
   .build();
 
+export interface AgentLog {
+  name: string
+  details: JsonObject
+}
+
 export abstract class NodeHandle {
   readonly metrics = new Metrics();
+
+  readonly log = new Event<AgentLog>()
 
   constructor (private readonly _nodeId: Buffer) {}
 
@@ -45,12 +53,12 @@ export abstract class NodeHandle {
       if (eventName === 'log') {
         console.log(`${this._nodeId.toString('hex').slice(4)}: ${JSON.parse(details!).message}`);
       } else {
-        console.log(`${this._nodeId.toString('hex').slice(4)}: ${eventName} ${details}`);
+        this.log.emit({ name: eventName!, details: JSON.parse(details!) })
       }
     } else if (event.snapshot) {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
     } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
-    }
+    } 
   }
 }
