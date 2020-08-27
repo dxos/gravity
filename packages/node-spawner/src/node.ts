@@ -25,6 +25,11 @@ const codec = new Codec('dxos.node.NodeCommand')
   .addJson(ProtoJSON)
   .build();
 
+/**
+ * Agent runtime. Prepares the environment and instantiates an Agent class.
+ * Decodes commands and forwards them to the Agent.
+ * Sends agent's events to the orchestrator.
+ */
 export class Node {
   private _agent: Agent | undefined;
 

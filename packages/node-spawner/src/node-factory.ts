@@ -19,6 +19,9 @@ export enum Platform {
   SAFARI,
 }
 
+/**
+ * Factory for spawning and destroying nodes.
+ */
 export class NodeFactory {
   private _nodes = new Set<NodeHandle>();
 

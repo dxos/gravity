@@ -15,6 +15,11 @@ export interface AgentLog {
   details: JsonObject
 }
 
+/**
+ * Base class for handle for a running node.
+ * 
+ * Defines a communication channel with the node as well as methods to control node lifecycle.
+ */
 export abstract class NodeHandle {
   readonly metrics = new Metrics();
 
