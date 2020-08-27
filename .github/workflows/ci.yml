@@ -1,4 +1,4 @@
-name: Built, Test, Lint
+name: Build, Test, Lint
 
 on:
   push
@@ -10,7 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - yarn install --frozen-lockfile
-      - yarn build
-      - yarn test 
-      - yarn lint
+      - name: Build
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+      - name: Test
+        run: |
+          yarn test --stream --concurrency 1
+      - name: Lint
+        run: | 
+          yarn lint
