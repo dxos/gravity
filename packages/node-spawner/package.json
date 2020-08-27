@@ -1,0 +1,57 @@
+{
+  "name": "@dxos/node-spawner",
+  "version": "1.0.0-beta.1",
+  "description": "Spawning node on different machines and platforms",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "./scripts/build-proto.sh && tsc",
+    "lint": "eslint '{src,test}/**/*.ts'",
+    "test": "jest --verbose --passWithNoTests"
+  },
+  "jest": {
+    "preset": "ts-jest/presets/js-with-ts",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "dist"
+    ]
+  },
+  "devDependencies": {
+    "@dxos/async": "^1.0.0-beta.5",
+    "@types/node": "^14.0.27",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "jest": "^26.4.0",
+    "protobufjs": "^6.10.1",
+    "semistandard": "^14.2.3",
+    "ts-jest": "^26.2.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@dxos/async": "^1.0.0-beta.5",
+    "@dxos/client": "^1.0.0-beta.260",
+    "@dxos/codec-protobuf": "^1.1.0-beta.11",
+    "@dxos/credentials": "^1.0.1-beta.36",
+    "@dxos/crypto": "^1.0.0-beta.2",
+    "@dxos/feed-store": "^1.2.0-beta.22",
+    "@dxos/network-manager": "1.0.0-beta.105",
+    "@dxos/party-manager": "^1.0.1-beta.36",
+    "@dxos/random-access-multi-storage": "^1.1.0-beta.4",
+    "buffer-json-encoding": "^1.0.2",
+    "memdown": "^5.1.0"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "eslint-config-semistandard",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "no-unused-vars": "off",
+      "no-useless-constructor": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off"
+    }
+  }
+}

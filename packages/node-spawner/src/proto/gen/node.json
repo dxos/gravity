@@ -1,0 +1,159 @@
+{
+  "nested": {
+    "dxos": {
+      "nested": {
+        "node": {
+          "nested": {
+            "NodeCommand": {
+              "oneofs": {
+                "command": {
+                  "oneof": [
+                    "event",
+                    "snapshot",
+                    "destroy"
+                  ]
+                }
+              },
+              "fields": {
+                "event": {
+                  "type": "EventCommand",
+                  "id": 1
+                },
+                "snapshot": {
+                  "type": "SnapshotCommand",
+                  "id": 2
+                },
+                "destroy": {
+                  "type": "DestroyCommand",
+                  "id": 3
+                }
+              }
+            },
+            "EventCommand": {
+              "fields": {
+                "event": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "SnapshotCommand": {
+              "fields": {}
+            },
+            "DestroyCommand": {
+              "fields": {}
+            },
+            "NodeEvent": {
+              "oneofs": {
+                "event": {
+                  "oneof": [
+                    "log",
+                    "snapshot",
+                    "metricsUpdate"
+                  ]
+                }
+              },
+              "fields": {
+                "timestamp": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "log": {
+                  "type": "LogEvent",
+                  "id": 2
+                },
+                "snapshot": {
+                  "type": "SnapshotEvent",
+                  "id": 3
+                },
+                "metricsUpdate": {
+                  "type": "MetricsUpdateEvent",
+                  "id": 4
+                }
+              }
+            },
+            "LogEvent": {
+              "fields": {
+                "eventName": {
+                  "type": "string",
+                  "id": 1
+                },
+                "details": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "SnapshotEvent": {
+              "fields": {
+                "data": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "MetricsUpdateEvent": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "Value",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Value": {
+                  "oneofs": {
+                    "value": {
+                      "oneof": [
+                        "int",
+                        "string",
+                        "bool"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "int": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "string": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "bool": {
+                      "type": "bool",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "protobuf": {
+          "nested": {
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
