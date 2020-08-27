@@ -29,7 +29,7 @@ export abstract class NodeHandle {
   constructor (private readonly _nodeId: Buffer) {}
 
   get name() {
-    return humanize(this._nodeId);
+    return humanize(this._nodeId) as string;
   }
 
   sendEvent (event: JsonObject) {
