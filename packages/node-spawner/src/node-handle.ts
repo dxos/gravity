@@ -5,6 +5,7 @@ import { JsonObject } from './common';
 import { Metrics } from './metrics';
 import { dxos } from './proto/gen/node';
 import ProtoSchema from './proto/gen/node.json';
+import { humanize } from '@dxos/crypto';
 
 const codec = new Codec('dxos.node.NodeCommand')
   .addJson(ProtoSchema)
@@ -26,6 +27,10 @@ export abstract class NodeHandle {
   readonly log = new Event<AgentLog>()
 
   constructor (private readonly _nodeId: Buffer) {}
+
+  get name() {
+    return humanize(this._nodeId);
+  }
 
   sendEvent (event: JsonObject) {
     const command: dxos.node.INodeCommand = {
