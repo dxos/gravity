@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package dxos.node;
+
+import "google/protobuf/any.proto";
+
+message NodeCommand {
+  oneof command {
+    EventCommand event = 1;
+    SnapshotCommand snapshot = 2;
+    DestroyCommand destroy = 3;
+  }
+}
+
+message EventCommand {
+  string event = 1;
+}
+
+message SnapshotCommand {
+
+}
+
+message DestroyCommand {
+
+}
+
+message NodeEvent {
+  uint32 timestamp = 1;
+  oneof event {
+    LogEvent log = 2;
+    SnapshotEvent snapshot = 3;
+    MetricsUpdateEvent metricsUpdate = 4;
+  }
+}
+
+message LogEvent {
+  string eventName = 1;
+  string details = 2;
+}
+
+message SnapshotEvent {
+  string data = 1;
+}
+
+message MetricsUpdateEvent {
+  message Value {
+    oneof value {
+      int32 int = 2;
+      string string = 3;
+      bool bool = 4;
+    }
+  }
+
+  string key = 1;
+  Value value = 2;
+}
