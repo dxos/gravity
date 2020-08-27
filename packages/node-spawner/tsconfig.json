@@ -9,7 +9,12 @@
     "sourceMap": true,
     "declarationMap": true,
     "resolveJsonModule": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "typeRoots": [
+      "../../node_modules/@types",
+      "./node_modules/@types",
+      "src/@types"
+    ]
   },
   "include": [
     "src",

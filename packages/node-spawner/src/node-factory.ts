@@ -1,7 +1,9 @@
 import { Node } from './node';
-import { randomBytes } from '@dxos/crypto';
+import { randomBytes, keyToString } from '@dxos/crypto';
 import { LocalNodeHandle } from './local-node-handle';
 import { NodeHandle } from './node-handle';
+import { fork } from 'child_process';
+import { ForkNodeHandle } from './fork-node-handle';
 
 export type PackageSource = {
   kind: 'local',
@@ -43,7 +45,19 @@ export class NodeFactory {
       this._nodes.add(handle);
       return handle;
     } else if (platform === Platform.NODE) {
-      throw new Error('Not implemented');
+      const nodeId = randomBytes();
+      const child = fork(require.resolve('./node-main'), [JSON.stringify({ 
+        id: keyToString(nodeId),
+        agentPath: packageSource.path,
+      })], { 
+        execArgv: ['-r', 'ts-node/register'],
+        env: {
+          'TS_NODE_PROJECT': require.resolve('../tsconfig.json')
+        }
+      });
+      const handle = new ForkNodeHandle(nodeId, child);
+      this._nodes.add(handle);
+      return handle;
     } else {
       throw new Error(`Unsupported platform: ${Platform[platform]}`);
     }
