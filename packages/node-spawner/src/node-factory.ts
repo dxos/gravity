@@ -29,23 +29,25 @@ export class NodeFactory {
   async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
-    if (platform === Platform.IN_PROCESS) {
-      const nodeId = randomBytes();
-      let eventHandler: (data: Buffer) => void;
-      const node = new Node(
-        nodeId,
-        packageSource.path,
-        (data) => { eventHandler(data); }
-      );
-      const handle = new LocalNodeHandle(node);
-      eventHandler = handle.handleEvent.bind(handle);
-      await node.start();
-      this._nodes.add(handle);
-      return handle;
-    } else if (platform === Platform.NODE) {
-      throw new Error('Not implemented');
-    } else {
-      throw new Error(`Unsupported platform: ${Platform[platform]}`);
+    switch(platform) {
+      case Platform.IN_PROCESS: {
+        const nodeId = randomBytes();
+        let eventHandler: (data: Buffer) => void;
+        const node = new Node(
+          nodeId,
+          packageSource.path,
+          (data) => { eventHandler(data); }
+        );
+        const handle = new LocalNodeHandle(node);
+        eventHandler = handle.handleEvent.bind(handle);
+        await node.start();
+        this._nodes.add(handle);
+        return handle;
+      }
+      case Platform.NODE:
+        throw new Error('Not implemented');
+      default:
+        throw new Error(`Unsupported platform: ${Platform[platform]}`);
     }
   }
 

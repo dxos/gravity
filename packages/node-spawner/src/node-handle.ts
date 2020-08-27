@@ -1,12 +1,13 @@
-import { JsonObject } from './common';
-import { Codec } from '@dxos/codec-protobuf';
-import ProtoJSON from './proto/gen/node.json';
-import { dxos } from './proto/gen/node';
-import { Metrics } from './metrics';
 import { Event } from '@dxos/async';
+import { Codec } from '@dxos/codec-protobuf';
+
+import { JsonObject } from './common';
+import { Metrics } from './metrics';
+import { dxos } from './proto/gen/node';
+import ProtoSchema from './proto/gen/node.json';
 
 const codec = new Codec('dxos.node.NodeCommand')
-  .addJson(ProtoJSON)
+  .addJson(ProtoSchema)
   .build();
 
 export interface AgentLog {
