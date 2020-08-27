@@ -129,7 +129,7 @@ export class BaseContext extends EventEmitter {
     throw new Error('tick not implemented');
   }
 
-  agetParties () {
+  getParties () {
     throw new Error('getParties not implemented');
   }
 
