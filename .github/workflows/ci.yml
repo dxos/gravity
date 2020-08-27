@@ -17,7 +17,7 @@ jobs:
       - name: Test
         # Disable system-testing tests because there's a race somewhere that hangs the test in the CI runtime environment.
         run: |
-          yarn test --ignore @dxos/system-testing
+          yarn test --ignore @dxos/system-testing --stream --concurrency 1
       - name: Lint
         run: | 
           yarn lint
