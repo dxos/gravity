@@ -36,7 +36,7 @@ jobs:
           # Don't allow lerna to parallelize our world because pbjs isn't concurrency-safe at present.
           yarn build --concurrency 1
           yarn lint
-          yarn test
+          yarn test --ignore @dxos/system-testing --ignore @dxos/node-spawner
           # Make lerna happy below by restoring consistency with git origin.
           git checkout -- yarn.lock
       - name: Publish to NPM registry
