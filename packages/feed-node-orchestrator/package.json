@@ -4,7 +4,6 @@
   "description": "Bare Feeds Replication Network Simulation",
   "license": "GPL-3.0",
   "main": "dist/es/index.js",
-  "private": true,
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && babel ./src --out-dir ./dist/es --ignore \"**/*.test.js\" --source-maps inline",
