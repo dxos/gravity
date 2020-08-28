@@ -7,6 +7,7 @@ export default class TestAgent implements Agent {
 
   constructor (private environment: Environment) { }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   async init () { }
 
   onEvent (event: JsonObject) {
@@ -19,5 +20,6 @@ export default class TestAgent implements Agent {
     return { count: this._count };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   async destroy () { }
 }

@@ -18,7 +18,7 @@ export interface AgentLog {
 
 /**
  * Base class for handle for a running node.
- * 
+ *
  * Defines a communication channel with the node as well as methods to control node lifecycle.
  */
 export abstract class NodeHandle {
@@ -28,7 +28,7 @@ export abstract class NodeHandle {
 
   constructor (private readonly _nodeId: Buffer) {}
 
-  get name() {
+  get name () {
     return humanize(this._nodeId) as string;
   }
 
@@ -64,12 +64,12 @@ export abstract class NodeHandle {
       if (eventName === 'log') {
         console.log(`${this._nodeId.toString('hex').slice(4)}: ${JSON.parse(details!).message}`);
       } else {
-        this.log.emit({ name: eventName!, details: JSON.parse(details!) })
+        this.log.emit({ name: eventName!, details: JSON.parse(details!) });
       }
     } else if (event.snapshot) {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
     } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
-    } 
+    }
   }
 }
