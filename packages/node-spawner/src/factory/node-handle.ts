@@ -1,10 +1,10 @@
 import { Event } from '@dxos/async';
 import { Codec } from '@dxos/codec-protobuf';
 
-import { JsonObject } from './common';
-import { Metrics } from './metrics';
-import { dxos } from './proto/gen/node';
-import ProtoSchema from './proto/gen/node.json';
+import { JsonObject } from '../common';
+import { Metrics } from '../metrics';
+import { dxos } from '../proto/gen/node';
+import ProtoSchema from '../proto/gen/node.json';
 import { humanize } from '@dxos/crypto';
 
 const codec = new Codec('dxos.node.NodeCommand')

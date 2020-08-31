@@ -1,5 +1,5 @@
 import { NodeHandle } from './node-handle';
-import { Node } from './node';
+import { Node } from '../runtime/node';
 
 /**
  * Handle for the node running in the same process.

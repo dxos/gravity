@@ -1,7 +1,7 @@
 import { DefaultModel } from '@dxos/model-factory';
-import { Agent } from '../src/agent';
+import { Agent } from '../src/runtime/agent';
 import { JsonObject } from '../src/common';
-import { Environment } from '../src/node';
+import { Environment } from '../src/runtime/node';
 import { createClientFromEnvironment } from '../src/setup';
 
 export default class ClientAgent implements Agent {

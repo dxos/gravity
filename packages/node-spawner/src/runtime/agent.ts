@@ -1,4 +1,4 @@
-import { JsonObject } from './common';
+import { JsonObject } from '../common';
 
 /**
  * Agent interface. Defines a set of lifecycle methods.

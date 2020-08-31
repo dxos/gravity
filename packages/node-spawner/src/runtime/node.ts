@@ -4,13 +4,13 @@ import { randomBytes } from '@dxos/crypto';
 import { createStorage } from '@dxos/random-access-multi-storage';
 import { SwarmProvider } from '@dxos/network-manager';
 
-import { JsonObject } from './common';
+import { JsonObject } from '../common';
 import { Agent } from './agent';
 import assert from 'assert';
 import { Codec } from '@dxos/codec-protobuf';
-import ProtoJSON from './proto/gen/node.json';
-import { dxos } from './proto/gen/node';
-import { Metrics } from './metrics';
+import ProtoJSON from '../proto/gen/node.json';
+import { dxos } from '../proto/gen/node';
+import { Metrics } from '../metrics';
 
 export interface Environment {
   log: (eventName: string, details: JsonObject) => void;
