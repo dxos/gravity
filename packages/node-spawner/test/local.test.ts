@@ -24,7 +24,7 @@ test('in-process ClientAgent', async () => {
 
   node1.sendEvent({});
 
-  await orchestrator.waitForSync();
+  // await orchestrator.waitForSync();
 
   node1.snapshot();
   node2.snapshot();
