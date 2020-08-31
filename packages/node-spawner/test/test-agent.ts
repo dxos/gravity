@@ -1,5 +1,5 @@
-import { Environment } from '../src/node';
-import { Agent } from '../src/agent';
+import { Environment } from '../src/runtime/node';
+import { Agent } from '../src/runtime/agent';
 import { JsonObject } from '../src/common';
 
 export default class TestAgent implements Agent {

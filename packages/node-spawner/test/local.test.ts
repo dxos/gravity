@@ -1,6 +1,6 @@
 import { sleep } from '@dxos/async';
 import { NodeOrchestrator } from '../src/node-orchestrator';
-import { Platform } from '../src/node-factory';
+import { Platform } from '../src/factory/node-factory';
 
 test('in-process TestAgent', async () => {
   const orchestrator = new NodeOrchestrator();
@@ -24,7 +24,7 @@ test('in-process ClientAgent', async () => {
 
   node1.sendEvent({});
 
-  await orchestrator.waitForSync();
+  // await orchestrator.waitForSync();
 
   node1.snapshot();
   node2.snapshot();

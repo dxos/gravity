@@ -1,4 +1,4 @@
-import { Platform, NodeFactory } from './node-factory';
+import { Platform, NodeFactory } from './factory/node-factory';
 import { combine, sum } from './util';
 
 /**
