@@ -12,4 +12,9 @@ export class ForkNodeHandle extends NodeHandle {
   protected send(command: Buffer): void {
     this._process.send(command);
   }
+
+  destroy() {
+    super.destroy();
+    this._process.kill();
+  }
 }
