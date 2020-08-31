@@ -27,10 +27,15 @@ message DestroyCommand {
 message NodeEvent {
   uint32 timestamp = 1;
   oneof event {
-    LogEvent log = 2;
-    SnapshotEvent snapshot = 3;
-    MetricsUpdateEvent metricsUpdate = 4;
+    ReadyEvent ready = 2;
+    LogEvent log = 3;
+    SnapshotEvent snapshot = 4;
+    MetricsUpdateEvent metricsUpdate = 5;
   }
+}
+
+message ReadyEvent {
+
 }
 
 message LogEvent {

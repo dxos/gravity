@@ -4,6 +4,7 @@ import { LocalNodeHandle } from './local-node-handle';
 import { NodeHandle } from './node-handle';
 import { fork } from 'child_process';
 import { ForkNodeHandle } from './fork-node-handle';
+import assert from 'assert'
 
 export type PackageSource = {
   kind: 'local',
@@ -52,10 +53,16 @@ export class NodeFactory {
       })], { 
         execArgv: ['-r', 'ts-node/register'],
         env: {
+          'TS_NODE_FILES': 'true',
           'TS_NODE_PROJECT': require.resolve('../tsconfig.json')
-        }
+        },
+        serialization: 'advanced'
       });
       const handle = new ForkNodeHandle(nodeId, child);
+      child.on('message', data => {
+        assert(data instanceof Buffer)
+        handle.handleEvent(data)
+      })
       this._nodes.add(handle);
       return handle;
     } else {

@@ -374,6 +374,9 @@ export namespace dxos {
             /** NodeEvent timestamp */
             timestamp?: (number|null);
 
+            /** NodeEvent ready */
+            ready?: (dxos.node.IReadyEvent|null);
+
             /** NodeEvent log */
             log?: (dxos.node.ILogEvent|null);
 
@@ -396,6 +399,9 @@ export namespace dxos {
             /** NodeEvent timestamp. */
             public timestamp: number;
 
+            /** NodeEvent ready. */
+            public ready?: (dxos.node.IReadyEvent|null);
+
             /** NodeEvent log. */
             public log?: (dxos.node.ILogEvent|null);
 
@@ -406,7 +412,7 @@ export namespace dxos {
             public metricsUpdate?: (dxos.node.IMetricsUpdateEvent|null);
 
             /** NodeEvent event. */
-            public event?: ("log"|"snapshot"|"metricsUpdate");
+            public event?: ("ready"|"log"|"snapshot"|"metricsUpdate");
 
             /**
              * Creates a new NodeEvent instance using the specified properties.
@@ -474,6 +480,90 @@ export namespace dxos {
 
             /**
              * Converts this NodeEvent to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a ReadyEvent. */
+        interface IReadyEvent {
+        }
+
+        /** Represents a ReadyEvent. */
+        class ReadyEvent implements IReadyEvent {
+
+            /**
+             * Constructs a new ReadyEvent.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: dxos.node.IReadyEvent);
+
+            /**
+             * Creates a new ReadyEvent instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ReadyEvent instance
+             */
+            public static create(properties?: dxos.node.IReadyEvent): dxos.node.ReadyEvent;
+
+            /**
+             * Encodes the specified ReadyEvent message. Does not implicitly {@link dxos.node.ReadyEvent.verify|verify} messages.
+             * @param message ReadyEvent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: dxos.node.IReadyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ReadyEvent message, length delimited. Does not implicitly {@link dxos.node.ReadyEvent.verify|verify} messages.
+             * @param message ReadyEvent message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: dxos.node.IReadyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ReadyEvent message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ReadyEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): dxos.node.ReadyEvent;
+
+            /**
+             * Decodes a ReadyEvent message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ReadyEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): dxos.node.ReadyEvent;
+
+            /**
+             * Verifies a ReadyEvent message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ReadyEvent message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ReadyEvent
+             */
+            public static fromObject(object: { [k: string]: any }): dxos.node.ReadyEvent;
+
+            /**
+             * Creates a plain object from a ReadyEvent message. Also converts values to other types if specified.
+             * @param message ReadyEvent
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: dxos.node.ReadyEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ReadyEvent to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

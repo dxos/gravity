@@ -26,6 +26,7 @@
     "protobufjs": "^6.10.1",
     "semistandard": "^14.2.3",
     "ts-jest": "^26.2.0",
+    "ts-node": "^9.0.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {

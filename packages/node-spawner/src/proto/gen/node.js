@@ -820,6 +820,7 @@ $root.dxos = (function() {
              * @memberof dxos.node
              * @interface INodeEvent
              * @property {number|null} [timestamp] NodeEvent timestamp
+             * @property {dxos.node.IReadyEvent|null} [ready] NodeEvent ready
              * @property {dxos.node.ILogEvent|null} [log] NodeEvent log
              * @property {dxos.node.ISnapshotEvent|null} [snapshot] NodeEvent snapshot
              * @property {dxos.node.IMetricsUpdateEvent|null} [metricsUpdate] NodeEvent metricsUpdate
@@ -847,6 +848,14 @@ $root.dxos = (function() {
              * @instance
              */
             NodeEvent.prototype.timestamp = 0;
+
+            /**
+             * NodeEvent ready.
+             * @member {dxos.node.IReadyEvent|null|undefined} ready
+             * @memberof dxos.node.NodeEvent
+             * @instance
+             */
+            NodeEvent.prototype.ready = null;
 
             /**
              * NodeEvent log.
@@ -877,12 +886,12 @@ $root.dxos = (function() {
 
             /**
              * NodeEvent event.
-             * @member {"log"|"snapshot"|"metricsUpdate"|undefined} event
+             * @member {"ready"|"log"|"snapshot"|"metricsUpdate"|undefined} event
              * @memberof dxos.node.NodeEvent
              * @instance
              */
             Object.defineProperty(NodeEvent.prototype, "event", {
-                get: $util.oneOfGetter($oneOfFields = ["log", "snapshot", "metricsUpdate"]),
+                get: $util.oneOfGetter($oneOfFields = ["ready", "log", "snapshot", "metricsUpdate"]),
                 set: $util.oneOfSetter($oneOfFields)
             });
 
@@ -912,12 +921,14 @@ $root.dxos = (function() {
                     writer = $Writer.create();
                 if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
                     writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.timestamp);
+                if (message.ready != null && Object.hasOwnProperty.call(message, "ready"))
+                    $root.dxos.node.ReadyEvent.encode(message.ready, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 if (message.log != null && Object.hasOwnProperty.call(message, "log"))
-                    $root.dxos.node.LogEvent.encode(message.log, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    $root.dxos.node.LogEvent.encode(message.log, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                 if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
-                    $root.dxos.node.SnapshotEvent.encode(message.snapshot, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    $root.dxos.node.SnapshotEvent.encode(message.snapshot, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                 if (message.metricsUpdate != null && Object.hasOwnProperty.call(message, "metricsUpdate"))
-                    $root.dxos.node.MetricsUpdateEvent.encode(message.metricsUpdate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.dxos.node.MetricsUpdateEvent.encode(message.metricsUpdate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                 return writer;
             };
 
@@ -956,12 +967,15 @@ $root.dxos = (function() {
                         message.timestamp = reader.uint32();
                         break;
                     case 2:
-                        message.log = $root.dxos.node.LogEvent.decode(reader, reader.uint32());
+                        message.ready = $root.dxos.node.ReadyEvent.decode(reader, reader.uint32());
                         break;
                     case 3:
-                        message.snapshot = $root.dxos.node.SnapshotEvent.decode(reader, reader.uint32());
+                        message.log = $root.dxos.node.LogEvent.decode(reader, reader.uint32());
                         break;
                     case 4:
+                        message.snapshot = $root.dxos.node.SnapshotEvent.decode(reader, reader.uint32());
+                        break;
+                    case 5:
                         message.metricsUpdate = $root.dxos.node.MetricsUpdateEvent.decode(reader, reader.uint32());
                         break;
                     default:
@@ -1003,7 +1017,17 @@ $root.dxos = (function() {
                 if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                     if (!$util.isInteger(message.timestamp))
                         return "timestamp: integer expected";
+                if (message.ready != null && message.hasOwnProperty("ready")) {
+                    properties.event = 1;
+                    {
+                        var error = $root.dxos.node.ReadyEvent.verify(message.ready);
+                        if (error)
+                            return "ready." + error;
+                    }
+                }
                 if (message.log != null && message.hasOwnProperty("log")) {
+                    if (properties.event === 1)
+                        return "event: multiple values";
                     properties.event = 1;
                     {
                         var error = $root.dxos.node.LogEvent.verify(message.log);
@@ -1048,6 +1072,11 @@ $root.dxos = (function() {
                 var message = new $root.dxos.node.NodeEvent();
                 if (object.timestamp != null)
                     message.timestamp = object.timestamp >>> 0;
+                if (object.ready != null) {
+                    if (typeof object.ready !== "object")
+                        throw TypeError(".dxos.node.NodeEvent.ready: object expected");
+                    message.ready = $root.dxos.node.ReadyEvent.fromObject(object.ready);
+                }
                 if (object.log != null) {
                     if (typeof object.log !== "object")
                         throw TypeError(".dxos.node.NodeEvent.log: object expected");
@@ -1083,6 +1112,11 @@ $root.dxos = (function() {
                     object.timestamp = 0;
                 if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                     object.timestamp = message.timestamp;
+                if (message.ready != null && message.hasOwnProperty("ready")) {
+                    object.ready = $root.dxos.node.ReadyEvent.toObject(message.ready, options);
+                    if (options.oneofs)
+                        object.event = "ready";
+                }
                 if (message.log != null && message.hasOwnProperty("log")) {
                     object.log = $root.dxos.node.LogEvent.toObject(message.log, options);
                     if (options.oneofs)
@@ -1113,6 +1147,166 @@ $root.dxos = (function() {
             };
 
             return NodeEvent;
+        })();
+
+        node.ReadyEvent = (function() {
+
+            /**
+             * Properties of a ReadyEvent.
+             * @memberof dxos.node
+             * @interface IReadyEvent
+             */
+
+            /**
+             * Constructs a new ReadyEvent.
+             * @memberof dxos.node
+             * @classdesc Represents a ReadyEvent.
+             * @implements IReadyEvent
+             * @constructor
+             * @param {dxos.node.IReadyEvent=} [properties] Properties to set
+             */
+            function ReadyEvent(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Creates a new ReadyEvent instance using the specified properties.
+             * @function create
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {dxos.node.IReadyEvent=} [properties] Properties to set
+             * @returns {dxos.node.ReadyEvent} ReadyEvent instance
+             */
+            ReadyEvent.create = function create(properties) {
+                return new ReadyEvent(properties);
+            };
+
+            /**
+             * Encodes the specified ReadyEvent message. Does not implicitly {@link dxos.node.ReadyEvent.verify|verify} messages.
+             * @function encode
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {dxos.node.IReadyEvent} message ReadyEvent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReadyEvent.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ReadyEvent message, length delimited. Does not implicitly {@link dxos.node.ReadyEvent.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {dxos.node.IReadyEvent} message ReadyEvent message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ReadyEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a ReadyEvent message from the specified reader or buffer.
+             * @function decode
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {dxos.node.ReadyEvent} ReadyEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReadyEvent.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.dxos.node.ReadyEvent();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a ReadyEvent message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {dxos.node.ReadyEvent} ReadyEvent
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ReadyEvent.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ReadyEvent message.
+             * @function verify
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ReadyEvent.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                return null;
+            };
+
+            /**
+             * Creates a ReadyEvent message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {dxos.node.ReadyEvent} ReadyEvent
+             */
+            ReadyEvent.fromObject = function fromObject(object) {
+                if (object instanceof $root.dxos.node.ReadyEvent)
+                    return object;
+                return new $root.dxos.node.ReadyEvent();
+            };
+
+            /**
+             * Creates a plain object from a ReadyEvent message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof dxos.node.ReadyEvent
+             * @static
+             * @param {dxos.node.ReadyEvent} message ReadyEvent
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ReadyEvent.toObject = function toObject() {
+                return {};
+            };
+
+            /**
+             * Converts this ReadyEvent to JSON.
+             * @function toJSON
+             * @memberof dxos.node.ReadyEvent
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ReadyEvent.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return ReadyEvent;
         })();
 
         node.LogEvent = (function() {

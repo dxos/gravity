@@ -10,6 +10,6 @@ export class ForkNodeHandle extends NodeHandle {
   }
 
   protected send(command: Buffer): void {
-    throw new Error("Method not implemented.");
+    this._process.send(command);
   }
 }

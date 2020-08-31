@@ -47,6 +47,7 @@
               "oneofs": {
                 "event": {
                   "oneof": [
+                    "ready",
                     "log",
                     "snapshot",
                     "metricsUpdate"
@@ -58,19 +59,26 @@
                   "type": "uint32",
                   "id": 1
                 },
+                "ready": {
+                  "type": "ReadyEvent",
+                  "id": 2
+                },
                 "log": {
                   "type": "LogEvent",
-                  "id": 2
+                  "id": 3
                 },
                 "snapshot": {
                   "type": "SnapshotEvent",
-                  "id": 3
+                  "id": 4
                 },
                 "metricsUpdate": {
                   "type": "MetricsUpdateEvent",
-                  "id": 4
+                  "id": 5
                 }
               }
+            },
+            "ReadyEvent": {
+              "fields": {}
             },
             "LogEvent": {
               "fields": {
