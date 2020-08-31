@@ -4,7 +4,7 @@ import { LocalNodeHandle } from './local-node-handle';
 import { NodeHandle } from './node-handle';
 import { fork } from 'child_process';
 import { ForkNodeHandle } from './fork-node-handle';
-import assert from 'assert'
+import assert from 'assert';
 
 export type PackageSource = {
   kind: 'local',
@@ -42,7 +42,7 @@ export class NodeFactory {
     }
   }
 
-  private async _spawnLocal(path: string) {
+  private async _spawnLocal (path: string) {
     const nodeId = randomBytes();
     // eslint-disable-next-line prefer-const
     let eventHandler: (data: Buffer) => void;
@@ -58,24 +58,24 @@ export class NodeFactory {
     return handle;
   }
 
-  private async _spawnFork(path: string) {
+  private async _spawnFork (path: string) {
     const nodeId = randomBytes();
-    const child = fork(require.resolve('../runtime/node-main'), [JSON.stringify({ 
+    const child = fork(require.resolve('../runtime/node-main'), [JSON.stringify({
       id: keyToString(nodeId),
-      agentPath: path,
-    })], { 
+      agentPath: path
+    })], {
       execArgv: ['-r', 'ts-node/register'],
       env: {
-        'TS_NODE_FILES': 'true',
-        'TS_NODE_PROJECT': require.resolve('../../tsconfig.json')
+        TS_NODE_FILES: 'true',
+        TS_NODE_PROJECT: require.resolve('../../tsconfig.json')
       },
       serialization: 'advanced'
     });
     const handle = new ForkNodeHandle(nodeId, child);
     child.on('message', data => {
-      assert(data instanceof Buffer)
-      handle.handleEvent(data)
-    })
+      assert(data instanceof Buffer);
+      handle.handleEvent(data);
+    });
     this._nodes.add(handle);
     await handle.ready.waitForCount(1);
     return handle;

@@ -79,7 +79,7 @@ export class Node {
 
     this._reportEvent({
       ready: {}
-    })
+    });
   }
 
   handleCommand (commandBuffer: Buffer) {

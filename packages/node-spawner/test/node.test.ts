@@ -11,7 +11,7 @@ test('fork TestAgent', async () => {
 
   node.snapshot();
 
-  await node.metrics.update.waitFor(() => node.metrics.getNumber('updated') === 1)
+  await node.metrics.update.waitFor(() => node.metrics.getNumber('updated') === 1);
 
   orchestrator.destroy();
 });
