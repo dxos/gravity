@@ -1,6 +1,5 @@
 import { NodeOrchestrator } from '../src/node-orchestrator';
 import { Platform } from '../src/node-factory';
-import { sleep } from '@dxos/async';
 
 test('fork TestAgent', async () => {
   const orchestrator = new NodeOrchestrator();
