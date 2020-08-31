@@ -26,6 +26,8 @@ export abstract class NodeHandle {
 
   readonly log = new Event<AgentLog>()
 
+  readonly ready = new Event();
+
   constructor (private readonly _nodeId: Buffer) {}
 
   get name () {
@@ -70,6 +72,8 @@ export abstract class NodeHandle {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
     } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
+    } else if (event.ready) {
+      this.ready.emit();
     }
   }
 }

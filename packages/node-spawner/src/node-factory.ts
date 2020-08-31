@@ -70,6 +70,7 @@ export class NodeFactory {
           handle.handleEvent(data)
         })
         this._nodes.add(handle);
+        await handle.ready.waitForCount(1);
         return handle;
       }
       default:

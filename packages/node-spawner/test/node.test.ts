@@ -4,7 +4,7 @@ import { Platform } from '../src/node-factory';
 test('fork TestAgent', async () => {
   const orchestrator = new NodeOrchestrator();
 
-  const node = await orchestrator.createNode(require.resolve('./test-agent'), Platform.NODE);
+  const node = await orchestrator.createNode(require.resolve('./client-agent'), Platform.NODE);
 
   node.sendEvent({});
 

@@ -76,6 +76,10 @@ export class Node {
     this._agent = new AgentClass(environment);
 
     await this._agent!.init();
+
+    this._reportEvent({
+      ready: {}
+    })
   }
 
   handleCommand (commandBuffer: Buffer) {
