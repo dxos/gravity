@@ -1,12 +1,14 @@
-import { JsonObject } from './common';
-import { Codec } from '@dxos/codec-protobuf';
-import ProtoJSON from './proto/gen/node.json';
-import { dxos } from './proto/gen/node';
-import { Metrics } from './metrics';
 import { Event } from '@dxos/async';
+import { Codec } from '@dxos/codec-protobuf';
+
+import { JsonObject } from './common';
+import { Metrics } from './metrics';
+import { dxos } from './proto/gen/node';
+import ProtoSchema from './proto/gen/node.json';
+import { humanize } from '@dxos/crypto';
 
 const codec = new Codec('dxos.node.NodeCommand')
-  .addJson(ProtoJSON)
+  .addJson(ProtoSchema)
   .build();
 
 export interface AgentLog {
@@ -14,12 +16,21 @@ export interface AgentLog {
   details: JsonObject
 }
 
+/**
+ * Base class for handle for a running node.
+ *
+ * Defines a communication channel with the node as well as methods to control node lifecycle.
+ */
 export abstract class NodeHandle {
   readonly metrics = new Metrics();
 
   readonly log = new Event<AgentLog>()
 
   constructor (private readonly _nodeId: Buffer) {}
+
+  get name () {
+    return humanize(this._nodeId) as string;
+  }
 
   sendEvent (event: JsonObject) {
     const command: dxos.node.INodeCommand = {
@@ -53,12 +64,12 @@ export abstract class NodeHandle {
       if (eventName === 'log') {
         console.log(`${this._nodeId.toString('hex').slice(4)}: ${JSON.parse(details!).message}`);
       } else {
-        this.log.emit({ name: eventName!, details: JSON.parse(details!) })
+        this.log.emit({ name: eventName!, details: JSON.parse(details!) });
       }
     } else if (event.snapshot) {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
     } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
-    } 
+    }
   }
 }

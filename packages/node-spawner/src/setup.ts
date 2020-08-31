@@ -5,6 +5,9 @@ import { FeedStore } from '@dxos/feed-store';
 import bufferJson from 'buffer-json-encoding';
 import { Environment } from './node';
 
+/**
+ * Setup SDK Client using the environment provided
+ */
 export async function createClientFromEnvironment ({ keyStore, storage, swarmProvider }: Environment) {
   const keyring = new Keyring(keyStore);
   await keyring.createKeyRecord({ type: KeyType.IDENTITY });

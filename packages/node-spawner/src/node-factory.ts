@@ -22,6 +22,9 @@ export enum Platform {
   SAFARI,
 }
 
+/**
+ * Factory for spawning and destroying nodes.
+ */
 export class NodeFactory {
   private _nodes = new Set<NodeHandle>();
 
@@ -32,41 +35,45 @@ export class NodeFactory {
   async createNode (packageSource: PackageSource, platform: Platform) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
-    if (platform === Platform.IN_PROCESS) {
-      const nodeId = randomBytes();
-      let eventHandler: (data: Buffer) => void;
-      const node = new Node(
-        nodeId,
-        packageSource.path,
-        (data) => { eventHandler(data); }
-      );
-      const handle = new LocalNodeHandle(node);
-      eventHandler = handle.handleEvent.bind(handle);
-      await node.start();
-      this._nodes.add(handle);
-      return handle;
-    } else if (platform === Platform.NODE) {
-      const nodeId = randomBytes();
-      const child = fork(require.resolve('./node-main'), [JSON.stringify({ 
-        id: keyToString(nodeId),
-        agentPath: packageSource.path,
-      })], { 
-        execArgv: ['-r', 'ts-node/register'],
-        env: {
-          'TS_NODE_FILES': 'true',
-          'TS_NODE_PROJECT': require.resolve('../tsconfig.json')
-        },
-        serialization: 'advanced'
-      });
-      const handle = new ForkNodeHandle(nodeId, child);
-      child.on('message', data => {
-        assert(data instanceof Buffer)
-        handle.handleEvent(data)
-      })
-      this._nodes.add(handle);
-      return handle;
-    } else {
-      throw new Error(`Unsupported platform: ${Platform[platform]}`);
+    switch (platform) {
+      case Platform.IN_PROCESS: {
+        const nodeId = randomBytes();
+        // eslint-disable-next-line prefer-const
+        let eventHandler: (data: Buffer) => void;
+        const node = new Node(
+          nodeId,
+          packageSource.path,
+          (data) => { eventHandler(data); }
+        );
+        const handle = new LocalNodeHandle(node);
+        eventHandler = handle.handleEvent.bind(handle);
+        await node.start();
+        this._nodes.add(handle);
+        return handle;
+      }
+      case Platform.NODE: {
+        const nodeId = randomBytes();
+        const child = fork(require.resolve('./node-main'), [JSON.stringify({ 
+          id: keyToString(nodeId),
+          agentPath: packageSource.path,
+        })], { 
+          execArgv: ['-r', 'ts-node/register'],
+          env: {
+            'TS_NODE_FILES': 'true',
+            'TS_NODE_PROJECT': require.resolve('../tsconfig.json')
+          },
+          serialization: 'advanced'
+        });
+        const handle = new ForkNodeHandle(nodeId, child);
+        child.on('message', data => {
+          assert(data instanceof Buffer)
+          handle.handleEvent(data)
+        })
+        this._nodes.add(handle);
+        return handle;
+      }
+      default:
+        throw new Error(`Unsupported platform: ${Platform[platform]}`);
     }
   }
 

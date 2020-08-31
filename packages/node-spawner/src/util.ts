@@ -22,9 +22,5 @@ export function combine<T> (events: Event<T>[]): ReadOnlyEvent<T> {
 }
 
 export function sum (arr: number[]) {
-  let sum = 0;
-  for (const item of arr) {
-    sum += item;
-  }
-  return sum;
+  return arr.reduce((acc, x) => acc + x, 0);
 }

@@ -10,11 +10,7 @@
     "declarationMap": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
-    "typeRoots": [
-      "../../node_modules/@types",
-      "./node_modules/@types",
-      "src/@types"
-    ]
+    "target": "ES2018"
   },
   "include": [
     "src",

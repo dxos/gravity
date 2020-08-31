@@ -4,32 +4,52 @@
 
 import assert from 'assert';
 import debug from 'debug';
-import ram from 'random-access-memory';
 
 import { discoveryKey, humanize } from '@dxos/crypto';
-import { FeedStore } from '@dxos/feed-store';
 import { Protocol } from '@dxos/protocol';
 import { DefaultReplicator } from '@dxos/protocol-plugin-replicator';
 
-const log = debug('dxos:feed-replication-network');
+const log = debug('dxos:feed-store-node');
 
-export class FeedReplicationPeer {
-  // TODO(dboreham): Factor out message handling code into test class.
-
+export class FeedNode {
+  // Note this is required by the network-generator
   /** @type {Key} */
   id;
 
   /** @type {FeedStore} */
-  feedStore;
+  _feedStore;
 
   /** @type {Feed} */
-  feed;
+  _feed;
 
   /** @type {ProtocolExtension} */
-  replicator;
+  _replicator;
 
   /** @type {Boolean} */
   closed;
+
+  constructor (agentNetworkInterface) {
+    const { feedStore, feed } = agentNetworkInterface;
+    assert(feedStore);
+    assert(feed);
+    this._feedStore = feedStore;
+    this._feed = feed;
+  }
+
+  /**
+   * @return {FeedAgent}
+   */
+  getAgent () {
+    return this._agent;
+  }
+
+  /**
+   * Set this node's associated agent.
+   * @param agent {FeedAgent}
+   */
+  setAgent (agent) {
+    this._agent = agent;
+  }
 
   /**
    *
@@ -40,14 +60,11 @@ export class FeedReplicationPeer {
   async initialize (topic, peerId) {
     this.id = peerId;
     this.topic = topic;
-    // TODO(dboreham): Allow specification of storage type and encoding.
-    this.feedStore = await FeedStore.create(ram, { feedOptions: { valueEncoding: 'json' } });
-    this.feed = await this.feedStore.openFeed('/feed', { metadata: { topic: topic.toString('hex') } });
     this.closed = false;
 
-    this.replicator = new DefaultReplicator({
-      feedStore: this.feedStore,
-      onLoad: () => [this.feed],
+    this._replicator = new DefaultReplicator({
+      feedStore: this._feedStore,
+      onLoad: () => [this._feed],
       onUnsubscribe: () => {
         this.closed = true;
       }
@@ -55,11 +72,12 @@ export class FeedReplicationPeer {
     log(`Created peer ${humanize(peerId)}`);
   }
 
+  // Note this is required by the network-generator
   createStream () {
     // TODO(dboreham): We believe that topic is required in init(discoveryKey(this.topic) below.
     // However it appears that even if this.topic is undefined, our tests pass.
     assert(this.topic);
-    assert(this.feedStore);
+    assert(this._feedStore);
     return new Protocol({
       streamOptions: {
         live: true
@@ -67,7 +85,7 @@ export class FeedReplicationPeer {
     })
       .setSession({ id: 'session1' })
       .setContext({ name: 'foo' })
-      .setExtensions([this.replicator.createExtension()])
+      .setExtensions([this._replicator.createExtension()])
       .init(discoveryKey(this.topic))
       .stream;
   }
@@ -76,9 +94,3 @@ export class FeedReplicationPeer {
     return this.closed;
   }
 }
-
-export const FeedReplicationPeerFactory = async (topic, peerId) => {
-  const result = new FeedReplicationPeer();
-  await result.initialize(topic, peerId);
-  return result;
-};

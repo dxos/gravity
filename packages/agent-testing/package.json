@@ -21,8 +21,7 @@
     "lint": "semistandard 'src/**/*.js'",
     "prepublishOnly": "npm run build && npm run test",
     "example": "node -r @babel/register example.js",
-    "test": "jest --rootDir ./src --verbose --passWithNoTests",
-    "posttest": "npm run lint"
+    "test": "jest --rootDir ./src --verbose --passWithNoTests"
   },
   "browserslist": [
     "> 5%"

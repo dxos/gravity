@@ -22,7 +22,7 @@ const createKey = () => {
  * @property opts.initializeConnected - Connect initial peer set if true.
  * @returns {Promise<Network>} - Network from '@dxos/network-generator
  */
-export const createReplicationNetwork = async (opts, peerFactory) => {
+export const feedNodeOrchestrator = async (opts, peerFactory) => {
   assert(peerFactory);
   assert(opts);
   const { peerCount, initializeConnected = true } = opts;

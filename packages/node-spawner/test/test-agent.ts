@@ -5,12 +5,10 @@ import { JsonObject } from '../src/common';
 export default class TestAgent implements Agent {
   private _count = 0;
 
-  constructor (private environment: Environment) {
-  }
+  constructor (private environment: Environment) { }
 
-  async init () {
-
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async init () { }
 
   onEvent (event: JsonObject) {
     this._count++;
@@ -22,7 +20,6 @@ export default class TestAgent implements Agent {
     return { count: this._count };
   }
 
-  async destroy () {
-
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async destroy () { }
 }
