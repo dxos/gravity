@@ -1,10 +1,10 @@
 import { Event } from '@dxos/async';
 import { Codec } from '@dxos/codec-protobuf';
 
-import { JsonObject } from './common';
-import { Metrics } from './metrics';
-import { dxos } from './proto/gen/node';
-import ProtoSchema from './proto/gen/node.json';
+import { JsonObject } from '../common';
+import { Metrics } from '../metrics';
+import { dxos } from '../proto/gen/node';
+import ProtoSchema from '../proto/gen/node.json';
 import { humanize } from '@dxos/crypto';
 
 const codec = new Codec('dxos.node.NodeCommand')
@@ -25,6 +25,8 @@ export abstract class NodeHandle {
   readonly metrics = new Metrics();
 
   readonly log = new Event<AgentLog>()
+
+  readonly ready = new Event();
 
   constructor (private readonly _nodeId: Buffer) {}
 
@@ -70,6 +72,8 @@ export abstract class NodeHandle {
       console.log(`${this._nodeId.toString('hex').slice(4)}: snapshot ${event.snapshot.data}`);
     } else if (event.metricsUpdate) {
       this.metrics.applyUpdate(event.metricsUpdate);
+    } else if (event.ready) {
+      this.ready.emit();
     }
   }
 }

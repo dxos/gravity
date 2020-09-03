@@ -3,7 +3,7 @@ import { Keyring, KeyType } from '@dxos/credentials';
 import { NetworkManager } from '@dxos/network-manager';
 import { FeedStore } from '@dxos/feed-store';
 import bufferJson from 'buffer-json-encoding';
-import { Environment } from './node';
+import { Environment } from './runtime/node';
 
 /**
  * Setup SDK Client using the environment provided
