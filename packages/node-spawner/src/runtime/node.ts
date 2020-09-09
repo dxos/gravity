@@ -11,6 +11,7 @@ import { Codec } from '@dxos/codec-protobuf';
 import ProtoJSON from '../proto/gen/node.json';
 import { dxos } from '../proto/gen/node';
 import { Metrics } from '../metrics';
+import { Spec } from './spec';
 
 export interface Environment {
   log: (eventName: string, details: JsonObject) => void;
@@ -38,7 +39,8 @@ export class Node {
   constructor (
     public readonly id: Buffer,
     private readonly _agentPath: string,
-    private readonly _onEvent: (event: Buffer) => void
+    private readonly _onEvent: (event: Buffer) => void,
+    private readonly _spec: Spec = {},
   ) {}
 
   private _log (eventName: string, details: JsonObject) {
@@ -63,7 +65,7 @@ export class Node {
       logMessage: this._logMessage.bind(this),
       keyStore: new KeyStore(memdown()),
       storage: createStorage(`.temp/${randomBytes(32).toString('hex')}`),
-      swarmProvider: new SwarmProvider(),
+      swarmProvider: new SwarmProvider(this._spec.signal),
       metrics: this._metrics
     };
 

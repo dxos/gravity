@@ -5,6 +5,7 @@ import { NodeHandle } from './node-handle';
 import { fork } from 'child_process';
 import { ForkNodeHandle } from './fork-node-handle';
 import assert from 'assert';
+import { Spec } from '../runtime/spec';
 
 export type PackageSource = {
   kind: 'local',
@@ -32,24 +33,25 @@ export class NodeFactory {
     return this._nodes;
   }
 
-  async createNode (packageSource: PackageSource, platform: Platform) {
+  async createNode (packageSource: PackageSource, platform: Platform, spec: Spec = {}) {
     if (packageSource.kind !== 'local') throw new Error('Only local packages are supported');
 
     switch (platform) {
-      case Platform.IN_PROCESS: return this._spawnLocal(packageSource.path);
-      case Platform.NODE: return this._spawnFork(packageSource.path);
+      case Platform.IN_PROCESS: return this._spawnLocal(packageSource.path, spec);
+      case Platform.NODE: return this._spawnFork(packageSource.path, spec);
       default: throw new Error(`Unsupported platform: ${Platform[platform]}`);
     }
   }
 
-  private async _spawnLocal (path: string) {
+  private async _spawnLocal (path: string, spec: Spec) {
     const nodeId = randomBytes();
     // eslint-disable-next-line prefer-const
     let eventHandler: (data: Buffer) => void;
     const node = new Node(
       nodeId,
       path,
-      (data) => { eventHandler(data); }
+      (data) => { eventHandler(data); },
+      spec,
     );
     const handle = new LocalNodeHandle(node);
     eventHandler = handle.handleEvent.bind(handle);
@@ -58,11 +60,12 @@ export class NodeFactory {
     return handle;
   }
 
-  private async _spawnFork (path: string) {
+  private async _spawnFork (path: string, spec: Spec) {
     const nodeId = randomBytes();
     const child = fork(require.resolve('../runtime/node-main'), [JSON.stringify({
       id: keyToString(nodeId),
-      agentPath: path
+      agentPath: path,
+      spec,
     })], {
       execArgv: ['-r', 'ts-node/register'],
       env: {

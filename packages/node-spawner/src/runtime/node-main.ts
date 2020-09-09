@@ -1,10 +1,12 @@
 import { Node } from './node';
 import { keyToBuffer } from '@dxos/crypto';
 import assert from 'assert';
+import { Spec } from './spec';
 
 interface Options {
   id: string
   agentPath: string
+  spec: Spec
 }
 
 const options: Options = JSON.parse(process.argv[2]);
@@ -12,7 +14,8 @@ const options: Options = JSON.parse(process.argv[2]);
 const node = new Node(
   keyToBuffer(options.id),
   options.agentPath,
-  event => process.send!(event)
+  event => process.send!(event),
+  options.spec,
 );
 
 process.on('message', data => {
