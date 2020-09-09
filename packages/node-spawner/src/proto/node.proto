@@ -9,6 +9,9 @@ message NodeCommand {
     EventCommand event = 1;
     SnapshotCommand snapshot = 2;
     DestroyCommand destroy = 3;
+    CreatePartyCommand createParty = 4;
+    CreateInvitationCommand createInvitation = 5;
+    JoinPartyCommand joinParty = 6;
   }
 }
 
@@ -24,6 +27,19 @@ message DestroyCommand {
 
 }
 
+message CreatePartyCommand {
+
+}
+
+message CreateInvitationCommand {
+  required bytes partyKey = 1;
+}
+
+message JoinPartyCommand {
+  required bytes partyKey = 1;
+  required string invitation = 2;
+}
+
 message NodeEvent {
   uint32 timestamp = 1;
   oneof event {
@@ -31,6 +47,9 @@ message NodeEvent {
     LogEvent log = 3;
     SnapshotEvent snapshot = 4;
     MetricsUpdateEvent metricsUpdate = 5;
+    PartyCreatedEvent partyCreated = 6;
+    InvitationCreatedEvent invitationCreated = 7;
+    InvitationAcceptedEvent invitationAccepted = 8;
   }
 }
 
@@ -58,4 +77,18 @@ message MetricsUpdateEvent {
 
   string key = 1;
   Value value = 2;
+}
+
+message PartyCreatedEvent {
+  required bytes partyKey = 1;
+}
+
+message InvitationCreatedEvent {
+  required bytes partyKey = 1;
+  required string data = 2;
+}
+
+message InvitationAcceptedEvent {
+  required bytes partyKey = 1;
+  string response = 2;
 }

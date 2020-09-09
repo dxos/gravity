@@ -93,6 +93,36 @@ export class Node {
       this._snapshot();
     } else if (command.destroy) {
       this._destory();
+    } else if (command.createParty) {
+      assert(this._agent);
+      this._agent.createParty?.().then(
+        partyKey => this._reportEvent({
+          partyCreated: { partyKey }
+        }),
+        console.error, // TODO(marik-d): Better error reporting
+      );
+    } else if (command.createInvitation) {
+      assert(this._agent);
+      this._agent.createInvitation?.(command.createInvitation.partyKey).then(
+        invitation => this._reportEvent({
+          invitationCreated: { 
+            data: JSON.stringify(invitation),
+            partyKey: command.createInvitation!.partyKey,
+          }
+        }),
+        console.error, // TODO(marik-d): Better error reporting
+      );
+    } else if (command.joinParty) {
+      assert(this._agent);
+      this._agent.joinParty?.(command.joinParty.partyKey, JSON.parse(command.joinParty.invitation)).then(
+        response => this._reportEvent({
+          invitationAccepted: { 
+            partyKey: command.joinParty!.partyKey,
+            response: response ? JSON.stringify(response) : undefined,
+          }
+        }),
+        console.error, // TODO(marik-d): Better error reporting
+      );
     }
   }
 
