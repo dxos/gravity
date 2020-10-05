@@ -20,6 +20,8 @@ test('simple', async () => {
     }
   }));
 
+  console.warn('ObjectModel', ObjectModel);
+
   const agent = env.addAgent({
     spec: {
       ModelClass: ObjectModel,
