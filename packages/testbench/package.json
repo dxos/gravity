@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/runtime": "7.7.2",
     "@date-io/moment": "^1.3.11",
-    "@dxos/credentials": "^1.0.1-beta.4",
+    "@dxos/credentials": "^0.2.7",
     "@dxos/crypto": "^1.0.0-beta.1",
     "@dxos/data-client": "^1.0.0-beta.91",
     "@dxos/debug": "^1.0.0-beta.73",
