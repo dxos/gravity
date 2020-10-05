@@ -1393,7 +1393,26 @@
     "@wirelineio/hyperswarm-network-memory" "^0.2.17"
     pump "^3.0.0"
 
-"@dxos/echo-db@1.0.0-beta.28", "@dxos/echo-db@^1.0.0-beta.28":
+"@dxos/echo-db@1.0.0-beta.27":
+  version "1.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/@dxos/echo-db/-/echo-db-1.0.0-beta.27.tgz#9ebfc5308897e41294dc708e6ec531c8a690bbdc"
+  integrity sha512-0VRU+kxukwsmnsnrUeVrZfmjZXCTKGrYtcsBuAFa70nVBwJawBjbZdNHkHyRjfEuFG93GGexWSXls0KRXjtM3g==
+  dependencies:
+    "@dxos/codec-protobuf" "^1.1.0-beta.0"
+    "@dxos/crypto" "^0.0.1"
+    "@dxos/feed-store" "^1.2.0-beta.23"
+    "@dxos/model-factory" "^1.0.0-beta.27"
+    "@types/debug" "^4.1.1"
+    "@types/end-of-stream" "^1.4.0"
+    "@types/node" "^14.0.9"
+    "@types/stream-buffers" "^3.0.2"
+    "@types/through2" "^2.0.36"
+    debug "^4.1.1"
+    js-data-structs "^1.1.2"
+    protobufjs "^6.9.0"
+    source-map-support "^0.5.12"
+
+"@dxos/echo-db@1.0.0-beta.28":
   version "1.0.0-beta.28"
   resolved "https://registry.yarnpkg.com/@dxos/echo-db/-/echo-db-1.0.0-beta.28.tgz#b89dca21ac7ba93b329d87d1e0000f89d02764ef"
   integrity sha512-ZFkvnQwxjQ6TtDbszJhbOfwBIQLuTj6rWK7wi46lxz6p6uBEulZzLOYsBzH5yJ/RhmMYn5WOZwJ00f6gT31/UQ==
@@ -7551,7 +7570,7 @@ debug@^3.0.0, debug@^3.1.0, debug@^3.1.1, debug@^3.2.6:
   dependencies:
     ms "^2.1.1"
 
-"debug@github:ngokevin/debug#noTimestamp":
+debug@ngokevin/debug#noTimestamp:
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -7887,7 +7906,7 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-"document-register-element@github:dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90":
+document-register-element@dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90:
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
@@ -18100,7 +18119,7 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-"three-bmfont-text@github:dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e":
+three-bmfont-text@dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e:
   version "2.3.0"
   resolved "https://codeload.github.com/dmarcos/three-bmfont-text/tar.gz/1babdf8507c731a18f8af3b807292e2b9740955e"
   dependencies:
