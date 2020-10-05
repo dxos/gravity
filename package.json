@@ -46,5 +46,9 @@
       "node",
       "browser"
     ]
+  },
+  "resolutions": {
+    "@dxos/echo-db": "1.0.0-beta.28",
+    "@dxos/model-factory": "1.0.0-beta.28"
   }
 }
