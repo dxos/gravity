@@ -8,10 +8,9 @@
 - Package, folder, and filenames should typically be lowercase and hyphenated.
   (Exceptions for platform/framework specific content: e.g., React components, mobile apps, etc.)
 
-- TODO(burdon): Template/set-up?
+- TODO(burdon): Template/set-up? (e.g., LICENSE, README format, etc.)
 - TODO(burdon): Describe GH actions and pre-commit hooks.
 - TODO(burdon): Describe CI process.
-- TODO(burdon): LICENSE, README format, etc.
 - TODO(burdon): CHANGELOG process.
 
 
@@ -38,3 +37,4 @@
 ## TODO
 
 - TODO(burdon): Copy test-driven development guide here.
+- TODO(burdon): Create chart of all tools (git, npm, yarn, jest, verdaccio, CI?) or separate file for each.
