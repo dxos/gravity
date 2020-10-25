@@ -20,9 +20,7 @@ The channel and branch which associates with the unmodified name of the package 
 
 ## Example
 For a package named halo, it would exist in the package management system as @dxos/halo. @dxos/halo would map to the branch named 'release'.
-
 When changes are to be made. The developer will create a branch tied to an issue. The branch name should then follow a convention of username/fix/issuenumber. When the work is complete, the developer will open a pull request to merge into main. Developers should not merge directly into beta, or release.
-
 When a sufficient number of feature enhancements or fixes have accumulated in main, the head of main will be merged into beta. Beta may then be published. 
 
 ## Versioning 
