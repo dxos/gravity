@@ -11,6 +11,8 @@
 - TODO(burdon): Template/set-up?
 - TODO(burdon): Describe GH actions and pre-commit hooks.
 - TODO(burdon): Describe CI process.
+- TODO(burdon): LICENSE, README format, etc.
+- TODO(burdon): CHANGELOG process.
 
 
 ## Development process guidelines
