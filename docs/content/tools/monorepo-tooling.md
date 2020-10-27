@@ -67,3 +67,35 @@ It is also discouraged to stack multiple lint commands in a lint job as this pre
   "lint": "wsrun lint && lockfile-lint",
 }
 ```
+
+
+## Typescript
+
+### Project references
+
+Specifying references to other typescript packages in the same monorepo significantly improves developer experience. For example this is `tsconfig.json` from `@dxos/echo-db` package:
+
+```json
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src",
+  ],
+  "references": [
+    { "path": "../echo-protocol" },
+    { "path": "../model-factory" },
+    { "path": "../object-model" },
+    { "path": "../util" }
+  ]
+}
+```
+
+Project references ensure that the compiler will inspect package source instead of compiled artifacts which might be stale.
+For example: a new export added in `echo-protocol` is immediately available to be imported in `echo-db` without having to recompile `echo-protocol` first.
+
+## Linter
+
+We have a general linter config for typescript and react projects available at https://github.com/dxos/eslint-config.
