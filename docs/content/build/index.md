@@ -31,7 +31,7 @@
 
 ## Lint
 
-- TODO(burdon): Describe lint setup.
+- There is a DXOS univeral eslint plugin [here](https://github.com/dxos/eslint-config), providing setup for react application as well.
 
 
 ## TODO
