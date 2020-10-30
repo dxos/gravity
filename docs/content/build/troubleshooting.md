@@ -1,6 +1,6 @@
-# Build Notes
+# Build System Troubleshooting
 
-## Yarn
+## Yarn errors
 
 `yarn install` may fail with:
 
