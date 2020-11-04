@@ -1,7 +1,5 @@
 # Gravity
 
-Unified testing framework for DXNS.
+A unified testing framework.
 
-## Links
-
-* [Our tooling docs](docs/content/tools/monorepo-tooling.md)
+![Gravity](docs/content/images/gravity.jpg "Gravity")
