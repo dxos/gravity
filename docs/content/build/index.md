@@ -7,6 +7,12 @@
 - The initial version for packages should be `1.0.0`.
 - Package, folder, and filenames should typically be lowercase and hyphenated.
   (Exceptions for platform/framework specific content: e.g., React components, mobile apps, etc.)
+- Every package.json must include `"dist": "rm -rf dist && NODE_ENV=production webpack",` step for deployment.
+- Every package must include app.yml. Use https://github.com/dxos/teamwork/blob/main/apps/teamwork-app/app.yml as an example for now.
+- Use the AGPL3 license. See https://github.com/dxos/tutorials/blob/main/LICENSE & https://github.com/dxos/tutorials/blob/main/package.json as examples.
+- README.md must include badges for the latest test run status and code coverage amount.
+- Use Github Actions for CI. See https://github.com/dxos/teamwork/tree/main/.github/workflows for examples.
+
 
 - TODO(burdon): Template/set-up? (e.g., LICENSE, README format, etc.)
 - TODO(burdon): Describe GH actions and pre-commit hooks.
@@ -19,6 +25,7 @@
 - All work should be initiated via a GH issue in the relevant project kanban.
 - Create a new branch: `<username>/<short-feature-name>`.
 - Pull request are required prior to merging to `main`. PRs should include the GH issue.
+- Do not use 'feat:' as the commit message. Any PRs which would otherwise step the major version must have approval from @richburdon
 - TODO(burdon): Review https://www.conventionalcommits.org/en/v1.0.0 with team (practical?)
 
 
