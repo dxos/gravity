@@ -2,4 +2,4 @@
 
 ## Devops
 
-- (QA)[./qa/index/md]
+- [QA](./qa/index.md)
