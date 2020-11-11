@@ -3,8 +3,9 @@
 # QA Process
 
 ## Apps
-- [Teamwork Test Plan](https://github.com/dxos/teamwork/blob/main/docs/content/teamwork-testplan.md)
-- [Teamwork Test Run](https://github.com/dxos/teamwork/issues/450)
+- [Teamwork Manual Test Plan](https://github.com/dxos/teamwork/blob/main/docs/content/teamwork-testplan.md)
+- [Teamwork Latest Manual Test Run](https://github.com/dxos/teamwork/issues/450)
+- [Teamwork Latest Automated Run](https://github.com/dxos/teamwork/actions?query=workflow%3A%22Build+and+test%22) (use the top of the list)
   - [Deployed Teamwork App](https://apollo1.kube.moon.dxos.network/app/wrn%3A%2F%2Fdxos%2Fapplication%2Fteamwork%40alpha/)
   - [Deployed Arena App](https://apollo1.kube.moon.dxos.network/app/wrn%3A%2F%2Fdxos%2Fapplication%2Farena%40alpha/)
 
