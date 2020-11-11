@@ -9,6 +9,9 @@
   - [Deployed Arena App](https://apollo1.kube.moon.dxos.network/app/wrn%3A%2F%2Fdxos%2Fapplication%2Farena%40alpha/)
 
 # Test Details:
+
+TODO: move this somewhere (e.g., GH issue that has a link to the deployment process; add comment (history) for each update.
+
 - Date: 10 Nov 2020
 - Teamwork version: 0.0.54
 - KUBE: wrn://dxos/application/teamwork@alpha
