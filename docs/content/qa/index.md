@@ -3,7 +3,7 @@
 # QA Process
 
 ## Apps
-- [Teamwork Manual Test Plan](https://github.com/dxos/teamwork/blob/main/docs/content/teamwork-testplan.md)
+- [Teamwork Manual Test Plan](https://github.com/dxos/teamwork/blob/main/docs/content/testing-plan.md)                              
 - [Teamwork Latest Manual Test Run](https://github.com/dxos/teamwork/issues/450)
 - [Teamwork Issue Query for QA Label](https://github.com/dxos/teamwork/issues?q=is%3Aissue+is%3Aopen+label%3AQA)
 - [Teamwork Latest Automated Run](https://github.com/dxos/teamwork/actions?query=workflow%3A%22Build+and+test%22) (use the top of the list)
