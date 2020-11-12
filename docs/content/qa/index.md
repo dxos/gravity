@@ -43,6 +43,7 @@ TODO: move this somewhere (e.g., GH issue that has a link to the deployment proc
   - [ ] Open invite dialog
 
 ## Gravity
+* point of clarity - we are testing the scenarios and underlying models, not the task list app specifically
 - [ ] Multiuser tests for Task List app
   - [ ] Invitation flow
   - [ ] Cross-user functions 
