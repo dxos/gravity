@@ -27,3 +27,31 @@ TODO: move this somewhere (e.g., GH issue that has a link to the deployment proc
 
 ### Arena:
 - [Feature: ]()
+
+# QA Priorities:
+## Jest
+- [ ] Add tests to SDK for client creation (ex: https://github.com/dxos/sdk/pull/314/files packages/client/src/client.test.ts)
+
+## Playwright
+- [ ] Create playwright tests for Task List app
+  - [ ] Create profile
+  - [ ] Create a party
+  - [ ] Create task list
+  - [ ] Create task
+  - [ ] Update task status
+  - [ ] Delete task
+  - [ ] Open invite dialog
+
+## Gravity
+- [ ] Multiuser tests for Task List app
+  - [ ] Invitation flow
+  - [ ] Cross-user functions 
+    - [ ] First user creates a task, second user completes the same task
+    - [ ] Second user creates a task, first user deletes the task
+- [ ] Load testing for Task List app
+  - [ ] Maximum users before systemic failure
+  - [ ] Rapid creation, deletion, and updating of tasks
+
+## Manual
+- [ ] Add manual test plan to Task List app. Use https://github.com/dxos/teamwork/blob/main/docs/content/testing-plan.md as an example.
+- [ ] Add manual test plan to Arena. Use https://github.com/dxos/teamwork/blob/main/docs/content/testing-plan.md as an example.
