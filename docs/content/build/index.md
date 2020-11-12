@@ -3,8 +3,11 @@
 ## Creating repositories and packages
 
 - New repos AND npm packages require a PR with sign-off from the PM/TL.
-- The default branch is `main`.
-- The initial version for packages should be `1.0.0`.
+- The default branch is `main`. 
+- The branches beta, and release must exist.
+- 'beta' branch only accepts merges from main.
+- 'release' branch only accepts merges from beta.
+- The initial version for packages must be `1.0.0`.
 - Package, folder, and filenames should typically be lowercase and hyphenated.
   (Exceptions for platform/framework specific content: e.g., React components, mobile apps, etc.)
 - Every package.json must include `"dist": "rm -rf dist && NODE_ENV=production webpack",` step for deployment.
@@ -30,7 +33,10 @@
 
 
 ## CI
-
+- Every repo must have the following Github Actions:
+  - Copy from https://github.com/dxos/teamwork/tree/main/.github/workflows
+  - Update test.yml to use the name of the app being deployed
+- Every repo must contain a scripts folder with deploy_apps_to_wns.sh. See https://github.com/dxos/teamwork/blob/main/scripts/deploy_apps_to_wns.sh to copy.
 - TODO(burdon): Describe main > beta > release process.
 - TODO(burdon): Release process: https://github.com/googleapis/release-please
 - TODO(burdon): Code coverage.
