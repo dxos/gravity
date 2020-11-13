@@ -2,7 +2,8 @@
 
 A unified testing framework.
 
-- [Build](build/index.md)
-- [QA](qa/index.md)
+- [Build](./docs/content/build/index.md)
+- [QA](./docs/content/qa/index.md)
 
+<br/>
 ![Gravity](docs/content/images/gravity.jpg "Gravity")
