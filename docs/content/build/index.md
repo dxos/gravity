@@ -17,6 +17,8 @@
 - Use Github Actions for CI. See https://github.com/dxos/teamwork/tree/main/.github/workflows for examples.
 
 
+## TODO
+
 - TODO(burdon): Template/set-up? (e.g., LICENSE, README format, etc.)
 - TODO(burdon): Describe GH actions and pre-commit hooks.
 - TODO(burdon): Describe CI process.
