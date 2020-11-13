@@ -79,8 +79,8 @@ Make sure your profile configured for uploading to IPFS. Open `~/.wire/profile/d
 
 ```
 ipfs:
-   server: 'https://apollo1.kube.moon.dxos.network/dxos/ipfs/api'
-   gateway: 'https://apollo1.kube.moon.dxos.network/dxos/ipfs/gateway'
+  server: 'https://apollo1.kube.moon.dxos.network/dxos/ipfs/api'
+  gateway: 'https://apollo1.kube.moon.dxos.network/dxos/ipfs/gateway'
 ```
 
 ### App
