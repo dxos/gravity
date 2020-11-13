@@ -14,16 +14,22 @@
 
 TODO: move this somewhere (e.g., GH issue that has a link to the deployment process; add comment (history) for each update.
 
-- Date: 10 Nov 2020
-- Teamwork version: 0.0.54
+- Date: 13 Nov 2020
+- Teamwork version: 0.0.65
 - KUBE: wrn://dxos/application/teamwork@alpha
-- Using: 2 machines
+- Using: 1 machine
 - Browser 1: Chrome
-- Browser 2: Firefox 
+- Browser 2: Brave 
 
 ## Broken Features:
 ### Teamwork:
-- [Feature: ]()
+- [Feature: Messenger in Editor](https://github.com/dxos/teamwork/issues/452)
+- [Feature: Switching between Editors](https://github.com/dxos/teamwork/issues/371)
+- [Feature: Space below content in Editor](https://github.com/dxos/teamwork/issues/382)
+- [Feature: Scroll in X axis in Editor](https://github.com/dxos/teamwork/issues/453)
+- [Feature: Disable adding empty task](https://github.com/dxos/teamwork/issues/454)
+- [Feature: Redeem offline invitation](https://github.com/dxos/teamwork/issues/455)
+- [Feature: Resetting storage](https://github.com/dxos/teamwork/issues/360)
 
 ### Arena:
 - [Feature: ]()
