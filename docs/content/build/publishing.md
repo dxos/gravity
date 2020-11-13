@@ -1,31 +1,35 @@
 # Migration and Deploy Directions
 
+TODO(burdon): Split publishing packages (release please) and publishing apps (wire)
+
 ## Pre-requisties
-- The repo must conform to the expectations of https://github.com/dxos/gravity/blob/main/docs/content/build/index.md
+TODO(burdon): Remove and reference other document.
+- The repo should conform to the expectations of https://github.com/dxos/gravity/blob/main/docs/content/build/index.md
 - Specifically:
-  - main, beta, and release branches must exist
-  - app.yml must exist and be configured in the root of the folder
+  - main, beta, and release branches must exist // TODO(burdon): How? Refernce packages.md?
+  - app.yml must exist and be configured in the root of the folder // TODO(burdon): This is incorrect.
   - package.json must include a dist command : "dist": "rm -rf dist && NODE_ENV=production webpack"
   - The 4 Github Actions from the teamwork repo must be copied over and test.yml modified. Copy from https://github.com/dxos/teamwork/tree/main/.github/workflows
   - The repo must contain a scripts folder with deploy_apps_to_wns.sh. See https://github.com/dxos/teamwork/blob/main/scripts/deploy_apps_to_wns.sh to copy.
 - Github org level secrets must exist for WNS_BOND_ID and WNS_USER_KEY https://github.com/organizations/dxos/settings/secrets/actions
   
 ### Migration Conditions
-- Main:
+TODO(burdon): Remove and reference other document.
+- Main
   - When a sufficient collection of features have accumulated in main to complete a milestone and it passes QA, main must be merged into beta with PM approval.
-  - If the Major or Minor version should step with this delivery of features, request approval from @richburdon . Upon approval, use the appropriate conventional commit tag.
 
-- Beta: 
+- Beta
   - When the new features and fixes migrated from main have been properly tested by QA and the tests pass, beta must be merged into release with PM approval.
   - If emergent errors due to the features and fixes are discovered, they must be fixed in main then uplifted to beta. Beta must not migrate new, broken features.
 
-
 ### Deployment Conditions
+TODO(burdon): Remove and reference other document.
 - Main: Deployment is managed via Github Actions and occurs for every successful merge.
 - Beta: Deployment is managed via Github Actions and occurs for every successful merge from main into beta.
 - Release: Deployment is managed via Github Actions and occurs for every successful merge from beta into release.
 
 # Manual Deployment Directions
+TODO(burdon): Remove and reference other document.
 Manual deployments should be avoided at all costs. If you are not @richburdon or @telackey you must ask their permission first.
 Before deploying, post an announcement message in #general and mention @RB, @Alex Wykoff 
 
@@ -46,7 +50,6 @@ Activate devnet-moon profile:
 wire profile init --name devnet-moon --template-url https://git.io/JUkhm
 export WIRE_PROFILE="devnet-moon"
 ```
-
 
 **IMPORTANT!** Make sure you are using the same profile in all terminal windows you are using. It makes sense to put `export WIRE_PROFILE="devnet-moon"` into a bash profile.
 

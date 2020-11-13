@@ -68,7 +68,6 @@ It is also discouraged to stack multiple lint commands in a lint job as this pre
 }
 ```
 
-
 ## Typescript
 
 ### Project references
