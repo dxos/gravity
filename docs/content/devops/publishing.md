@@ -30,6 +30,7 @@ TODO(burdon): Remove and reference other document.
 
 # Manual Deployment Directions
 TODO(burdon): Remove and reference other document.
+TODO(burdon): Remove refs to people (find another way: by process or intention).
 Manual deployments should be avoided at all costs. If you are not @richburdon or @telackey you must ask their permission first.
 Before deploying, post an announcement message in #general and mention @RB, @Alex Wykoff 
 

@@ -1,6 +1,6 @@
-## Yarn
+# Yarn
 
-### Performing a clean install
+## Performing a clean install
 
 Sometimes installed dependencies get corrupted and it's necessary to perform a clean install. This will also re-run postinstall scripts such as installing git hooks. Use this command to do a clean install:
 
@@ -18,7 +18,7 @@ git clean -fdx
 yarn
 ```
 
-### Lockfile linting
+## Lockfile linting
 
 We use [lockfile-lint](https://www.npmjs.com/package/lockfile-lint) to validate lockfile. This ensures that url from private NPM registries don't get into lockfiles. The following command is used in our repos:
 
