@@ -21,7 +21,7 @@ This guide is an overview of structure of each repo and monorepo.
 ## Branches
 
 - Repos under full QA should have `beta` and `release` system branches.
-- Merging to these branches will trigger Github actions that automatically pulish new NPM packages
+- Merging to these branches will trigger Github actions that automatically publish new NPM packages
 with the associated tag suffix.
 
 | Branch      | NPM Tag suffix |
@@ -51,7 +51,7 @@ with the associated tag suffix.
 
 ## Github Workflows and Actions
 
-- TODO(burdon): Standarize actions (tests, coverage, release, etc.)
+- TODO(burdon): Standardize actions (tests, coverage, release, etc.)
 - TODO(burdon): Reference sample project with canonical workflow definitions (e.g., @dxos/echo?)
 
 
