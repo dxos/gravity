@@ -2,7 +2,8 @@
 
 A unified testing framework.
 
-- [Devlops](./docs/content/devops/index.md)
+- [Devops](./devops/index.md)
+- [Guides](./guides/index.md)
 
 <br>
 
