@@ -7,4 +7,4 @@ A unified testing framework.
 
 <br>
 
-![Gravity](docs/content/images/gravity.jpg "Gravity")
+![Gravity](./images/gravity.jpg "Gravity")
