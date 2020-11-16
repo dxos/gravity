@@ -1,3 +1,5 @@
+# Using Verdaccio
+
 # Avoid yarn link by using a local registry proxy
 
 Problem: replace one or more dependent packages of a project under development with 
@@ -51,7 +53,7 @@ prompted to enter a new password):
     ```
    
     The locally published package will now be visible in Verdaccio's web interface:
-    ![Locally published package screenshot](./local-repo-screenshot.png)
+    ![Locally published package screenshot](verdaccio-screenshot.png)
 1. In the depending project, use `yarn upgrade` to target the new version of `@dxos/echodb`:
     ```
    $ cd examples/playground

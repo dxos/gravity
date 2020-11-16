@@ -2,7 +2,7 @@
 
 A unified testing framework.
 
-- [Build](./docs/content/build/index.md)
+- [Build](docs/content/devops/index.md)
 - [QA](./docs/content/qa/index.md)
 
 <br>
