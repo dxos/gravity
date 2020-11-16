@@ -5,15 +5,20 @@
 Documentation is like code: it needs to be constantly maintained otherwise it quickly becomes technical debt.
 People like DOING not READING: write simple informative documents that people can scan.
 
+
 - Assume that EVERYTHING will be public.
+- TL;DR: write short, simple docs that can be easily scanned. 
+  - Bullets are simpler to read than sentences.
+  - Separate "normative" descriptions and definitions from "non-normative" sections that give details and examples.
+- Consider how and when the documentation could become OUT-OF-DATE (avoid technical debt).
+  - Avoid referencing specific configuration settings (if required then reference a config file in Github).
+  - As far as possible avoid referencing specific files (or people).
+- Avoid repetition; instead reference other documents (across repos if necessary).
 - Favor shorter documents focused on a very specific topic.
 - Start documents with consise bullets that others can scan, correct, add to.
   For example, [this](http://download.aopa.org/121010av-adventures.pdf) is how to fly an airplane.
-- Consider how and when the documentation could become out-of-date.
 - Fix documentation that doesn't work (at the very least update the docs to note it is broken).
-
-- TODO(burdon): Document Gatsby.
-- TODO(burdon): Doc types: instructions (like this), design docs, specs, tutorials, etc.
+- TODO(burdon): Describe different doc types: instructions (like this), design docs, specs, tutorials, etc.
 
 
 ## Style
@@ -35,6 +40,3 @@ People like DOING not READING: write simple informative documents that people ca
 - https://www.writethedocs.org
 
 
-A normative section is a formal part of the recommendation. It contains rules that everyone must follow.
-A non-normative, or informative, section contains additional information (e.g., advice) that isn't a formal part of the standard. 
-That doesn't mean the information is less important, but it's not binding in the same way as the normative sections.

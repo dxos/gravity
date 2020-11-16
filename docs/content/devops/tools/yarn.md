@@ -1,4 +1,4 @@
-# Yarn
+# Using Yarn
 
 ## Performing a clean install
 
