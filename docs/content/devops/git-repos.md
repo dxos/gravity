@@ -59,7 +59,7 @@ with the associated tag suffix.
 
 | Workflow   | Purpose   | Trigger    |
 | --------   |  -------- | ---------  |
-| all-lint-build-test  | Run yarn lint, build, & coverage | Every push    |
+| all-lint-build-test    | Run yarn lint, build, & coverage | Every push    |
 | beta-publish           | Run yarn lint, build, test & then publish to NPM `-beta` tag or WNS app@beta  | Only on push to `beta` branch |
 | main-release-please    | Run [release-please](https://github.com/googleapis/release-please), then yarn lint, build, test     | Only on push to `main` branch |
 | release-publish        | Run yarn lint, build, test & then publish to NPM or WNS `app@beta`    | Only on push to `release` branch |
