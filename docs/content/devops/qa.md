@@ -30,6 +30,8 @@ TODO: move this somewhere (e.g., GH issue that has a link to the deployment proc
 - [Feature: Disable adding empty task](https://github.com/dxos/teamwork/issues/454)
 - [Feature: Redeem offline invitation](https://github.com/dxos/teamwork/issues/455)
 - [Feature: Resetting storage](https://github.com/dxos/teamwork/issues/360)
+- [Feature: Indicator presence on Windows](https://github.com/dxos/teamwork/issues/461)
+- [Feature: Inviting chess bot](https://github.com/dxos/teamwork/issues/460)
 
 ### Arena:
 - [Feature: ]()
