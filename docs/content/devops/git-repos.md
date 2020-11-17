@@ -9,7 +9,8 @@ This guide is an overview of structure of each repo and monorepo.
 - The default branch should be `main`.
 - Package, folder, and filenames should typically be lowercase and hyphenated.
   (Exceptions for platform/framework specific content: e.g., React components, mobile apps, etc.)
-- TODO(burdon): Template (or example) repo?
+- For NPM published packages, use ECHO(https://github.com/dxos/echo) as an example.
+- For WNS published apps, use the Tasks App in the Tutorials(https://github.com/dxos/tutorials/) repo as an example.
 - Configure ESLint using the [DXOS plugin](https://github.com/dxos/eslint-config).
 
 
@@ -43,7 +44,7 @@ with the associated tag suffix.
 | jest          | Unit and integration tests    |
 | nyc           | Code Coverage                 |
 | storybooks    | Manual React UX tets          |
-| [Playright](https://github.com/microsoft/playwright-test)  | Automated React UX tests      |
+| [Playwright](https://github.com/microsoft/playwright-test)  | Automated React UX tests      |
 | gravity       | Integration and stress tests  |
 
 - TODO(burdon): Reference GH workflow assets.
@@ -53,6 +54,15 @@ with the associated tag suffix.
 
 - TODO(burdon): Standardize actions (tests, coverage, release, etc.)
 - TODO(burdon): Reference sample project with canonical workflow definitions (e.g., @dxos/echo?)
+- TODO(wykoff): Rename workflows
+- TODO(wykoff): Missing workflows for published apps
+
+| Workflow   | Purpose   | Trigger    |
+| --------   |  -------- | ---------  |
+| all-lint-build-test  | Run yarn lint, build, & coverage | Every push    |
+| beta-publish           | Run yarn lint, build, test & then publish to NPM -beta tag or WNS app@beta  | Only on push to 'beta' branch |
+| main-release-please    | Run [release-please](https://github.com/googleapis/release-please), then yarn lint, build, test     | Only on push to 'main' branch |
+| release-publish        | Run yarn lint, build, test & then publish to NPM or WNS app@beta    | Only on push to 'release' branch |
 
 
 ## Badges

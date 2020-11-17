@@ -17,6 +17,7 @@ People like DOING not READING: write simple informative documents that people ca
 - Favor shorter documents focused on a very specific topic.
 - Start documents with concise bullets that others can scan, correct, add to.
   For example, [this](http://download.aopa.org/121010av-adventures.pdf) is how to fly an airplane.
+- Use a spellchecker and confirm spellings before submitting a PR  
 - Fix documentation that doesn't work (at the very least update the docs to note it is broken).
 - TODO(burdon): Describe different doc types: instructions (like this), design docs, specs, tutorials, etc.
 
