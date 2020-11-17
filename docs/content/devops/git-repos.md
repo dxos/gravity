@@ -44,7 +44,7 @@ with the associated tag suffix.
 | jest          | Unit and integration tests    |
 | nyc           | Code Coverage                 |
 | storybooks    | Manual React UX tets          |
-| [Playwright](https://github.com/microsoft/playwright-test)  | Automated React UX tests      |
+| [playwright](https://github.com/microsoft/playwright-test)  | Automated React UX tests |
 | gravity       | Integration and stress tests  |
 
 - TODO(burdon): Reference GH workflow assets.
