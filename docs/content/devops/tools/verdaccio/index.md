@@ -17,7 +17,7 @@ TODO(burdon): Why was 5736 chosen and link to registry of used port numbers. The
 
 ## Authentication
 
-Craete a local account (matching your public npm username).
+Create a local account (matching your public npm username).
 
 ```
 export NPM_CONFIG_REGISTRY=http://npm.dev.dxos.network:5736
