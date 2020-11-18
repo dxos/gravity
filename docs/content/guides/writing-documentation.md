@@ -22,6 +22,12 @@ People like DOING not READING: write simple informative documents that people ca
 - TODO(burdon): Describe different doc types: instructions (like this), design docs, specs, tutorials, etc.
 
 
+## Diagram
+
+- Use diagrams.net to create and edit diagrams
+  - File > Open from... Github
+
+
 ## Style
 
 - Don't use first or second person pronouns (I, we, you, etc.)
