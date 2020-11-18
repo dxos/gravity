@@ -15,3 +15,11 @@ $ yarn policies set-version 1.18.0
 ```
 
 See [this bug report](https://github.com/yarnpkg/yarn/issues/7807) for more details and latest status.
+
+## Local development errors
+Workspaces may become corrupt.
+- First check that you have pulled the latest code
+- Do the cleanup steps in the [Yarn doc](tools/yarn.md)
+- Attempt a clean clone in another folder
+- Check the behavior on the deployed app, inspect the 
+- If you can still reproduce the issue with a clean clone, file an issue in the repo. Include the SHA, steps to reproduce, relevant logs, and if possible a screenshot or gif.
