@@ -20,3 +20,6 @@
 ```
 - TODO(wykoff): update when version-check can replace manual update  
 - TODO(burdon): Reference `@dxos/version-check`.
+
+## Troubleshooting
+- Refer to our [Troubleshooting Guide](troubleshooting.md)
