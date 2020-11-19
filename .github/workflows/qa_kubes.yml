@@ -1,9 +1,7 @@
-name: Deploy QA Kubes
+name: Deploy QA Kubes at Midnight
 on:
-  push:
-    branches: [ main ]
-#  schedule:
-#    - cron:  '0 0,12 * * *'
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
   build:
