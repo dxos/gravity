@@ -1,0 +1,34 @@
+name: Deploy QA Kubes
+on:
+  push:
+    branches: [ main ]
+#  schedule:
+#    - cron:  '0 0,12 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    timeout-minutes: 5
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v2
+    - name: Deploy Kubes
+      run: |
+        yarn wire profile init \
+          --name $WIRE_PROFILE \
+          --template-url "$WIRE_PROFILE_URL"
+        yarn wire machine delete --name alpha
+        yarn wire machine delete --name beta
+        yarn wire machine delete --name release
+        yarn wire machine create --name alpha --cliver '@alpha'
+        yarn wire machine create --name beta --cliver '@beta'
+        yarn wire machine create --name release
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        WIRE_WNS_USER_KEY: ${{secrets.wns_user_key}}
+        WIRE_WNS_BOND_ID: ${{secrets.wns_bond_id}}
+        WIRE_PROFILE: ci
+        WIRE_PROFILE_URL: ${{secrets.wire_profile_url}}
+        WIRE_MACHINE_DO_TOKEN: ${{secrets.wire_machine_do_token}}
+        WIRE_MACHINE_GITHUB_TOKEN: ${{secrets.wire_machine_github_token}}
+        WIRE_MACHINE_DNS_DOMAIN: ${{secrets.wire_machine_dns_domain}}
