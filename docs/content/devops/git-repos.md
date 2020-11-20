@@ -34,22 +34,6 @@ with the associated tag suffix.
 - TODO(burdon): Add example flow (echo, client, react-client, tasks-app, gravity).
 
 
-## Tests
-
-- All repos should have tests that are required to pass before PRs can be merged.
-- These tests include:
-
-| Test          | Purpose                       |
-| ------------- | ----------------------------- |
-| jest          | Unit and integration tests    |
-| nyc           | Code Coverage                 |
-| storybooks    | Manual React UX tets          |
-| [playwright](https://github.com/microsoft/playwright-test)  | Automated React UX tests |
-| gravity       | Integration and stress tests  |
-
-- TODO(burdon): Reference GH workflow assets.
-
-
 ## Github Workflows and Actions
 
 - TODO(burdon): Standardize actions (tests, coverage, release, etc.)
