@@ -19,6 +19,8 @@ jobs:
         yarn wire machine delete --name alpha
         yarn wire machine delete --name beta
         yarn wire machine delete --name release
+        # TODO(telackey): Replace with proper existence check.
+        sleep 10
         yarn wire machine create --name alpha --cliver '@alpha'
         yarn wire machine create --name beta --cliver '@beta'
         yarn wire machine create --name release
