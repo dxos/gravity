@@ -17,13 +17,13 @@ jobs:
           --name $WIRE_PROFILE \
           --template-url "$WIRE_PROFILE_URL"
         yarn wire machine delete --name alpha
-        yarn wire machine delete --name beta
-        yarn wire machine delete --name release
+        # yarn wire machine delete --name beta
+        # yarn wire machine delete --name release
         # TODO(telackey): Replace with proper existence check.
         sleep 10
-        yarn wire machine create --name alpha --cliver '@alpha'
-        yarn wire machine create --name beta --cliver '@beta'
-        yarn wire machine create --name release
+        yarn wire machine create --name alpha --cliver '@alpha' --register
+        # yarn wire machine create --name beta --cliver '@beta' --register
+        # yarn wire machine create --name release --register
       env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         WIRE_WNS_USER_KEY: ${{secrets.wns_user_key}}
