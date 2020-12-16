@@ -1,6 +1,6 @@
-# Publishing to WNS
+# Creating and Registering Public Kubes
 
-This guide explains how to publish applications to WNS.
+This guide explains how to create public Kubes using `wire machine` and register them in DXNS.
 
 ## Pre-requisites
 
