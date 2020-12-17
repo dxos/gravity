@@ -133,13 +133,13 @@ The main public Kubes in use are `apollo1`, `apollo2`, and `apollo3`.
 These nodes have proper SSL certificates from Let's Encrypt, run Radicle, automatically pin all apps, bots, and files registered in DXNS,
 have registered IPFS, signal, and bot-factory services, etc.
 
-The command to create a Kube in this configuration is:
+To create a similar node of your own, use:
 
 > NOTE: You _must_ provide a legitimate e-mail address for Let's Encrypt.
 
 ```bash
 $ wire machine create \
-  --name apollo4 \
+  --name apollo13 \
   --pin \
   --letsencrypt \
   --email your_real_email@goes.here \
@@ -153,13 +153,13 @@ them more than absolutely necessary.
 When it is necessary, after deleting the existing Kube, you will have to wait for the DNS registration TTL to lapse
 before recreating one with the same name, else Let's Encrypt may attempt to use the old IP address during verification and fail.
 
-For example, if you must recreate `apollo2` from scratch, do this:
+For example, if you must recreate `apollo13` from scratch, do this:
 
 ```
-$ wire machine delete --name apollo2
+$ wire machine delete --name apollo13
 
 # Wait 30 minutes (to be safe).
 $ sleep 1800 
 
-$ wire machine create --name apollo2 --extension dxos/radicle-seed-node --pin --letsencrypt --email your_real_email@goes.here --register
+$ wire machine create --name apollo13 --extension dxos/radicle-seed-node --pin --letsencrypt --email your_real_email@goes.here --register
 ```
