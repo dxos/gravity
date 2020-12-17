@@ -124,7 +124,7 @@ $ wire machine create --name mykube --register
 You can install a Kube using `alpha` or `beta` versions of the CLI with the `--cliver` option:
 
 ```
-$ wire machine create --name alpha --cliver '@alpha'
+$ wire machine create --cliver '@alpha'
 ```
 
 ## Registered Kubes
