@@ -62,8 +62,8 @@ Notice `-t` flag in build command specifying that jobs should be performed in st
 It is also discouraged to stack multiple lint commands in a lint job as this prevents arguments from being forwarded properly. Example:
 
 ```json
+# Don't do this.
 {
-  # Don't do this
   "lint": "wsrun lint && lockfile-lint",
 }
 ```
