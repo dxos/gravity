@@ -14,6 +14,11 @@ This guide is an overview of structure of each repo and monorepo.
 - Configure ESLint using the [DXOS plugin](https://github.com/dxos/eslint-config).
 
 
+## Tools
+
+- Use [`gita`](https://github.com/nosarthur/gita) to manage repos.
+
+
 ## NPM Packages
 
 - The initial version for published packages should be `1.0.0`.
