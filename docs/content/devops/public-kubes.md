@@ -40,18 +40,18 @@ These may be added to your `dx` profile, or set in your environment.  The enviro
 ```bash
 DX_MACHINE_DO_TOKEN
 DX_MACHINE_GITHUB_TOKEN
-DX_WNS_USER_KEY
-DX_WNS_BOND_ID
+DX_REGISTRY_USER_KEY
+DX_REGISTRY_BOND_ID
 ```
 
 Make sure your profile is configured for publishing to DXNS. 
-Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.wns` and `services.machine` sections with the following settings:
+Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.registry` and `services.machine` sections with the following settings:
 
 ```
-wns:
-  server: 'https://wns1.kube.moon.dxos.network/api'
-  userKey: 'Use quotes and set it equal to the value of DX_WNS_USER_KEY'
-  bondId: 'Use quotes and set it equal to the value of DX_WNS_BOND_ID'
+registry:
+  server: 'https://registry1.kube.moon.dxos.network/api'
+  userKey: 'Use quotes and set it equal to the value of DX_REGISTRY_USER_KEY'
+  bondId: 'Use quotes and set it equal to the value of DX_REGISTRY_BOND_ID'
   chainId: devnet-2
   gas: '200000'
   fees: '200000udxt'

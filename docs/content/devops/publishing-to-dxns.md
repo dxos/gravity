@@ -13,7 +13,7 @@ yarn global add @dxos/cli@beta
 Then install the required extensions:
 
 ```bash
-dx extension install @dxos/cli-wns
+dx extension install @dxos/cli-registry
 dx extension install @dxos/cli-data
 dx extension install @dxos/cli-app
 dx extension install @dxos/cli-bot
@@ -37,16 +37,16 @@ Optionally add the profile environment variable to your shell profile.
 ## Credentials
 
 Publishing apps within the `dxos` domain require shared credentials.
-Get the values of the `WNS_BOND_ID` and `WNS_USER_KEY` secrets from @telackey.
+Get the values of the `REGISTRY_BOND_ID` and `REGISTRY_USER_KEY` secrets from @telackey.
 
-Make sure your profile is configured for publishing to WNS. 
-Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.wns` section with the following settings:
+Make sure your profile is configured for publishing to Registry. 
+Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.registry` section with the following settings:
 
 ```
-wns:
-  server: 'https://wns1.kube.moon.dxos.network/api'
-  userKey: 'Use quotes and set it equal to the value of WNS_USER_KEY'
-  bondId: 'Use quotes and set it equal to the value of WNS_BOND_ID'
+registry:
+  server: 'https://registry1.kube.moon.dxos.network/api'
+  userKey: 'Use quotes and set it equal to the value of REGISTRY_USER_KEY'
+  bondId: 'Use quotes and set it equal to the value of REGISTRY_BOND_ID'
   chainId: devnet-2
   gas: '200000'
   fees: '200000udxt'
@@ -55,7 +55,7 @@ wns:
 ## Configure IPFS
 
 Applicaiton assets are published to and IPFS node on the devnet.
-Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.wns` section with the following settings:
+Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.registry` section with the following settings:
 
 ```
 ipfs:
@@ -75,11 +75,11 @@ then the application metadata is registered with the DXNS blockchain.
 cd apps/tasks-app
 dx app build
 dx app publish
-dx app register --name wrn://dxos/application/tasks-app
+dx app register --name dxn://dxos/application/tasks-app
 ```
 
 Once registered, the application record should be visible via the CLI and the 
-[DXNS Console](https://apollo1.kube.moon.dxos.network/app/wrn:dxos:application:console/#/apps).
+[DXNS Console](https://apollo1.kube.moon.dxos.network/app/dxn:dxos:application:console/#/apps).
 
 ```bash
 dx app query
