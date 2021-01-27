@@ -1,6 +1,6 @@
 # Creating and Registering Public Kubes
 
-This guide explains how to create public Kubes using `wire machine` and register them in DXNS.
+This guide explains how to create public Kubes using `dx machine` and register them in DXNS.
 
 ## Pre-requisites
 
@@ -13,7 +13,7 @@ yarn global add @dxos/cli
 Then install the required extensions:
 
 ```bash
-wire extension install @dxos/cli-machine
+dx extension install @dxos/cli-machine
 ```
 
 For more information (including instructions for updating the CLI) see the 
@@ -24,47 +24,47 @@ For more information (including instructions for updating the CLI) see the
 To use the DXNS devnet, run the following commands to import the `devnet-moon` profile:
 
 ```bash
-wire profile init --name devnet-moon --template-url https://git.io/JUkhm
-export WIRE_PROFILE="devnet-moon"
+dx profile init --name devnet-moon --template-url https://git.io/JUkhm
+export DX_PROFILE="devnet-moon"
 ```
 
 Optionally add the profile environment variable to your shell profile.
 
 ## Credentials
 
-Creating Kubes using `wire machine` requires a Digital Ocean API token for creating the droplets, and a GitHub token for checking out the Kube
+Creating Kubes using `dx machine` requires a Digital Ocean API token for creating the droplets, and a GitHub token for checking out the Kube
 code. If the Kubes are to be registered, DXNS credentials for the `dxos` domain are also required.
 
-These may be added to your `wire` profile, or set in your environment.  The environment variables for these are:
+These may be added to your `dx` profile, or set in your environment.  The environment variables for these are:
 
 ```bash
-WIRE_MACHINE_DO_TOKEN
-WIRE_MACHINE_GITHUB_TOKEN
-WIRE_WNS_USER_KEY
-WIRE_WNS_BOND_ID
+DX_MACHINE_DO_TOKEN
+DX_MACHINE_GITHUB_TOKEN
+DX_WNS_USER_KEY
+DX_WNS_BOND_ID
 ```
 
 Make sure your profile is configured for publishing to DXNS. 
-Edit `~/.wire/profile/devnet-moon.yml`, updating the `services.wns` and `services.machine` sections with the following settings:
+Edit `~/.dx/profile/devnet-moon.yml`, updating the `services.wns` and `services.machine` sections with the following settings:
 
 ```
 wns:
   server: 'https://wns1.kube.moon.dxos.network/api'
-  userKey: 'Use quotes and set it equal to the value of WIRE_WNS_USER_KEY'
-  bondId: 'Use quotes and set it equal to the value of WIRE_WNS_BOND_ID'
+  userKey: 'Use quotes and set it equal to the value of DX_WNS_USER_KEY'
+  bondId: 'Use quotes and set it equal to the value of DX_WNS_BOND_ID'
   chainId: devnet-2
   gas: '200000'
-  fees: '200000uwire'
+  fees: '200000udxt'
 machine:
-  doAccessToken: 'Use quotes and set it equal to WIRE_MACHINE_DO_TOKEN'
-  githubAccessToken: 'Use quotes and set it equal to WIRE_MACHINE_GITHUB_TOKEN'
+  doAccessToken: 'Use quotes and set it equal to DX_MACHINE_DO_TOKEN'
+  githubAccessToken: 'Use quotes and set it equal to DX_MACHINE_GITHUB_TOKEN'
   dnsDomain: 'kube.moon.dxos.network'
 ```
 
 ## Listing and Inspecting Kubes
 
 ```bash
-$ wire machine list | jq '.machines[].name'
+$ dx machine list | jq '.machines[].name'
 "alpha"
 "egor"
 "apollo1"
@@ -74,7 +74,7 @@ $ wire machine list | jq '.machines[].name'
 "blockexplorer"
 "ipfs"
 
-$ wire machine info --name ipfs
+$ dx machine info --name ipfs
 {
   "machine": {
     "name": "ipfs",
@@ -89,7 +89,7 @@ $ wire machine info --name ipfs
 
 ## Creating a Kube
 ```
-$ wire machine create
+$ dx machine create
 {
   "machine": {
     "name": "kube557cb42a",
@@ -104,8 +104,8 @@ $ wire machine create
 
 ## Removing a Kube
 ```
-$ wire machine delete --name kube557cb42a
-$ wire machine info --name kube557cb42a
+$ dx machine delete --name kube557cb42a
+$ dx machine info --name kube557cb42a
 {
   "machine": {}
 }
@@ -116,7 +116,7 @@ To have the Kube register itself in DXNS, add the `--register` option when creat
 This will create a DXNS entry for the Kube itself, as well as for the IPFS, signal, and bot-factory services.
 
 ```
-$ wire machine create --name mykube --register
+$ dx machine create --name mykube --register
 ```
 
 ## Other CLI versions
@@ -124,7 +124,7 @@ $ wire machine create --name mykube --register
 You can install a Kube using `alpha` or `beta` versions of the CLI with the `--cliver` option:
 
 ```
-$ wire machine create --cliver '@alpha'
+$ dx machine create --cliver '@alpha'
 ```
 
 ## Registered Kubes
@@ -138,7 +138,7 @@ To create a similar node of your own, use:
 > NOTE: You _must_ provide a legitimate e-mail address for Let's Encrypt.
 
 ```bash
-$ wire machine create \
+$ dx machine create \
   --name apollo13 \
   --pin \
   --letsencrypt \
@@ -156,10 +156,10 @@ before recreating one with the same name, else Let's Encrypt may attempt to use 
 For example, if you must recreate `apollo13` from scratch, do this:
 
 ```
-$ wire machine delete --name apollo13
+$ dx machine delete --name apollo13
 
 # Wait 30 minutes (to be safe).
 $ sleep 1800 
 
-$ wire machine create --name apollo13 --extension dxos/radicle-seed-node --pin --letsencrypt --email your_real_email@goes.here --register
+$ dx machine create --name apollo13 --extension dxos/radicle-seed-node --pin --letsencrypt --email your_real_email@goes.here --register
 ```

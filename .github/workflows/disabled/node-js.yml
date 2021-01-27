@@ -29,6 +29,6 @@ jobs:
           yarn lerna publish -y prerelease --dist-tag="beta" --force-publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          WIRE_WNS_USER_KEY: ${{secrets.wns_user_key}}
-          WIRE_WNS_BOND_ID: ${{secrets.wns_bond_id}}
-          WIRE_PROFILE: ci
+          DX_REGISTRY_USER_KEY: ${{secrets.registry_user_key}}
+          DX_REGISTRY_BOND_ID: ${{secrets.registry_bond_id}}
+          DX_PROFILE: ci
