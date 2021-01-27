@@ -10,7 +10,7 @@ This guide is an overview of structure of each repo and monorepo.
 - Package, folder, and filenames should typically be lowercase and hyphenated.
   (Exceptions for platform/framework specific content: e.g., React components, mobile apps, etc.)
 - For NPM published packages, use ECHO(https://github.com/dxos/echo) as an example.
-- For WNS published apps, use the Tasks App in the Tutorials(https://github.com/dxos/tutorials/) repo as an example.
+- For Registry published apps, use the Tasks App in the Tutorials(https://github.com/dxos/tutorials/) repo as an example.
 - Configure ESLint using the [DXOS plugin](https://github.com/dxos/eslint-config).
 
 
@@ -49,9 +49,9 @@ with the associated tag suffix.
 | Workflow   | Purpose   | Trigger    |
 | --------   |  -------- | ---------  |
 | all-lint-build-test    | Run yarn lint, build, & coverage | Every push    |
-| beta-publish           | Run yarn lint, build, test & then publish to NPM `-beta` tag or WNS app@beta  | Only on push to `beta` branch |
+| beta-publish           | Run yarn lint, build, test & then publish to NPM `-beta` tag or Registry app@beta  | Only on push to `beta` branch |
 | main-release-please    | Run [release-please](https://github.com/googleapis/release-please) then yarn lint, build, test     | Only on push to `main` branch |
-| release-publish        | Run yarn lint, build, test & then publish to NPM or WNS `app@beta`    | Only on push to `release` branch |
+| release-publish        | Run yarn lint, build, test & then publish to NPM or Registry `app@beta`    | Only on push to `release` branch |
 
 
 ## Badges

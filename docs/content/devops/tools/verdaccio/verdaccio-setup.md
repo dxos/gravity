@@ -45,7 +45,7 @@ prompted to enter a new password):
    info New version: 1.0.1-local.10
    [2/4] Logging in...
    info npm username: david
-   info npm email: david@wireline.io
+   info npm email: david@dxos.org
    question npm password: 
    success Logged in.
    [3/4] Publishing...
@@ -66,8 +66,8 @@ prompted to enter a new password):
    .
    .
    .
-   => Found "@wirelineio/playground#@dxos/echodb@1.0.1-local.10"
-   info This module exists because "_project_#@wirelineio#playground" depends on it.
+   => Found "@dxos/playground#@dxos/echodb@1.0.1-local.10"
+   info This module exists because "_project_#@dxos#playground" depends on it.
    .
    .
    .

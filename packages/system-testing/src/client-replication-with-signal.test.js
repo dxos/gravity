@@ -32,10 +32,10 @@ export const createTestClient = async () => {
   // Specify the local test signal server
   const client = await createClient(ram, keyring, {
     swarm: {
-      signal: process.env.WIRE_SIGNAL_ENDPOINT || 'ws://localhost:4000',
+      signal: process.env.DX_SIGNAL_ENDPOINT || 'ws://localhost:4000',
       // ICE disabled per:
       // https://stackoverflow.com/questions/30742431/webrtc-on-isolated-lan-without-ice-stun-turn-server
-      ice: JSON.parse(process.env.WIRE_ICE_ENDPOINTS || '[]')
+      ice: JSON.parse(process.env.DX_ICE_ENDPOINTS || '[]')
     }
   });
 
