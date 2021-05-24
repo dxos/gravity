@@ -1,8 +1,6 @@
 # Gravity
 
-A unified testing framework.
-
-- [Build](docs/content/devops)
+DXOS Testing framework.
 
 <br>
 
